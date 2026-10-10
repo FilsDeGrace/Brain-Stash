@@ -1,0 +1,7 @@
+[
+  { "id": "m1", "prompt": "47 × 9", "options": [{"id":"a","label":"413"},{"id":"b","label":"423"},{"id":"c","label":"433"},{"id":"d","label":"403"}], "correctId":"b", "explanation":"Ten times 47 is 470. Subtract one 47: 470 − 47 = 423." },
+  { "id": "m2", "prompt": "What is 35² using the ending-in-5 trick?", "options": [{"id":"a","label":"1125"},{"id":"b","label":"1225"},{"id":"c","label":"1325"},{"id":"d","label":"1025"}], "correctId":"b", "explanation":"Multiply 3 by the next number, 4, to get 12. Attach 25: 1225." },
+  { "id": "m3", "prompt": "64 × 11", "options": [{"id":"a","label":"604"},{"id":"b","label":"694"},{"id":"c","label":"704"},{"id":"d","label":"714"}], "correctId":"c", "explanation":"Keep 6 and 4 outside. Their sum is 10, so carry the 1: 64 × 11 = 704." },
+  { "id": "m4", "prompt": "28 × 25", "options": [{"id":"a","label":"650"},{"id":"b","label":"700"},{"id":"c","label":"725"},{"id":"d","label":"750"}], "correctId":"b", "explanation":"25 is a quarter of 100. 28 × 100 ÷ 4 = 2800 ÷ 4 = 700." },
+  { "id": "m5", "prompt": "97 × 96", "options": [{"id":"a","label":"9212"},{"id":"b","label":"9312"},{"id":"c","label":"9318"},{"id":"d","label":"9412"}], "correctId":"b", "explanation":"The distances from 100 are 3 and 4. Cross-subtract to get 93, then write 3 × 4 = 12: 9312." }
+]

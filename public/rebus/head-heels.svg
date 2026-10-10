@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
+ <rect width="600" height="360" rx="14" fill="#211e18"/><path d="M22 22h556v316H22z" fill="none" stroke="#7f6846" stroke-width="1.5"/>
+ <text x="300" y="133" fill="#E9DCC3" font-family="Georgia,serif" font-size="62" text-anchor="middle" letter-spacing="6">HEAD</text>
+ <path d="M110 166H490" stroke="#B99356" stroke-width="2" stroke-dasharray="3 8"/>
+ <text x="300" y="248" fill="#B75C46" font-family="Georgia,serif" font-size="56" text-anchor="middle" letter-spacing="4">HEELS</text>
+ <text x="300" y="310" fill="#A69B87" font-family="Arial,sans-serif" font-size="16" letter-spacing="5" text-anchor="middle">NOTICE WHAT IS ABOVE</text>
+</svg>

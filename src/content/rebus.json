@@ -1,0 +1,1036 @@
+[
+  {
+    "id": "tricycle",
+    "title": "Count the shape",
+    "answer": "tricycle",
+    "accepts": [],
+    "imageSrc": "/rebus/tricycle.svg",
+    "imageAlt": "The word CYCLE shown inside three outlined circles in a row",
+    "wordLengths": [
+      8
+    ],
+    "hintCost": 3,
+    "hintsLeft": 2,
+    "explanation": "A tri-cycle: three wheels or cycles make a tricycle.",
+    "tiles": "rcitrycealz",
+    "letterCount": 8,
+    "difficulty": 1
+  },
+  {
+    "id": "understand",
+    "title": "Read the position",
+    "answer": "I understand",
+    "accepts": [
+      "i understand"
+    ],
+    "imageSrc": "/rebus/understand.svg",
+    "imageAlt": "The word STAND with the letter I underneath",
+    "wordLengths": [
+      1,
+      10
+    ],
+    "hintCost": 3,
+    "hintsLeft": 2,
+    "explanation": "The I is under STAND, making ‘I understand’. The position supplies the word ‘under’. ",
+    "tiles": "dunrisetandb",
+    "letterCount": 11,
+    "difficulty": 1
+  },
+  {
+    "id": "head-heels",
+    "title": "Notice what is above",
+    "answer": "head over heels",
+    "accepts": [],
+    "imageSrc": "/rebus/head-heels.svg",
+    "imageAlt": "HEAD appears above HEELS",
+    "wordLengths": [
+      4,
+      4,
+      5
+    ],
+    "hintCost": 3,
+    "hintsLeft": 2,
+    "explanation": "HEAD is literally over HEELS, spelling the phrase ‘head over heels’.",
+    "letterCount": 13,
+    "difficulty": 1
+  },
+  {
+    "id": "mind-matter",
+    "title": "Look between the lines",
+    "answer": "mind over matter",
+    "accepts": [],
+    "imageSrc": "/rebus/mind-matter.svg",
+    "imageAlt": "MIND is written above MATTER with a horizontal divider between them",
+    "wordLengths": [
+      4,
+      4,
+      6
+    ],
+    "hintCost": 3,
+    "hintsLeft": 2,
+    "explanation": "MIND sits over MATTER, forming the familiar phrase ‘mind over matter’.",
+    "letterCount": 14,
+    "difficulty": 1
+  },
+  {
+    "id": "r01",
+    "img": "rebus/01.jpg",
+    "answer": "COFFEE BREAK",
+    "letterCount": 11,
+    "wordLengths": [
+      6,
+      5
+    ],
+    "accepts": [],
+    "title": "Rebus 01",
+    "imageSrc": "/rebus/01.jpg",
+    "imageAlt": "Rebus puzzle, number 1",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r02",
+    "img": "rebus/02.jpg",
+    "answer": "SPLIT PERSONALITY",
+    "letterCount": 16,
+    "wordLengths": [
+      5,
+      11
+    ],
+    "accepts": [],
+    "title": "Rebus 02",
+    "imageSrc": "/rebus/02.jpg",
+    "imageAlt": "Rebus puzzle, number 2",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r03",
+    "img": "rebus/03.jpg",
+    "answer": "LOVE AT FIRST SIGHT",
+    "letterCount": 16,
+    "wordLengths": [
+      4,
+      2,
+      5,
+      5
+    ],
+    "accepts": [],
+    "title": "Rebus 03",
+    "imageSrc": "/rebus/03.jpg",
+    "imageAlt": "Rebus puzzle, number 3",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r04",
+    "img": "rebus/04.jpg",
+    "answer": "TWENTY-FOUR/SEVEN",
+    "letterCount": 15,
+    "wordLengths": [
+      15
+    ],
+    "accepts": [
+      "24/7",
+      "24 7",
+      "TWENTY FOUR SEVEN"
+    ],
+    "title": "Rebus 04",
+    "imageSrc": "/rebus/04.jpg",
+    "imageAlt": "Rebus puzzle, number 4",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r05",
+    "img": "rebus/05.jpg",
+    "answer": "SON OF A GUN",
+    "letterCount": 9,
+    "wordLengths": [
+      3,
+      2,
+      1,
+      3
+    ],
+    "accepts": [],
+    "title": "Rebus 05",
+    "imageSrc": "/rebus/05.jpg",
+    "imageAlt": "Rebus puzzle, number 5",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r06",
+    "img": "rebus/06.jpg",
+    "answer": "A TALL ORDER",
+    "letterCount": 10,
+    "wordLengths": [
+      1,
+      4,
+      5
+    ],
+    "accepts": [],
+    "title": "Rebus 06",
+    "imageSrc": "/rebus/06.jpg",
+    "imageAlt": "Rebus puzzle, number 6",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r07",
+    "img": "rebus/07.jpg",
+    "answer": "3-D MOVIE",
+    "letterCount": 7,
+    "wordLengths": [
+      2,
+      5
+    ],
+    "accepts": [
+      "THREE D MOVIE"
+    ],
+    "title": "Rebus 07",
+    "imageSrc": "/rebus/07.jpg",
+    "imageAlt": "Rebus puzzle, number 7",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r08",
+    "img": "rebus/08.jpg",
+    "answer": "BROKEN PROMISE",
+    "letterCount": 13,
+    "wordLengths": [
+      6,
+      7
+    ],
+    "accepts": [],
+    "title": "Rebus 08",
+    "imageSrc": "/rebus/08.jpg",
+    "imageAlt": "Rebus puzzle, number 8",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r09",
+    "img": "rebus/09.jpg",
+    "answer": "READ BETWEEN THE LINES",
+    "letterCount": 19,
+    "wordLengths": [
+      4,
+      7,
+      3,
+      5
+    ],
+    "accepts": [],
+    "title": "Rebus 09",
+    "imageSrc": "/rebus/09.jpg",
+    "imageAlt": "Rebus puzzle, number 9",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r10",
+    "img": "rebus/10.jpg",
+    "answer": "GIVE THE GREEN LIGHT",
+    "letterCount": 17,
+    "wordLengths": [
+      4,
+      3,
+      5,
+      5
+    ],
+    "accepts": [],
+    "title": "Rebus 10",
+    "imageSrc": "/rebus/10.jpg",
+    "imageAlt": "Rebus puzzle, number 10",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r11",
+    "img": "rebus/11.jpg",
+    "answer": "SPACE INVADERS",
+    "letterCount": 13,
+    "wordLengths": [
+      5,
+      8
+    ],
+    "accepts": [],
+    "title": "Rebus 11",
+    "imageSrc": "/rebus/11.jpg",
+    "imageAlt": "Rebus puzzle, number 11",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r12",
+    "img": "rebus/12.jpg",
+    "answer": "POTATOES",
+    "letterCount": 8,
+    "wordLengths": [
+      8
+    ],
+    "accepts": [],
+    "title": "Rebus 12",
+    "imageSrc": "/rebus/12.jpg",
+    "imageAlt": "Rebus puzzle, number 12",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r13",
+    "img": "rebus/13.jpg",
+    "answer": "LONG OVERDUE",
+    "letterCount": 11,
+    "wordLengths": [
+      4,
+      7
+    ],
+    "accepts": [],
+    "title": "Rebus 13",
+    "imageSrc": "/rebus/13.jpg",
+    "imageAlt": "Rebus puzzle, number 13",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r14",
+    "img": "rebus/14.jpg",
+    "answer": "HAND-ME-DOWN",
+    "letterCount": 10,
+    "wordLengths": [
+      10
+    ],
+    "accepts": [],
+    "title": "Rebus 14",
+    "imageSrc": "/rebus/14.jpg",
+    "imageAlt": "Rebus puzzle, number 14",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r15",
+    "img": "rebus/15.jpg",
+    "answer": "BALANCED DIET",
+    "letterCount": 12,
+    "wordLengths": [
+      8,
+      4
+    ],
+    "accepts": [],
+    "title": "Rebus 15",
+    "imageSrc": "/rebus/15.jpg",
+    "imageAlt": "Rebus puzzle, number 15",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r16",
+    "img": "rebus/16.jpg",
+    "answer": "LONG TIME NO SEE",
+    "letterCount": 13,
+    "wordLengths": [
+      4,
+      4,
+      2,
+      3
+    ],
+    "accepts": [],
+    "title": "Rebus 16",
+    "imageSrc": "/rebus/16.jpg",
+    "imageAlt": "Rebus puzzle, number 16",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r17",
+    "img": "rebus/17.jpg",
+    "answer": "MIXED EMOTIONS",
+    "letterCount": 13,
+    "wordLengths": [
+      5,
+      8
+    ],
+    "accepts": [],
+    "title": "Rebus 17",
+    "imageSrc": "/rebus/17.jpg",
+    "imageAlt": "Rebus puzzle, number 17",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r18",
+    "img": "rebus/18.jpg",
+    "answer": "NO EXCUSE FOR IT",
+    "letterCount": 13,
+    "wordLengths": [
+      2,
+      6,
+      3,
+      2
+    ],
+    "accepts": [],
+    "title": "Rebus 18",
+    "imageSrc": "/rebus/18.jpg",
+    "imageAlt": "Rebus puzzle, number 18",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r19",
+    "img": "rebus/19.jpg",
+    "answer": "FIRST AID",
+    "letterCount": 8,
+    "wordLengths": [
+      5,
+      3
+    ],
+    "accepts": [],
+    "title": "Rebus 19",
+    "imageSrc": "/rebus/19.jpg",
+    "imageAlt": "Rebus puzzle, number 19",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r20",
+    "img": "rebus/20.jpg",
+    "answer": "FOOD FOR THOUGHT",
+    "letterCount": 14,
+    "wordLengths": [
+      4,
+      3,
+      7
+    ],
+    "accepts": [],
+    "title": "Rebus 20",
+    "imageSrc": "/rebus/20.jpg",
+    "imageAlt": "Rebus puzzle, number 20",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r21",
+    "img": "rebus/21.jpg",
+    "answer": "OUT OF THE BLUE",
+    "letterCount": 12,
+    "wordLengths": [
+      3,
+      2,
+      3,
+      4
+    ],
+    "accepts": [],
+    "title": "Rebus 21",
+    "imageSrc": "/rebus/21.jpg",
+    "imageAlt": "Rebus puzzle, number 21",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r22",
+    "img": "rebus/22.jpg",
+    "answer": "BROWN NOSING",
+    "letterCount": 11,
+    "wordLengths": [
+      5,
+      6
+    ],
+    "accepts": [],
+    "title": "Rebus 22",
+    "imageSrc": "/rebus/22.jpg",
+    "imageAlt": "Rebus puzzle, number 22",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r23",
+    "img": "rebus/23.jpg",
+    "answer": "WHAT COMES UP MUST COME DOWN",
+    "letterCount": 23,
+    "wordLengths": [
+      4,
+      5,
+      2,
+      4,
+      4,
+      4
+    ],
+    "accepts": [],
+    "title": "Rebus 23",
+    "imageSrc": "/rebus/23.jpg",
+    "imageAlt": "Rebus puzzle, number 23",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r24",
+    "img": "rebus/24.jpg",
+    "answer": "DON'T GIVE UP ON ME",
+    "letterCount": 14,
+    "wordLengths": [
+      4,
+      4,
+      2,
+      2,
+      2
+    ],
+    "accepts": [],
+    "title": "Rebus 24",
+    "imageSrc": "/rebus/24.jpg",
+    "imageAlt": "Rebus puzzle, number 24",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r25",
+    "img": "rebus/25.jpg",
+    "answer": "ON THE RIGHT TRACK",
+    "letterCount": 15,
+    "wordLengths": [
+      2,
+      3,
+      5,
+      5
+    ],
+    "accepts": [],
+    "title": "Rebus 25",
+    "imageSrc": "/rebus/25.jpg",
+    "imageAlt": "Rebus puzzle, number 25",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r26",
+    "img": "rebus/26.jpg",
+    "answer": "STICK AROUND",
+    "letterCount": 11,
+    "wordLengths": [
+      5,
+      6
+    ],
+    "accepts": [],
+    "title": "Rebus 26",
+    "imageSrc": "/rebus/26.jpg",
+    "imageAlt": "Rebus puzzle, number 26",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r27",
+    "img": "rebus/27.jpg",
+    "answer": "HEAVY METAL",
+    "letterCount": 10,
+    "wordLengths": [
+      5,
+      5
+    ],
+    "accepts": [],
+    "title": "Rebus 27",
+    "imageSrc": "/rebus/27.jpg",
+    "imageAlt": "Rebus puzzle, number 27",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r28",
+    "img": "rebus/28.jpg",
+    "answer": "RAISING HELL",
+    "letterCount": 11,
+    "wordLengths": [
+      7,
+      4
+    ],
+    "accepts": [],
+    "title": "Rebus 28",
+    "imageSrc": "/rebus/28.jpg",
+    "imageAlt": "Rebus puzzle, number 28",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r29",
+    "img": "rebus/29.jpg",
+    "answer": "TEA TIME",
+    "letterCount": 7,
+    "wordLengths": [
+      3,
+      4
+    ],
+    "accepts": [],
+    "title": "Rebus 29",
+    "imageSrc": "/rebus/29.jpg",
+    "imageAlt": "Rebus puzzle, number 29",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r30",
+    "img": "rebus/30.jpg",
+    "answer": "BIRD'S EYE VIEW",
+    "letterCount": 12,
+    "wordLengths": [
+      5,
+      3,
+      4
+    ],
+    "accepts": [],
+    "title": "Rebus 30",
+    "imageSrc": "/rebus/30.jpg",
+    "imageAlt": "Rebus puzzle, number 30",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r31",
+    "img": "rebus/31.jpg",
+    "answer": "DIFFERENT STROKES FOR DIFFERENT FOLKS",
+    "letterCount": 33,
+    "wordLengths": [
+      9,
+      7,
+      3,
+      9,
+      5
+    ],
+    "accepts": [],
+    "title": "Rebus 31",
+    "imageSrc": "/rebus/31.jpg",
+    "imageAlt": "Rebus puzzle, number 31",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r32",
+    "img": "rebus/32.jpg",
+    "answer": "SCRAMBLED EGGS",
+    "letterCount": 13,
+    "wordLengths": [
+      9,
+      4
+    ],
+    "accepts": [],
+    "title": "Rebus 32",
+    "imageSrc": "/rebus/32.jpg",
+    "imageAlt": "Rebus puzzle, number 32",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r33",
+    "img": "rebus/33.jpg",
+    "answer": "ONCE IN A BLUE MOON",
+    "letterCount": 15,
+    "wordLengths": [
+      4,
+      2,
+      1,
+      4,
+      4
+    ],
+    "accepts": [],
+    "title": "Rebus 33",
+    "imageSrc": "/rebus/33.jpg",
+    "imageAlt": "Rebus puzzle, number 33",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r34",
+    "img": "rebus/34.jpg",
+    "answer": "OVER AND OVER AGAIN",
+    "letterCount": 16,
+    "wordLengths": [
+      4,
+      3,
+      4,
+      5
+    ],
+    "accepts": [],
+    "title": "Rebus 34",
+    "imageSrc": "/rebus/34.jpg",
+    "imageAlt": "Rebus puzzle, number 34",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r35",
+    "img": "rebus/35.jpg",
+    "answer": "A FRIEND IN NEED IS A FRIEND INDEED",
+    "letterCount": 28,
+    "wordLengths": [
+      1,
+      6,
+      2,
+      4,
+      2,
+      1,
+      6,
+      6
+    ],
+    "accepts": [],
+    "title": "Rebus 35",
+    "imageSrc": "/rebus/35.jpg",
+    "imageAlt": "Rebus puzzle, number 35",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r36",
+    "img": "rebus/36.jpg",
+    "answer": "UP TO NO GOOD",
+    "letterCount": 10,
+    "wordLengths": [
+      2,
+      2,
+      2,
+      4
+    ],
+    "accepts": [],
+    "title": "Rebus 36",
+    "imageSrc": "/rebus/36.jpg",
+    "imageAlt": "Rebus puzzle, number 36",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r37",
+    "img": "rebus/37.jpg",
+    "answer": "READY FOR ACTION",
+    "letterCount": 14,
+    "wordLengths": [
+      5,
+      3,
+      6
+    ],
+    "accepts": [],
+    "title": "Rebus 37",
+    "imageSrc": "/rebus/37.jpg",
+    "imageAlt": "Rebus puzzle, number 37",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r38",
+    "img": "rebus/38.jpg",
+    "answer": "MISUNDERSTOOD",
+    "letterCount": 13,
+    "wordLengths": [
+      13
+    ],
+    "accepts": [],
+    "title": "Rebus 38",
+    "imageSrc": "/rebus/38.jpg",
+    "imageAlt": "Rebus puzzle, number 38",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r39",
+    "img": "rebus/39.jpg",
+    "answer": "WHEN IN ROME, DO AS THE ROMANS DO",
+    "letterCount": 25,
+    "wordLengths": [
+      4,
+      2,
+      4,
+      2,
+      2,
+      3,
+      6,
+      2
+    ],
+    "accepts": [],
+    "title": "Rebus 39",
+    "imageSrc": "/rebus/39.jpg",
+    "imageAlt": "Rebus puzzle, number 39",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r40",
+    "img": "rebus/40.jpg",
+    "answer": "HEART ATTACK",
+    "letterCount": 11,
+    "wordLengths": [
+      5,
+      6
+    ],
+    "accepts": [],
+    "title": "Rebus 40",
+    "imageSrc": "/rebus/40.jpg",
+    "imageAlt": "Rebus puzzle, number 40",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r41",
+    "img": "rebus/41.jpg",
+    "answer": "NOT FOR THE FAINT-HEARTED",
+    "letterCount": 21,
+    "wordLengths": [
+      3,
+      3,
+      3,
+      12
+    ],
+    "accepts": [],
+    "title": "Rebus 41",
+    "imageSrc": "/rebus/41.jpg",
+    "imageAlt": "Rebus puzzle, number 41",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r42",
+    "img": "rebus/42.jpg",
+    "answer": "YOU'LL GET OVER IT",
+    "letterCount": 14,
+    "wordLengths": [
+      5,
+      3,
+      4,
+      2
+    ],
+    "accepts": [],
+    "title": "Rebus 42",
+    "imageSrc": "/rebus/42.jpg",
+    "imageAlt": "Rebus puzzle, number 42",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r43",
+    "img": "rebus/43.jpg",
+    "answer": "SEE THE BIG PICTURE",
+    "letterCount": 16,
+    "wordLengths": [
+      3,
+      3,
+      3,
+      7
+    ],
+    "accepts": [],
+    "title": "Rebus 43",
+    "imageSrc": "/rebus/43.jpg",
+    "imageAlt": "Rebus puzzle, number 43",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r44",
+    "img": "rebus/44.jpg",
+    "answer": "CRUEL INTENTIONS",
+    "letterCount": 15,
+    "wordLengths": [
+      5,
+      10
+    ],
+    "accepts": [],
+    "title": "Rebus 44",
+    "imageSrc": "/rebus/44.jpg",
+    "imageAlt": "Rebus puzzle, number 44",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r45",
+    "img": "rebus/45.jpg",
+    "answer": "TOP SECRET",
+    "letterCount": 9,
+    "wordLengths": [
+      3,
+      6
+    ],
+    "accepts": [],
+    "title": "Rebus 45",
+    "imageSrc": "/rebus/45.jpg",
+    "imageAlt": "Rebus puzzle, number 45",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r46",
+    "img": "rebus/46.jpg",
+    "answer": "HOT UNDER THE COLLAR",
+    "letterCount": 17,
+    "wordLengths": [
+      3,
+      5,
+      3,
+      6
+    ],
+    "accepts": [],
+    "title": "Rebus 46",
+    "imageSrc": "/rebus/46.jpg",
+    "imageAlt": "Rebus puzzle, number 46",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r47",
+    "img": "rebus/47.jpg",
+    "answer": "CRYSTAL CLEAR",
+    "letterCount": 12,
+    "wordLengths": [
+      7,
+      5
+    ],
+    "accepts": [],
+    "title": "Rebus 47",
+    "imageSrc": "/rebus/47.jpg",
+    "imageAlt": "Rebus puzzle, number 47",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r48",
+    "img": "rebus/48.jpg",
+    "answer": "SQUARE ROOT",
+    "letterCount": 10,
+    "wordLengths": [
+      6,
+      4
+    ],
+    "accepts": [],
+    "title": "Rebus 48",
+    "imageSrc": "/rebus/48.jpg",
+    "imageAlt": "Rebus puzzle, number 48",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r49",
+    "img": "rebus/49.jpg",
+    "answer": "FORGIVE AND FORGET",
+    "letterCount": 16,
+    "wordLengths": [
+      7,
+      3,
+      6
+    ],
+    "accepts": [],
+    "title": "Rebus 49",
+    "imageSrc": "/rebus/49.jpg",
+    "imageAlt": "Rebus puzzle, number 49",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  },
+  {
+    "id": "r50",
+    "img": "rebus/50.jpg",
+    "answer": "FEEL FREE",
+    "letterCount": 8,
+    "wordLengths": [
+      4,
+      4
+    ],
+    "accepts": [],
+    "answerInferred": true,
+    "title": "Rebus 50",
+    "imageSrc": "/rebus/50.jpg",
+    "imageAlt": "Rebus puzzle, number 50",
+    "hintsLeft": 2,
+    "hintCost": 3,
+    "explanation": "Read the arrangement carefully. The position, spacing, repetition, or relationship between the elements suggests a familiar word or phrase.",
+    "difficulty": 1
+  }
+]

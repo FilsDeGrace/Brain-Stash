@@ -1,0 +1,836 @@
+[
+  {
+    "id": "inversion",
+    "title": "Think in reverse",
+    "category": "Decision-making",
+    "label": "INVERSION",
+    "summary": "Instead of asking how to succeed, ask what would reliably make you fail, then avoid those causes.",
+    "example": "Before an exam, list the behaviours that would ruin your preparation: skipping practice, sleeping too little, and ignoring weak topics. Build the plan around preventing them.",
+    "whyItMatters": "Forward plans describe an ideal path. Inversion helps expose fragile assumptions and preventable errors before they become expensive.",
+    "quiz": {
+      "prompt": "What is the central move in inversion?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Copy the most successful person"
+        },
+        {
+          "id": "b",
+          "label": "Identify failure causes and work to avoid them"
+        },
+        {
+          "id": "c",
+          "label": "Make the plan more complicated"
+        },
+        {
+          "id": "d",
+          "label": "Choose the fastest option every time"
+        }
+      ],
+      "correctId": "b",
+      "explanation": "Inversion examines the problem from the opposite direction to reveal risks that a forward-only plan can miss."
+    },
+    "difficulty": 1,
+    "tier": 1,
+    "kind": "stash"
+  },
+  {
+    "id": "second-order",
+    "title": "Follow the second consequence",
+    "category": "Strategic thinking",
+    "label": "SECOND-ORDER THINKING",
+    "summary": "Do not stop at what happens immediately. Ask what that first result will cause next.",
+    "example": "A discount may attract more buyers today. The next questions are whether support can handle the demand, whether customers will wait for future discounts, and whether margins remain healthy.",
+    "whyItMatters": "Many bad decisions look good at the first step. A second pass helps you see incentives, feedback loops, and delayed costs.",
+    "quiz": {
+      "prompt": "A decision has a clear immediate benefit. What should you ask next?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Whether the benefit sounds impressive"
+        },
+        {
+          "id": "b",
+          "label": "What the benefit causes afterward"
+        },
+        {
+          "id": "c",
+          "label": "Whether anyone disagrees"
+        },
+        {
+          "id": "d",
+          "label": "How to make the decision permanent"
+        }
+      ],
+      "correctId": "b",
+      "explanation": "Second-order thinking follows the consequences of consequences instead of treating the first effect as the whole story."
+    },
+    "difficulty": 1,
+    "tier": 1,
+    "kind": "stash"
+  },
+  {
+    "id": "opportunity-cost",
+    "title": "Every yes spends a no",
+    "category": "Decision-making",
+    "label": "OPPORTUNITY COST",
+    "summary": "The true cost of a choice includes the best alternative you give up.",
+    "example": "Spending Saturday on a side project costs more than transport or materials. It may also cost the study time, rest, or other project you could have chosen instead.",
+    "whyItMatters": "A choice can be affordable in money and still be expensive in time, focus, or missed alternatives.",
+    "quiz": {
+      "prompt": "What is opportunity cost?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Only the money paid"
+        },
+        {
+          "id": "b",
+          "label": "The total of every possible alternative"
+        },
+        {
+          "id": "c",
+          "label": "The value of the best forgone alternative"
+        },
+        {
+          "id": "d",
+          "label": "A fee charged after a decision"
+        }
+      ],
+      "correctId": "c",
+      "explanation": "Opportunity cost measures the value of the best option you did not choose, not every possible alternative added together."
+    },
+    "difficulty": 1,
+    "tier": 1,
+    "kind": "stash"
+  },
+  {
+    "id": "confirmation-bias",
+    "title": "Interrogate your favourite idea",
+    "category": "Cognitive bias",
+    "label": "CONFIRMATION BIAS",
+    "summary": "We tend to seek and interpret evidence in ways that support what we already believe.",
+    "example": "If you believe a trading setup works, track losing examples and the conditions around them instead of saving only the winning screenshots.",
+    "whyItMatters": "A belief that is never tested against inconvenient evidence can feel increasingly certain while becoming less accurate.",
+    "quiz": {
+      "prompt": "Which habit best counters confirmation bias?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Collect only evidence from trusted supporters"
+        },
+        {
+          "id": "b",
+          "label": "Ask what evidence would prove your view wrong"
+        },
+        {
+          "id": "c",
+          "label": "Avoid changing your mind publicly"
+        },
+        {
+          "id": "d",
+          "label": "Repeat a belief until it feels familiar"
+        }
+      ],
+      "correctId": "b",
+      "explanation": "Actively looking for disconfirming evidence makes it harder for a preferred belief to control what you notice."
+    },
+    "difficulty": 1,
+    "tier": 1,
+    "kind": "stash"
+  },
+  {
+    "id": "map-territory",
+    "title": "The map is not the territory",
+    "category": "Mental models",
+    "label": "MODEL LIMITS",
+    "summary": "A model is a useful simplification of reality, not reality itself.",
+    "example": "A weather forecast compresses a complex atmosphere into probabilities. It can guide a decision without guaranteeing exactly what will happen in one location.",
+    "whyItMatters": "Good models help you act. Remembering their limits helps you update when the real world no longer fits the simplified picture.",
+    "quiz": {
+      "prompt": "When a model disagrees with new observations, what is the best response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Assume the observations are wrong"
+        },
+        {
+          "id": "b",
+          "label": "Use the model without change"
+        },
+        {
+          "id": "c",
+          "label": "Recheck assumptions and update the model if needed"
+        },
+        {
+          "id": "d",
+          "label": "Stop using all models"
+        }
+      ],
+      "correctId": "c",
+      "explanation": "Models are tools. New observations can reveal where their assumptions, data, or scope need revision."
+    },
+    "difficulty": 1,
+    "tier": 1,
+    "kind": "stash"
+  },
+  {
+    "id": "circle-competence",
+    "title": "Know the edge of your knowledge",
+    "category": "Judgment",
+    "label": "CIRCLE OF COMPETENCE",
+    "summary": "Make the boundary between what you understand and what you only think you understand visible.",
+    "example": "Before investing in a company, write down which parts of its business you can explain clearly and which depend on assumptions you have not verified.",
+    "whyItMatters": "Accurately recognizing uncertainty helps you research, ask better questions, and avoid confusing confidence with competence.",
+    "quiz": {
+      "prompt": "What is the most useful purpose of a circle of competence?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Avoid learning unfamiliar subjects"
+        },
+        {
+          "id": "b",
+          "label": "Make uncertainty and knowledge limits explicit"
+        },
+        {
+          "id": "c",
+          "label": "Win every disagreement"
+        },
+        {
+          "id": "d",
+          "label": "Replace evidence with intuition"
+        }
+      ],
+      "correctId": "b",
+      "explanation": "The boundary is useful because it identifies when to rely on what you know, when to investigate, and when to seek help."
+    },
+    "difficulty": 1,
+    "tier": 1,
+    "kind": "stash"
+  },
+  {
+    "id": "stash-t1-b1-01",
+    "kind": "stash",
+    "difficulty": 1,
+    "category": "Cognitive Biases",
+    "title": "Survivorship Bias",
+    "summary": "Survivorship bias is the error of drawing conclusions from the cases that passed some selection process while ignoring the cases that did not. The visible sample is not a random draw from the whole population; it is the part that survived, and survival is often related to the very trait being studied. Any pattern found among survivors may therefore reflect the filter rather than the underlying reality. The difficulty is that failures tend to leave no record: closed firms stop publishing, discarded prototypes are never photographed, and patients who dropped out do not appear in the final data.",
+    "example": "During the Second World War, analysts examined bombers returning from missions and mapped where the aircraft had taken bullet damage. The damage clustered on the wings and fuselage, with few hits around the engines. The tempting proposal was to add armour where the holes were. The statistician Abraham Wald reasoned the other way: the planes in the sample had survived, so hits to the wings were evidently survivable, and the missing hits on engines probably belonged to aircraft that never came back. Armour therefore belonged on the engines. The returning planes were a filtered sample, and the filter was the outcome being studied. The same structure appears whenever only successes are available for inspection.",
+    "whyItMatters": "Survivorship bias distorts judgement in investing, where fund databases drop closed funds and so overstate average returns; in business advice drawn from famous founders; and in medicine, where trials that lose participants can flatter a treatment. The remedy is to ask what the selection process was and to look for the missing cases. The idea can be over-applied, however: not every successful sample is misleading. If the filter is unrelated to the trait you are studying, the survivors still tell you something, so the question is always whether survival and the trait are connected.",
+    "tags": [
+      "bias",
+      "statistics",
+      "sampling"
+    ],
+    "quiz": {
+      "prompt": "A consulting firm studies 40 companies that have been listed on a stock exchange for at least 30 years and finds that nearly all of them maintained a conservative debt policy. It concludes that low debt is a reliable route to long-term corporate survival and recommends the policy to a client. The firm did not examine companies that were delisted, bankrupted or acquired during those 30 years. Which criticism best identifies the weakness in the conclusion?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The sample of 40 companies is too small, so no conclusion about debt policy could be drawn from any group of this size."
+        },
+        {
+          "id": "b",
+          "label": "The firm should have studied companies in several countries, because debt policy is regulated differently in each jurisdiction."
+        },
+        {
+          "id": "c",
+          "label": "Failed companies are absent by construction, so the study cannot show whether they also held conservative debt; the pattern may only reflect who remained to be studied."
+        },
+        {
+          "id": "d",
+          "label": "Conservative debt and longevity are correlated, and that correlation shows the policy caused the survival of these companies."
+        }
+      ],
+      "correctId": "c",
+      "explanation": "Option c is correct. The study selected companies on the outcome, long-term survival, and then looked for common traits. If many failed companies also held conservative debt, the trait would not separate survivors from failures, and this design could never reveal that. Option a is weaker because sample size is not the central defect; a large sample selected the same way would carry the same flaw. Option b raises a legitimate refinement but would not remove the selection problem. Option d is a causal overreach, yet it follows from the missing comparison group rather than being the root error. A valid design would include delisted and failed firms."
+    },
+    "tier": 1
+  },
+  {
+    "id": "stash-t1-b1-02",
+    "kind": "stash",
+    "difficulty": 1,
+    "category": "Cognitive Biases",
+    "title": "Anchoring",
+    "summary": "Anchoring is the tendency for an initial number or reference point to pull later estimates toward it, even when the number is arbitrary or known to be irrelevant. People usually adjust away from the anchor, but the adjustment tends to be insufficient, so the final judgement stays closer to the starting value than the evidence justifies. The effect has been demonstrated with prices, quantities and legal sentences, although its size varies between settings. In practice the anchor is often supplied by someone else, such as a seller, a negotiator or a budget template, which makes it hard to notice.",
+    "example": "A buyer is shown a used van listed at 18,500 euros and wants to know its fair value. She has no strong prior, so she begins at the asking price and negotiates down to 16,800 euros, feeling that she has secured a good deal. A different buyer sees the same van listed at 14,000 euros and eventually pays 13,200. Comparable vans, checked afterwards on three separate marketplaces, sell for between 14,000 and 15,500 euros. Neither buyer examined the market before the first number appeared. The first overpaid by about 2,000 euros relative to the middle of that range, while the second paid less than the range suggests. Both final prices sit close to their respective starting figures.",
+    "whyItMatters": "Anchors shape salary negotiations, procurement, damages claims, forecasts and project budgets, usually through whoever speaks first or whichever figure is printed on the page. Useful defences include forming your own estimate before seeing any number, seeking several independent reference points, and deliberately arguing why the true value might be far from the anchor. The concept is over-applied when every first offer is treated as manipulation. A first number can carry real information about the other party's costs or knowledge, and discounting it entirely is also an error.",
+    "tags": [
+      "bias",
+      "negotiation",
+      "estimation"
+    ],
+    "quiz": {
+      "prompt": "A procurement officer in Lisbon needs a cost estimate for replacing the ventilation system in a municipal library. Before any analysis, a supplier mentions that a similar project elsewhere cost 2.4 million euros. The officer's internal estimate then comes out at 2.1 million euros, well above the three independent quotes the library later receives, which range from 1.1 to 1.4 million euros. Which practice would most reliably have reduced the pull of the supplier's figure?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Drafting a bottom-up estimate from the building's own specifications before hearing any outside figure, then comparing it with later numbers."
+        },
+        {
+          "id": "b",
+          "label": "Asking the supplier to repeat the figure in writing so that the officer can study it carefully before replying."
+        },
+        {
+          "id": "c",
+          "label": "Averaging the supplier's figure with the officer's first instinct, since combining two estimates is always better than relying on one."
+        },
+        {
+          "id": "d",
+          "label": "Refusing to consider any figure from a supplier, because a number offered by an interested party carries no information."
+        }
+      ],
+      "correctId": "a",
+      "explanation": "Option a is correct. Anchoring works because an early number becomes the starting point for adjustment, so the most effective defence is to build an independent estimate before the anchor arrives. Option b increases attention to the anchor and so strengthens it. Option c fails because averaging in the anchor imports its bias; if the supplier's figure is inflated, much of that inflation survives in the result. Option d overcorrects: a supplier's figure can contain real information about comparable costs, and ignoring it wholesale discards evidence. The better rule is to weigh outside numbers only after forming an independent view, and to seek several sources."
+    },
+    "tier": 1
+  },
+  {
+    "id": "stash-t1-b1-03",
+    "kind": "stash",
+    "difficulty": 1,
+    "category": "Decision Making",
+    "title": "Sunk Cost Fallacy",
+    "summary": "The sunk cost fallacy is the habit of letting past, unrecoverable investments influence a decision about the future. Money, time or effort already spent cannot be retrieved whichever option is chosen, so rationally it should not affect the comparison between continuing and stopping. What matters are the future costs and future benefits of each path. The pull towards continuing is strong because abandoning a project feels like admitting a loss, and because people want to appear consistent. It is hard to see in practice because the past spend is vivid and easily described, while the alternative uses of future resources are abstract.",
+    "example": "A regional hospital has spent 4.2 million pounds on a patient-records system that is two years behind schedule. An independent review estimates that finishing it will cost a further 3.0 million pounds and deliver benefits worth 2.2 million. An off-the-shelf alternative could be installed for 1.5 million pounds and would deliver benefits worth 2.0 million. A board member argues that stopping would waste the 4.2 million already spent. But that sum is gone under both options. Continuing yields a net of 2.2 − 3.0 = −0.8 million going forward, while switching yields 2.0 − 1.5 = +0.5 million. The sensible decision is to switch, even though it feels like writing off a large investment.",
+    "whyItMatters": "Sunk costs distort decisions about failing projects, unsuitable degrees, poor investments and long-running disputes, usually pushing people to escalate commitment when stopping would serve them better. A useful check is to ask what you would choose if you inherited the situation today with no history. The idea is over-applied when past investment is treated as always irrelevant: earlier spending can reveal information about difficulty, and reputation or relationships may carry genuine future costs when a project is abandoned. Those are future effects, not sunk ones.",
+    "tags": [
+      "decision-making",
+      "economics",
+      "bias"
+    ],
+    "quiz": {
+      "prompt": "A logistics firm in Nairobi has spent 900,000 shillings customising a routing software package. Midway through, it becomes clear that the package will need another 600,000 shillings to finish and will then save the firm 450,000 shillings in fuel costs over its useful life. A ready-made alternative costs 300,000 shillings and would save 400,000 over the same period. The operations manager says the firm cannot abandon the first package after spending so much. Which assessment is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Continuing is right, because abandoning the package would waste the 900,000 shillings and make the original spending pointless."
+        },
+        {
+          "id": "b",
+          "label": "Continuing is right, because its savings of 450,000 shillings exceed the alternative's savings of 400,000 over the same period."
+        },
+        {
+          "id": "c",
+          "label": "Switching is right only if the firm first writes off the 900,000 shillings in its accounts, because the loss must be recognised before deciding."
+        },
+        {
+          "id": "d",
+          "label": "Switching is right: from now on, finishing the first package nets −150,000 shillings while the alternative nets +100,000, and the 900,000 is gone either way."
+        }
+      ],
+      "correctId": "d",
+      "explanation": "Option d is correct. The 900,000 shillings is spent under either choice, so it drops out of the comparison. Looking forward, finishing the first package costs 600,000 and saves 450,000, a net of −150,000. The alternative costs 300,000 and saves 400,000, a net of +100,000. Switching is better by 250,000 shillings. Option a is the sunk cost fallacy itself. Option b compares savings while ignoring the very different remaining costs. Option c confuses an accounting treatment with a decision: whether the loss is recorded does not change which option is better. The general lesson is to compare only future costs and benefits."
+    },
+    "tier": 1
+  },
+  {
+    "id": "stash-t1-b1-04",
+    "kind": "stash",
+    "difficulty": 1,
+    "category": "Logic",
+    "title": "Modus Ponens and Modus Tollens",
+    "summary": "Modus ponens and modus tollens are two valid forms of reasoning from a conditional statement. In modus ponens, from 'if P then Q' and 'P', we conclude 'Q'. In modus tollens, from 'if P then Q' and 'not Q', we conclude 'not P'. Both are guaranteed: if the premises are true, the conclusion must be true. They are often confused with two invalid neighbours, affirming the consequent and denying the antecedent. A conditional says that P is sufficient for Q, not that Q requires P, so learning that Q is true, or that P is false, tells us nothing certain.",
+    "example": "A laboratory rule states: if a sample is contaminated, then the control reading exceeds 5.0. Suppose a technician records a control reading of 4.2. By modus tollens, the sample is not contaminated, because a contaminated sample would have produced a reading above 5.0. Now suppose the reading is 6.1 instead. It is tempting to conclude that the sample is contaminated, but that does not follow: the rule says contamination guarantees a high reading, not that a high reading can only come from contamination. Instrument drift or a faulty reagent might also raise it. Only the first case supports a certain conclusion. The second supports, at most, a suspicion that would need further testing.",
+    "whyItMatters": "Conditional reasoning underlies diagnosis, debugging, contract interpretation and the testing of scientific hypotheses. Modus tollens is the logical core of falsification: a hypothesis predicts an observation, the observation fails to appear, and the hypothesis is in trouble. People are generally comfortable with modus ponens but often miss modus tollens, and frequently accept the invalid forms. The caution is that real-world rules are rarely exceptionless. If a rule holds only usually, the conclusion becomes probable rather than certain, and the logical forms must give way to probabilistic reasoning.",
+    "tags": [
+      "logic",
+      "conditionals",
+      "falsification"
+    ],
+    "quiz": {
+      "prompt": "A building inspector in Osaka follows this rule: if a fire door is correctly installed, then it closes fully on its own from any open position. During an inspection she finds a door in a stairwell that stays about ten centimetres ajar when released. No other information about the door is available. Which conclusion follows with certainty from the rule and her observation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The door is not correctly installed, and the fault must lie in its closing spring, since that is what makes doors self-close."
+        },
+        {
+          "id": "b",
+          "label": "The door is not correctly installed, since a correctly installed door would have closed fully on its own."
+        },
+        {
+          "id": "c",
+          "label": "Nothing follows, because the rule says what a correct installation does but not that only correct installation makes a door close."
+        },
+        {
+          "id": "d",
+          "label": "The door was installed correctly but has worn with age, because the rule describes only newly fitted doors and age is a likelier cause."
+        }
+      ],
+      "correctId": "b",
+      "explanation": "Option b is correct. The rule has the form 'if P then Q', where P is correct installation and Q is full self-closing. The inspector observes not-Q, so modus tollens gives not-P. Option c wrongly treats the situation as if she had observed Q: seeing a door that does close would indeed leave her uncertain, but seeing one that does not close settles the matter. Option a goes beyond the logic by naming a specific cause the rule never mentions. Option d contradicts the conclusion by asserting correct installation, which the premises rule out, and it invents a restriction to new doors that the rule does not contain."
+    },
+    "tier": 1
+  },
+  {
+    "id": "stash-t1-b1-05",
+    "kind": "stash",
+    "difficulty": 1,
+    "category": "Economics & Incentives",
+    "title": "Goodhart's Law",
+    "summary": "Goodhart's law is usually stated as: when a measure becomes a target, it ceases to be a good measure. A metric is chosen because it correlates with something we care about. Once rewards or penalties are attached to the metric, people and organisations optimise the metric directly, often by routes that break its link with the underlying goal. The correlation that justified the measure weakens or disappears. The difficulty in practice is that the metric still looks healthy: reported numbers improve while the real objective stagnates or declines, and the gap is hidden by the very figures being monitored.",
+    "example": "A hospital in a publicly funded system is told to reduce the proportion of emergency patients who wait more than four hours before being admitted, discharged or transferred. The target is meant to improve care. Managers respond by opening a temporary holding area where patients are formally admitted at the three-hour-and-fifty-minute mark, stopping the clock, though they may then wait many hours for treatment. Reported compliance rises from 78 percent to 96 percent. Meanwhile, the time until a patient is actually seen by a specialist is unchanged. The measure was a proxy for timely care, and once it carried consequences, the cheapest way to improve it was to change how patients were classified rather than how they were treated.",
+    "whyItMatters": "Goodhart's law applies to school league tables, sales quotas, software productivity counts, policing statistics and academic citation counts. Defences include using several measures that are hard to improve together, auditing outcomes directly, and pairing a quantitative target with human judgement. The idea is over-applied when it is used to dismiss all measurement. Unmeasured work is also distorted, usually by whoever is loudest. The practical question is how easily the metric can be improved without improving the goal.",
+    "tags": [
+      "incentives",
+      "metrics",
+      "organisations"
+    ],
+    "quiz": {
+      "prompt": "A software company in Bangalore wants to improve the quality of its customer support. It begins paying team bonuses based on the number of tickets closed per week. Within two months, closed tickets rise by 35 percent, but customer satisfaction surveys show a decline and the rate of tickets reopened by the same customer has doubled. The head of support proposes keeping the bonus and tightening the ticket-closing rules. Which diagnosis best explains the pattern?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The staff are insufficiently trained, and the rise in closed tickets proves that the bonus is motivating them as intended."
+        },
+        {
+          "id": "b",
+          "label": "Customer satisfaction surveys are unreliable, so the decline can be ignored while the ticket count is treated as the objective evidence."
+        },
+        {
+          "id": "c",
+          "label": "The bonus has no effect on behaviour, and the change in reopened tickets is a coincidence unrelated to the incentive scheme."
+        },
+        {
+          "id": "d",
+          "label": "Closing tickets was a proxy for resolving problems; once rewarded directly, staff raised the count by closing tickets prematurely, so the proxy stopped tracking quality."
+        }
+      ],
+      "correctId": "d",
+      "explanation": "Option d is correct. Tickets closed was a proxy for solved customer problems. Once bonuses depended on it, the cheapest way to raise it was to close tickets before the problem was fully resolved, which explains the rise in closures, the doubling of reopened tickets and the falling satisfaction. Option a reads the rising count as success, which is exactly what Goodhart's law warns against. Option b dismisses contrary evidence to protect the target. Option c ignores the timing, since the changes followed the bonus closely. Tighter closing rules may help, but they invite new workarounds; adding outcome measures such as reopen rates and audited resolution would address the cause."
+    },
+    "tier": 1
+  },
+  {
+    "id": "stash-t1-b1-06",
+    "kind": "stash",
+    "difficulty": 1,
+    "category": "Probability & Statistics",
+    "title": "Base Rates",
+    "summary": "A base rate is the underlying frequency of an event or category in a population before any specific evidence is considered. Base rate neglect is the tendency to overweight vivid, case-specific information and underweight how common the category was to begin with. When a condition is rare, even a fairly accurate test or a convincing description will produce many more false positives than true positives, because the rare cases are outnumbered by the large group of non-cases. The error is hard to see because the specific evidence feels informative on its own, while the base rate feels like background.",
+    "example": "A screening test for an infection is applied to a population of 10,000 people. It is 90 percent sensitive, meaning it detects 90 percent of those who have the infection, and it has a 5 percent false positive rate. The infection affects 1 percent of the population, which is 100 people. The test correctly flags 90 of them. Among the 9,900 people without the infection, 5 percent, or 495, also test positive. So 585 people test positive, and only 90 of them are infected: about 15 percent, or roughly one in six or seven. The result is informative, since it raises the probability from 1 percent to 15 percent, but it is far from conclusive.",
+    "whyItMatters": "Base rates matter in medical screening, fraud detection, security alerts, hiring and forensic evidence. Ignoring them leads to over-treatment, wasted investigation and wrongful confidence in a suspect or diagnosis. The practical habit is to ask how common the thing is before asking how well the evidence fits. The idea is over-applied when the base rate is taken from the wrong reference class or treated as fixed: a patient with symptoms or a known exposure belongs to a group with a higher base rate than the general population, and using the general figure would understate the risk.",
+    "tags": [
+      "probability",
+      "bias",
+      "screening"
+    ],
+    "quiz": {
+      "prompt": "A bank in Warsaw uses an automated system to flag fraudulent card transactions. Roughly 1 in 500 transactions is fraudulent. The system flags 95 percent of fraudulent transactions and also wrongly flags 2 percent of legitimate ones. An analyst reviews a batch of 100,000 transactions and picks one flagged transaction at random. Approximately what is the probability that it is genuinely fraudulent?",
+      "options": [
+        {
+          "id": "a",
+          "label": "About 9 percent, because most flagged transactions come from the very large legitimate group, even at a low false positive rate."
+        },
+        {
+          "id": "b",
+          "label": "About 95 percent, because the system detects 95 percent of fraudulent transactions."
+        },
+        {
+          "id": "c",
+          "label": "About 50 percent, because a flagged transaction is either fraudulent or legitimate with nothing to favour either."
+        },
+        {
+          "id": "d",
+          "label": "About 2 percent, because that is the system's rate of wrongly flagging legitimate transactions."
+        }
+      ],
+      "correctId": "a",
+      "explanation": "Option a is correct. In 100,000 transactions, about 200 are fraudulent and 99,800 are legitimate. The system flags 95 percent of the 200, which is 190, and 2 percent of 99,800, which is 1,996. Of 2,186 flagged transactions, 190 are fraudulent, giving about 8.7 percent, or roughly 9 percent. Option b confuses the detection rate with the probability that a flag is genuine, reversing the conditional. Option c treats the flag as a coin flip between two outcomes, ignoring the 499-to-1 ratio of legitimate to fraudulent transactions. Option d repeats the false positive rate, which answers a different question. A flag raises the probability from 0.2 percent to about 9 percent: informative, but most flags are still false alarms."
+    },
+    "tier": 1
+  },
+  {
+    "id": "stash-t1-b2-01",
+    "kind": "stash",
+    "difficulty": 1,
+    "category": "Cognitive Biases",
+    "title": "Confirmation Bias",
+    "summary": "Confirmation bias is the tendency to search for, interpret and remember information in ways that support what one already believes. It operates at several stages: which questions we ask, which sources we consult, how critically we read evidence that agrees or disagrees, and which cases we recall afterwards. Because each step feels reasonable, the bias rarely feels like bias. A person can gather a large amount of supporting evidence and feel well informed while never having tested the belief against anything that could have refuted it. The difficulty is that the quantity of agreeing evidence says little unless the search could also have found disagreeing evidence.",
+    "example": "A hiring manager forms a favourable impression of a candidate in the first five minutes of an interview. For the remaining forty minutes she asks questions that invite confirmation, such as 'Tell me about a project where you led a team successfully.' The candidate answers well, because the question made that easy. She does not ask about a project that failed, and when the candidate mentions a missed deadline she treats it as a sign of ambitious scope. A colleague who formed a negative first impression of the same candidate asks about conflicts and failures, hears the same missed-deadline story, and treats it as evidence of poor planning. Both interviewers leave with their opinions strengthened, and neither asked a question whose answer could have changed their mind.",
+    "whyItMatters": "Confirmation bias affects medical diagnosis, investigations, scientific research, investing and ordinary disputes. It helps explain why early hypotheses are so persistent and why more information does not always bring people closer together. Practical defences include writing down in advance what evidence would change your view, assigning someone to argue the opposite case, and asking what a search would have shown if you were wrong. The idea is over-applied when any disagreement is labelled bias. Sometimes a strong prior is well founded, and weighing new evidence against it is legitimate rather than stubborn.",
+    "tags": [
+      "bias",
+      "reasoning",
+      "hypothesis-testing"
+    ],
+    "quiz": {
+      "prompt": "A quality engineer at an auto-parts plant in Brazil suspects that a new steel supplier is causing cracks in brake components. She reviews the 20 parts rejected last month, notes that 14 were made from the new steel, and treats this as confirmation. She does not check what share of all production used the new steel, and she does not look at the accepted parts. Which criticism best identifies the weakness in her approach?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The sample of 20 rejected parts is too small, so no conclusion about a supplier could be drawn from any count of rejects."
+        },
+        {
+          "id": "b",
+          "label": "She examined only evidence that could agree with her suspicion; if the new steel is 70 percent of production, 14 of 20 rejects is exactly what chance would give."
+        },
+        {
+          "id": "c",
+          "label": "She should have trusted the supplier's certification, since a supplier's documents are better evidence than inspection counts."
+        },
+        {
+          "id": "d",
+          "label": "She should not have formed a suspicion before collecting data, because holding any hypothesis early always corrupts the analysis."
+        }
+      ],
+      "correctId": "b",
+      "explanation": "Option b is correct. A count of 14 out of 20 supports the suspicion only if the new steel is over-represented among rejects compared with its share of all production. If the new steel is used in 70 percent of production, 14 of 20 is exactly the expected share and the finding is no evidence at all. She searched in a way that could only agree with her view. Option a is partly true but not the central flaw, since a larger count taken the same way would carry the same weakness. Option c replaces inspection with an appeal to documents and would not test the claim. Option d overstates: forming a hypothesis early is normal and useful; the error lies in how it was tested."
+    },
+    "tier": 1
+  },
+  {
+    "id": "stash-t1-b2-02",
+    "kind": "stash",
+    "difficulty": 1,
+    "category": "Probability & Statistics",
+    "title": "The Law of Small Numbers",
+    "summary": "The law of small numbers is the mistaken belief that a small sample should closely resemble the population it comes from. In reality, small samples vary much more than large ones. The spread of a sample average shrinks only in proportion to the square root of the sample size, so results from a handful of cases are often extreme, in either direction, purely by chance. People nonetheless read patterns into small samples and treat them as representative. The error is hard to see because a striking result in a small sample feels like strong evidence, and the dramatic cases are exactly the ones that get reported.",
+    "example": "Consider the counties of a country ranked by the rate of a rare cancer. The counties with the highest rates and the counties with the lowest rates are often both small and rural. This is not because rural life protects some people and endangers others. A county of 2,000 people might expect 2 cases; recording 5 gives a rate two and a half times the average, and recording 0 gives a rate of zero. A county of 2,000,000 expects 2,000 cases, and the count will almost always fall within a few percent of that. Small populations land at both extremes through chance alone, while large ones stay near the average. Explaining the extremes with local causes, such as diet or pollution, would be a search for a story to fit noise.",
+    "whyItMatters": "Small-sample thinking affects judgements about sports streaks, fund managers with three good years, schools with one strong year of results, and early clinical findings from a handful of patients. Extreme results from small groups should be treated as weak evidence, and ranked lists of small units will be dominated by chance. The remedy is to ask how many observations lie behind a number and how much it would move with a few more. The idea is over-applied when small samples are dismissed outright. A single counterexample can still refute a universal claim.",
+    "tags": [
+      "statistics",
+      "sampling",
+      "bias"
+    ],
+    "quiz": {
+      "prompt": "A school district in Poland publishes a league table of 300 secondary schools ranked by average improvement in exam scores. The top five schools are all very small, with under 40 pupils in the tested year group, and the bottom five are also all very small. A newspaper concludes that small schools are either excellent or failing, and that school size drives the difference. Which explanation best accounts for the pattern?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Small schools attract either the very best or the very worst teachers, so their staff quality is more extreme than at larger schools."
+        },
+        {
+          "id": "b",
+          "label": "Exam boards moderate results at large schools more heavily, which pulls their averages towards the middle of the table."
+        },
+        {
+          "id": "c",
+          "label": "Averages from small groups vary far more from year to year by chance, so small schools fill both ends of the table even if size has no effect."
+        },
+        {
+          "id": "d",
+          "label": "Small schools are harder to measure because their pupils sit different exams from those taken in larger schools."
+        }
+      ],
+      "correctId": "c",
+      "explanation": "Option c is correct. The average of a small group has a much larger standard error than the average of a large one, so small schools will produce both the best and the worst scores through chance alone. If size had a real effect in one direction, small schools would cluster at one end of the table, not at both. Option a proposes a staff-quality mechanism for which the scenario offers no evidence; it would need to be tested rather than assumed. Option b invents a moderation procedure that is never mentioned. Option d invents a difference in exams. To check the newspaper's claim, the district should look at results over several years or report confidence intervals alongside each ranking."
+    },
+    "tier": 1
+  },
+  {
+    "id": "stash-t1-b2-03",
+    "kind": "stash",
+    "difficulty": 1,
+    "category": "Economics & Incentives",
+    "title": "Opportunity Cost",
+    "summary": "Opportunity cost is the value of the best alternative you give up when you make a choice. Every use of money, time or attention excludes other uses, so the true cost of an option includes what the next best option would have delivered, not just the price paid. It is a forward-looking concept: it concerns choices still available, not outlays already made. It is hard to see in practice because the chosen option is concrete and visible, while the forgone alternative is hypothetical and never appears on any statement or invoice. Costs that carry no payment, such as an hour of your time, are the most easily overlooked.",
+    "example": "A freelance translator in Montreal is offered a two-week contract worth 3,000 dollars. She would like to take it, but she also holds a standing offer from another client: ten days of work at 400 dollars a day, 4,000 dollars in total, which would fall in the same period. Accepting the 3,000-dollar contract means giving up the 4,000. Its opportunity cost is 4,000 dollars, so in economic terms accepting it leaves her 1,000 dollars worse off than the alternative, even though it brings in cash. Had the other client's offer not existed, and had her time otherwise gone unused, the opportunity cost would be close to zero and the contract would be clearly worthwhile.",
+    "whyItMatters": "Opportunity cost underlies decisions about careers, investment, public spending and the use of owned assets. A family that owns a flat and lets it stand empty, for example, bears the rent it could have earned. The habit it builds is to compare options against each other, rather than asking whether one option is acceptable in isolation. The idea is over-applied when every moment is treated as something to monetise. The best alternative must be realistic and actually available, and some alternatives, such as rest or time with family, hold value that cannot be expressed in a price.",
+    "tags": [
+      "economics",
+      "decision-making",
+      "trade-offs"
+    ],
+    "quiz": {
+      "prompt": "A café owner in Cape Town owns her shop premises outright and pays no rent. A property agent tells her the space could be let to a bookshop for 9,000 rand a month. Her café earns 14,000 rand a month after all running costs, none of which includes rent. A friend says that because she pays no rent, the premises cost her nothing to use. Which assessment is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The premises cost her 9,000 rand a month in forgone rent, so the café is still 5,000 rand a month better than letting the space."
+        },
+        {
+          "id": "b",
+          "label": "The friend is right, because costs are only the payments actually made, and she makes no payment for the premises."
+        },
+        {
+          "id": "c",
+          "label": "The premises cost her 14,000 rand a month, which is the café's profit, so she should let the space to the bookshop."
+        },
+        {
+          "id": "d",
+          "label": "The premises cost her 9,000 rand a month, but since the café's income is real cash and the rent is hypothetical, the rent should be ignored."
+        }
+      ],
+      "correctId": "a",
+      "explanation": "Option a is correct. Using the premises for the café means giving up the rent she could receive, so the opportunity cost is 9,000 rand a month even though no payment is made. The café earns 14,000, so after counting that cost it yields 5,000 more than letting would, and she should keep the café. Option b confuses cost with cash payment. Option c uses the café's whole profit as the cost, when the relevant forgone amount is the rent, the value of the alternative. Option d recognises the cost and then discards it because it is hypothetical, which is exactly what the idea of opportunity cost refuses to do."
+    },
+    "tier": 1
+  },
+  {
+    "id": "stash-t1-b2-04",
+    "kind": "stash",
+    "difficulty": 1,
+    "category": "Cognitive Biases",
+    "title": "Availability Heuristic",
+    "summary": "The availability heuristic is the habit of judging how frequent or probable something is by how easily examples come to mind. Ease of recall is a decent signal in many settings, since common events are generally easier to remember. But recall is also shaped by vividness, recency, emotional intensity and media coverage, none of which track frequency reliably. Dramatic and unusual events can therefore feel more common than quiet and ordinary ones. The bias is hard to detect because the judgement arrives instantly and feels like a direct perception of the world, not a guess based on what happens to be memorable.",
+    "example": "After a widely reported shark attack on a beach in Queensland, a family cancels its swimming holiday and drives to a lake instead. The attack was covered for several days with footage and interviews, and the image is easy to recall. Drowning deaths at lakes, rivers and pools are far more numerous than shark fatalities, but they are reported briefly, if at all, and rarely produce a memorable image. The family has substituted what comes to mind for what is likely. Their sense of danger follows media coverage rather than underlying rates, and the lake is not necessarily the safer choice. Nobody in the family checked the actual figures before changing plans.",
+    "whyItMatters": "Availability shapes risk perception, insurance purchases, hiring decisions based on a recent bad experience, and public policy after a dramatic incident. The corrective is to look up the actual frequencies, and to ask whether a case is memorable because it is common or because it is striking. The idea is over-applied when recall is always treated as misleading. Experts often have well-calibrated recall in their own fields, and a recent event can legitimately signal a changed risk, such as a new hazard that has not yet appeared in statistics.",
+    "tags": [
+      "bias",
+      "risk",
+      "heuristics"
+    ],
+    "quiz": {
+      "prompt": "A regional manager in Germany reviews staffing plans for the coming year. Last quarter one employee left abruptly after a public dispute that the whole office discussed for weeks. He now believes that conflict is the main cause of turnover and proposes spending most of the retention budget on mediation. HR records for the past three years show 120 departures, of which 9 involved conflict and 64 were for relocation or a career change. What is the most likely source of his belief?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Confirmation bias, because he has searched the HR records only for departures that fit his theory."
+        },
+        {
+          "id": "b",
+          "label": "Sunk cost, because he has already invested time in discussing the dispute and so feels bound to act on it."
+        },
+        {
+          "id": "c",
+          "label": "Anchoring, because the first departure he examined set the figure from which he adjusted his estimate of conflict-related turnover."
+        },
+        {
+          "id": "d",
+          "label": "Availability: the dispute was recent, vivid and widely discussed, so conflict departures come to mind far more easily than the more common quiet ones."
+        }
+      ],
+      "correctId": "d",
+      "explanation": "Option d is correct. The dispute was recent, emotionally charged and discussed at length, so it is easy to recall, while the 64 relocation and career-change departures were quiet and left little trace. The records show that conflict accounted for 9 of 120 departures, about 7.5 percent, against more than half for relocation or career change. Option a is wrong because the manager has not yet consulted the records at all. Option b misapplies sunk cost, which concerns past spending that distorts future choices. Option c requires a numerical starting point that the scenario does not supply. The sound step is to base the budget on the recorded distribution of reasons for leaving."
+    },
+    "tier": 1
+  },
+  {
+    "id": "stash-t2-b1-01",
+    "kind": "stash",
+    "difficulty": 2,
+    "category": "Probability & Statistics",
+    "title": "Regression to the Mean",
+    "summary": "Regression to the mean is the statistical tendency for extreme measurements to be followed by less extreme ones when the measurement involves a component of chance. If a value is unusually high or low partly because of random variation, the next measurement will usually contain less of that luck and move back towards the average. The effect is hard to see because we often act when things look unusually bad or good, then credit or blame whatever we did in between. The change that follows would have occurred anyway, so the intervention appears to work or to fail when it has done neither.",
+    "example": "A cycling club in Girona times its 60 members over 20 kilometres in March and selects the 10 slowest for a special coaching programme. In April all 60 are timed again. The 10 coached riders improve by an average of 90 seconds, and the club announces that the programme works. But the rest of the club's times barely change, and some of the fastest March riders get slower. Part of any rider's March time was luck: wind, a poor night's sleep, a mechanical problem. Selecting the slowest riders selected the unluckiest, so on average they would have improved even without coaching. To test the programme, the club would need to compare the coached riders with a similarly slow group, chosen at random, that was not coached.",
+    "whyItMatters": "Regression to the mean explains many apparent effects of punishment and praise, the sophomore slump in sport, the improvement of hospital units after a bad year and the apparent success of treatments for conditions that fluctuate, such as back pain. Any programme launched in response to an extreme result needs a comparison group. The idea is over-applied when every change after an extreme is dismissed as regression. If the underlying measure is highly reliable, there is little to regress, and a genuine intervention can add to the natural drift.",
+    "tags": [
+      "statistics",
+      "causation",
+      "evaluation"
+    ],
+    "quiz": {
+      "prompt": "A road-safety agency in Sweden installs speed cameras at the six junctions that recorded the most injury crashes last year. This year, crash counts at those six junctions fall by an average of 35 percent, and the agency credits the cameras. Crashes at the other junctions in the region were unchanged on average. The agency has no information on trends at junctions that had similar crash totals but did not receive cameras. Which conclusion is best supported?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The cameras caused the full 35 percent drop, since the other junctions did not change."
+        },
+        {
+          "id": "b",
+          "label": "The cameras had no effect, because crash counts naturally fall over time at every junction."
+        },
+        {
+          "id": "c",
+          "label": "Part of the drop is probably regression to the mean, since the junctions were chosen for extreme counts; a comparison with similar junctions without cameras is needed."
+        },
+        {
+          "id": "d",
+          "label": "The drop is meaningless, because six junctions are too few to measure any change in crashes."
+        }
+      ],
+      "correctId": "c",
+      "explanation": "Option c is correct. The six junctions were selected because they had the highest crash counts, and counts include a random component, so some of those junctions were simply unlucky that year. Next year their counts would tend to fall even with no intervention. The other junctions were not selected on extremes, so their unchanged average is not a fair comparison. Option a attributes the whole drop to the cameras without a valid control. Option b overcorrects: regression explains some of the drop, but it cannot show that the cameras did nothing. Option d is wrong because a small group can still be compared properly; the problem is the missing control, not the number. The fix is to compare against similar high-count junctions without cameras."
+    },
+    "tier": 2
+  },
+  {
+    "id": "stash-t2-b1-02",
+    "kind": "stash",
+    "difficulty": 2,
+    "category": "Probability & Statistics",
+    "title": "Simpson's Paradox",
+    "summary": "Simpson's paradox occurs when a trend that appears in several separate groups reverses, or disappears, when the groups are combined. It arises when group sizes are unequal and the grouping variable is related both to the outcome and to which option people receive. The aggregate figure is a weighted average of the group figures, and the weights can differ between the options being compared. The numbers are not wrong; the question is which comparison answers the question being asked. That depends on the causal structure: sometimes the groups are the right level of analysis and sometimes the combined data are.",
+    "example": "A hospital compares two treatments for kidney stones. For small stones, treatment A succeeded in 81 of 87 cases (93 percent) and treatment B in 234 of 270 (87 percent). For large stones, A succeeded in 192 of 263 cases (73 percent) and B in 55 of 80 (69 percent). Treatment A does better in both groups. Yet across all 350 patients per treatment, A succeeded in 273 cases (78 percent) and B in 289 (83 percent), so B looks better overall. The reason is that A was given mostly to patients with large stones, which are harder to treat, while B was given mostly to patients with small ones. Stone size drives both treatment choice and the chance of success, so the combined figures mix patient difficulty into the comparison.",
+    "whyItMatters": "Simpson's paradox appears in admissions statistics, drug trials, hospital comparisons and pay-gap analysis, where aggregate figures can point in the opposite direction from every subgroup. It warns against reading combined rates as causal effects without asking how people came to be in each group. The paradox does not mean subgroup figures are always the right ones: if the grouping variable is itself a consequence of the treatment, conditioning on it can create bias instead of removing it. The correct level of analysis depends on a causal model of the situation, not on the numbers alone.",
+    "tags": [
+      "statistics",
+      "paradox",
+      "confounding"
+    ],
+    "quiz": {
+      "prompt": "A university in Chile compares promotion rates for two cohorts of lecturers, X and Y, each with 100 applicants. In the law faculty, cohort X had 15 promotions from 20 applicants and cohort Y had 56 from 80. In the arts faculty, cohort X had 28 from 80 and cohort Y had 6 from 20. A dean says the overall figures, 43 percent for X and 62 percent for Y, prove that cohort Y is treated more favourably. Which response is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The inference is unsafe: X does better within each faculty, and the overall gap arises because most of Y's applicants applied to the faculty that promotes more."
+        },
+        {
+          "id": "b",
+          "label": "The dean is right, because overall figures include every applicant and are therefore the most reliable measure."
+        },
+        {
+          "id": "c",
+          "label": "The faculty figures must be wrong, since they cannot both favour X while the overall figures favour Y."
+        },
+        {
+          "id": "d",
+          "label": "The overall figures should be discarded, because subgroup figures are always the correct level of analysis."
+        }
+      ],
+      "correctId": "a",
+      "explanation": "Option a is correct. In law, X is promoted at 75 percent against Y's 70 percent; in arts, X at 35 percent against Y's 30 percent. So X does better in both faculties. The overall figures reverse this because 80 of Y's 100 applicants applied to law, which promotes about 70 percent of applicants of both cohorts, while 80 of X's 100 applied to arts, which promotes far fewer. This is Simpson's paradox: faculty is related both to applicant mix and to promotion rate. Option b treats aggregation as automatically more reliable, which it is not. Option c claims an impossibility; the arithmetic is consistent. Option d overcorrects, since subgroup analysis is appropriate only when the grouping variable is not itself affected by the cohort."
+    },
+    "tier": 2
+  },
+  {
+    "id": "stash-t2-b1-03",
+    "kind": "stash",
+    "difficulty": 2,
+    "category": "Decision Making",
+    "title": "The Planning Fallacy",
+    "summary": "The planning fallacy is the tendency to underestimate the time, cost and risk of a future task, even when one knows that similar tasks have run over in the past. Planners tend to build a forecast from the details of the current plan, imagining the best sequence of events, rather than from the record of comparable projects. The result is estimates that cluster around an optimistic scenario. The effect is hard to see from the inside because the plan itself seems realistic and each step is individually plausible, while delays arrive from sources nobody listed, such as illness, approvals, rework and interactions between tasks.",
+    "example": "A city transport authority estimates that a new tram extension will take 4 years and cost 300 million euros. The estimate is built bottom-up from engineers' schedules for each section. Suppose a review of 30 comparable extensions elsewhere found that the median project took 40 percent longer and cost 35 percent more than its original estimate. Applying those figures, the outside view puts the project at about 5.6 years and 405 million euros. Nothing in the internal estimate is obviously wrong: each section's schedule looks reasonable. But the internal view counts only the delays that planners can foresee, while the outside view captures the unforeseeable ones as well, since the reference projects experienced them too.",
+    "whyItMatters": "The planning fallacy affects construction, software delivery, personal deadlines and public budgets. A useful remedy is reference class forecasting: begin with the outcomes of similar past projects, then adjust for what is genuinely different about this one. Breaking a project into smaller tasks can also help, but only if it surfaces new risks rather than adding up optimistic pieces. The idea is over-applied when every delay is blamed on optimism. Some overruns come from changes in scope, shifting requirements or external events, which a better forecast cannot remove.",
+    "tags": [
+      "decision-making",
+      "forecasting",
+      "bias"
+    ],
+    "quiz": {
+      "prompt": "A software team in Hyderabad estimates that a payments-system migration will take 12 weeks, based on a task-by-task schedule that the senior engineers consider careful. The last five migrations the company carried out took 18, 21, 16, 24 and 19 weeks against original estimates of 10 to 14 weeks. The project lead says this migration is different because the engineers are more experienced. Which approach would best improve the forecast?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep the 12-week estimate, since the task-by-task schedule is detailed and the engineers are experienced."
+        },
+        {
+          "id": "b",
+          "label": "Add a flat two weeks to the estimate, which covers any plausible delay."
+        },
+        {
+          "id": "c",
+          "label": "Ask each engineer to give a more confident estimate, since confident people estimate better."
+        },
+        {
+          "id": "d",
+          "label": "Start from the company's own record, which averages about 20 weeks for similar migrations, then adjust only for differences backed by evidence."
+        }
+      ],
+      "correctId": "d",
+      "explanation": "Option d is correct. The team's five most similar projects ran at 16 to 24 weeks, averaging 19.6, against estimates of 10 to 14. That record is the outside view, and it is a better predictor than a detailed plan, because the plan counts only foreseen tasks. Experience is a reason to adjust from the baseline, but the adjustment must be evidenced, not assumed. Option a repeats the pattern that produced the earlier overruns. Option b picks an arbitrary buffer far smaller than the observed overruns. Option c mistakes confidence for accuracy: more confident estimates tend to be narrower, not more correct. Better still, the team would record this project's outcome so that the baseline improves over time."
+    },
+    "tier": 2
+  },
+  {
+    "id": "stash-t2-b1-04",
+    "kind": "stash",
+    "difficulty": 2,
+    "category": "Probability & Statistics",
+    "title": "Correlation Versus Causation",
+    "summary": "A correlation is a statistical association between two variables: when one is higher, the other tends to be higher, or lower. Causation means that changing one variable would change the other. The first does not establish the second. An association can arise because A causes B, because B causes A, because a third factor causes both, or by chance, especially when many comparisons are made. Only some of these support a policy that intervenes on A. The difficulty in practice is that a causal story is usually easy to tell, and a plausible story feels like evidence, even when the data cannot distinguish it from the alternatives.",
+    "example": "A study of residents of a coastal town finds that people who own air conditioners have more cases of heat-related illness than people who do not. A councillor proposes subsidising the removal of air conditioners to reduce illness. The reasoning confuses the direction of cause. Those most at risk from heat, such as older people and people with chronic conditions, are the ones more likely to buy air conditioning, so the units mark vulnerability rather than cause it. Within the vulnerable group, air conditioning probably reduces harm. The correlation is real, but the intervention it suggests would likely raise illness. Establishing the causal effect would need a comparison of similar households, ideally with randomised subsidies or a before-and-after design.",
+    "whyItMatters": "The distinction decides whether an intervention will work. Health advice, education policy and business decisions are all built on observed associations, and many have been reversed after controlled trials. Experiments with random assignment, natural experiments and carefully designed comparisons can separate the explanations. The idea is over-applied when correlation is dismissed as worthless. Correlation is often the first evidence of a real causal link, and where experiments are impractical or unethical, converging observational evidence is the best available.",
+    "tags": [
+      "statistics",
+      "causation",
+      "confounding"
+    ],
+    "quiz": {
+      "prompt": "Analysts at a retail chain in Mexico find that stores with more staff on the shop floor have higher monthly sales per square metre. The finance director proposes adding two staff to every store to raise sales. Store managers point out that head office already assigns more staff to stores in busy city-centre locations. Which statement best identifies the problem with the director's proposal?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The correlation must be spurious, since no logical link between staff and sales can exist."
+        },
+        {
+          "id": "b",
+          "label": "Staffing is partly a result of footfall, so the association may reflect busy stores receiving more staff rather than staff raising sales."
+        },
+        {
+          "id": "c",
+          "label": "The analysts should have measured sales per employee, because sales per square metre is not a valid measure."
+        },
+        {
+          "id": "d",
+          "label": "Staff do raise sales, but the effect is probably too small to justify the cost of two extra staff in every store."
+        }
+      ],
+      "correctId": "b",
+      "explanation": "Option b is correct. Head office allocates more staff to busy stores, so footfall is a common driver of both staffing and sales: the causal arrow may run from sales potential to staffing, or location may drive both. Adding staff to quiet stores might raise sales, but the data cannot show it. Option a overreaches: there is a plausible link between staff and sales, so the association is probably not coincidence; it is just not clearly causal. Option c changes the metric without addressing the confounding. Option d assumes causation and then argues about size, skipping the real question. A better test would add staff in a random subset of comparable stores and compare their sales with those of the rest."
+    },
+    "tier": 2
+  },
+  {
+    "id": "stash-t2-b1-05",
+    "kind": "stash",
+    "difficulty": 2,
+    "category": "Economics & Incentives",
+    "title": "Jevons Paradox and Rebound Effects",
+    "summary": "Jevons paradox describes cases in which an efficiency improvement leads to greater total consumption of a resource rather than less. Efficiency lowers the effective cost of using the resource. If demand is sufficiently responsive to cost, people use the cheaper service so much more that the savings are outweighed. Smaller rebounds, where the savings are partly offset but total use still falls, are far more common than the full reversal. The difficulty is that engineers' projected savings assume fixed demand, while behaviour changes only after the improvement is in place.",
+    "example": "In 1865 the economist William Stanley Jevons argued that more efficient steam engines had increased, not reduced, Britain's coal consumption, because cheaper power opened up new uses. A modern illustration: a household in Poland replaces its heating system with one that uses 25 percent less energy per hour of warmth. Suppose the family responds by heating more rooms, so that warmth rises by 20 percent. Energy per unit of warmth falls to 0.75 and warmth rises to 1.2, so total energy use is 0.75 × 1.2 = 0.90 of the original: a 10 percent saving, not 25. The rebound has absorbed 60 percent of the expected saving. If warmth rose by 40 percent, the total would be 1.05 and consumption would rise.",
+    "whyItMatters": "Rebound effects matter for energy and climate policy, transport planning and any technology that lowers the cost of a resource. Efficiency standards alone may deliver less than projected, and pairing them with price signals or caps can help lock in savings. The idea is over-applied when it is cited to dismiss efficiency measures. Full reversals are rare, and the evidence points mostly to partial rebounds, so efficiency usually still reduces total use, though by less than engineering estimates suggest.",
+    "tags": [
+      "economics",
+      "energy",
+      "unintended-consequences"
+    ],
+    "quiz": {
+      "prompt": "A national energy agency in New Zealand introduces standards that cut the electricity needed per kilometre by electric buses by 20 percent. Planners assumed that operators would run the same number of kilometres, so total fleet electricity use would fall by 20 percent. After three years, operators have added routes because cheaper running costs make marginal routes viable, and total kilometres have risen by 10 percent. What happened to total electricity use relative to before the standard?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It fell by 20 percent as planned, because the standard governs electricity use per kilometre."
+        },
+        {
+          "id": "b",
+          "label": "It rose by 10 percent, since kilometres rose by 10 percent."
+        },
+        {
+          "id": "c",
+          "label": "It fell by 12 percent, so only part of the planned 20 percent saving was realised."
+        },
+        {
+          "id": "d",
+          "label": "It was unchanged, because the 20 percent saving and the 10 percent increase cancel each other."
+        }
+      ],
+      "correctId": "c",
+      "explanation": "Option c is correct. Electricity per kilometre falls to 0.8 of the old value, and kilometres rise to 1.1 times the old figure, so total use is 0.8 × 1.1 = 0.88, a fall of 12 percent. The planned saving of 20 percent was reduced by a rebound of 8 percentage points, or 40 percent of the expected saving. Option a ignores the added kilometres. Option b ignores the efficiency gain per kilometre. Option d treats percentage changes as additive and cancelling, when they multiply: 20 percent less and 10 percent more is not zero net. This is a partial rebound, not Jevons paradox in its strong form; for total use to rise, kilometres would have to grow by more than 25 percent."
+    },
+    "tier": 2
+  },
+  {
+    "id": "stash-t2-b1-06",
+    "kind": "stash",
+    "difficulty": 2,
+    "category": "Logic",
+    "title": "De Morgan's Laws",
+    "summary": "De Morgan's laws describe how negation interacts with 'and' and 'or'. The first says that 'not (A and B)' is equivalent to '(not A) or (not B)': for a conjunction to fail, at least one part must fail. The second says that 'not (A or B)' is equivalent to '(not A) and (not B)': for a disjunction to fail, every part must fail. In practice the laws are easily violated in everyday language, where negation is placed loosely, and they matter wherever rules, filters or conditions are negated, as in database queries, legal clauses and eligibility criteria.",
+    "example": "A grant programme in Ireland states that applicants must be a registered charity and have been operating for at least two years. A clerk wants to describe who is rejected. It is tempting to write that rejected applicants are 'not a registered charity and not operating for two years'. That wrongly requires both failures. By De Morgan's first law, not (charity and two years) equals (not charity) or (under two years). A rejected applicant therefore fails if it is not a charity, or if it is under two years old, or both. A three-year-old company that is not a charity is rejected under the rule, but would be wrongly accepted under the clerk's wording. Pushing a negation inward reverses 'and' and 'or'.",
+    "whyItMatters": "De Morgan's laws are used constantly in programming, search queries, spreadsheet filters and regulatory drafting. An error when negating a compound condition produces silent bugs: records that should be excluded stay in, or valid ones disappear. The laws also help in reading contracts that say a person must not do A or B. They are over-applied when negation is moved across quantified statements without care: 'not all A are B' is not the same as 'no A are B'. In everyday work the main risk is simply forgetting them.",
+    "tags": [
+      "logic",
+      "negation",
+      "programming"
+    ],
+    "quiz": {
+      "prompt": "A hospital's data team in Seoul writes a query to find patients who should be excluded from a trial. The inclusion rule is: age 18 or over AND no history of kidney disease. A junior analyst writes the exclusion rule as: age under 18 AND history of kidney disease. The team lead says it is wrong. Which description of the correct exclusion rule is right?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Age under 18 OR history of kidney disease; excluded patients fail at least one inclusion condition."
+        },
+        {
+          "id": "b",
+          "label": "Age under 18 AND history of kidney disease; excluded patients must fail both inclusion conditions."
+        },
+        {
+          "id": "c",
+          "label": "Age 18 or over OR no history of kidney disease; excluded patients meet at least one inclusion condition."
+        },
+        {
+          "id": "d",
+          "label": "Age under 18 AND no history of kidney disease; excluded patients fail only the age condition."
+        }
+      ],
+      "correctId": "a",
+      "explanation": "Option a is correct. Inclusion requires age 18 or over and no kidney disease history. By De Morgan's first law, its negation is age under 18 or a history of kidney disease: failing either condition is enough for exclusion. The analyst's version in option b excludes only patients who fail both, so a 16-year-old without kidney disease and a 60-year-old with it would both be wrongly included. Option c changes only the connector and leaves the conditions unnegated, so it describes patients who meet an inclusion condition. Option d keeps the 'and' and negates only one condition, which excludes just one narrow group of patients. A quick check is to test a patient who passes one condition and fails the other: the correct rule excludes them."
+    },
+    "tier": 2
+  }
+]

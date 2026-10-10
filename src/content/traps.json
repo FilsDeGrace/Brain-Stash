@@ -1,0 +1,432 @@
+[
+  {
+    "id": "survivorship",
+    "prompt": "What is the biggest flaw?",
+    "context": "You study ten successful founders and notice that most ignored formal business plans. You conclude that ignoring plans causes success. You only interviewed people whose companies survived.",
+    "options": [
+      {
+        "id": "a",
+        "label": "Survivorship bias"
+      },
+      {
+        "id": "b",
+        "label": "The sunk cost fallacy"
+      },
+      {
+        "id": "c",
+        "label": "The bandwagon effect"
+      },
+      {
+        "id": "d",
+        "label": "False dilemma"
+      }
+    ],
+    "correctId": "a",
+    "explanation": "The failed founders are missing from the sample. Without them, you cannot tell whether ignoring a plan helped, hurt, or made no difference.",
+    "category": "Selection Bias",
+    "difficulty": 1,
+    "kind": "trap"
+  },
+  {
+    "id": "base-rate",
+    "prompt": "What probability principle is being overlooked?",
+    "context": "A test is 99% accurate, but the condition it tests for is very rare. A positive result automatically means you almost certainly have it. No information about the condition's rarity is considered.",
+    "options": [
+      {
+        "id": "a",
+        "label": "Straw man"
+      },
+      {
+        "id": "b",
+        "label": "Base-rate neglect"
+      },
+      {
+        "id": "c",
+        "label": "Appeal to tradition"
+      },
+      {
+        "id": "d",
+        "label": "Slippery slope"
+      }
+    ],
+    "correctId": "b",
+    "explanation": "When a condition is rare, false positives can make up a meaningful share of positive tests. Accuracy alone does not determine the chance that a positive is true.",
+    "category": "Probability",
+    "difficulty": 1,
+    "kind": "trap"
+  },
+  {
+    "id": "sunk-cost",
+    "prompt": "Which decision-making trap is illustrated?",
+    "context": "A film is boring, but you refuse to leave because you already paid for the ticket. The money cannot be recovered whether you stay or go.",
+    "options": [
+      {
+        "id": "a",
+        "label": "Availability heuristic"
+      },
+      {
+        "id": "b",
+        "label": "Confirmation bias"
+      },
+      {
+        "id": "c",
+        "label": "Sunk cost fallacy"
+      },
+      {
+        "id": "d",
+        "label": "False cause"
+      }
+    ],
+    "correctId": "c",
+    "explanation": "The ticket cost is already gone. The current choice should compare the value of staying with the value of doing something else, not try to rescue past spending.",
+    "category": "Decision Making",
+    "difficulty": 1,
+    "kind": "trap"
+  },
+  {
+    "id": "correlation",
+    "prompt": "What is the key reasoning error?",
+    "context": "Ice-cream sales and sunburn cases rise together, so a report says ice cream causes sunburn. Both are more common on hot, sunny days.",
+    "options": [
+      {
+        "id": "a",
+        "label": "Correlation mistaken for causation"
+      },
+      {
+        "id": "b",
+        "label": "No true Scotsman"
+      },
+      {
+        "id": "c",
+        "label": "Appeal to authority"
+      },
+      {
+        "id": "d",
+        "label": "Moving the goalposts"
+      }
+    ],
+    "correctId": "a",
+    "explanation": "A third factor, sunny weather, can increase both. A relationship between two variables does not by itself establish that one causes the other.",
+    "category": "Causation",
+    "difficulty": 1,
+    "kind": "trap"
+  },
+  {
+    "id": "confirmation",
+    "prompt": "Which bias explains this pattern?",
+    "context": "You believe a colleague is unreliable. You remember every late arrival but dismiss every time they arrive early. Evidence is evaluated differently depending on whether it agrees with your belief.",
+    "options": [
+      {
+        "id": "a",
+        "label": "False equivalence"
+      },
+      {
+        "id": "b",
+        "label": "Confirmation bias"
+      },
+      {
+        "id": "c",
+        "label": "Appeal to nature"
+      },
+      {
+        "id": "d",
+        "label": "Post hoc fallacy"
+      }
+    ],
+    "correctId": "b",
+    "explanation": "Confirmation bias favours evidence that supports an existing belief and discounts evidence that challenges it.",
+    "category": "Cognitive Biases",
+    "difficulty": 1,
+    "kind": "trap"
+  },
+  {
+    "id": "trap-t1-b1-01",
+    "kind": "trap",
+    "difficulty": 1,
+    "category": "Arithmetic Reasoning",
+    "context": "A small courier firm in Rotterdam buys a pallet jack and a set of load straps in a single purchase. The invoice total is 110 euros. The invoice also notes that the pallet jack cost exactly 100 euros more than the set of load straps. The office manager needs to record the price of each item separately for the asset register, and the straps are to be entered as a consumable expense. Prices include all taxes and no discount was applied to either item.",
+    "prompt": "What did the set of load straps cost on its own, in euros?",
+    "options": [
+      {
+        "id": "a",
+        "label": "The straps cost 10 euros and the pallet jack 100 euros."
+      },
+      {
+        "id": "b",
+        "label": "The straps cost 5 euros and the pallet jack 105 euros."
+      },
+      {
+        "id": "c",
+        "label": "The straps cost 5.50 euros and the pallet jack 104.50 euros."
+      },
+      {
+        "id": "d",
+        "label": "The straps cost 15 euros and the pallet jack 95 euros."
+      }
+    ],
+    "correctId": "b",
+    "intuitiveWrongId": "a",
+    "explanation": "Let the straps cost x euros. The pallet jack then costs x + 100, and the total is x + (x + 100) = 110. So 2x = 10 and x = 5. The straps cost 5 euros and the jack 105 euros, which sum to 110 and differ by exactly 100. The intuitive answer of 10 euros comes from subtracting 100 from 110 and stopping, which treats 100 as the price of the jack. But the statement says the jack costs 100 more than the straps, so the jack's price is the straps' price plus 100, not 100 itself. Checking option a: a jack at 100 and straps at 10 differ by 90, not 100. Option c gives a difference of 99, and option d a difference of 80. The general lesson is that an intuitive subtraction can satisfy the total while violating the stated relationship, so always test an answer against every condition in the problem."
+  },
+  {
+    "id": "trap-t1-b1-02",
+    "kind": "trap",
+    "difficulty": 1,
+    "category": "Probability",
+    "context": "In a board-game tournament in Seoul, players use a single six-sided die that an independent laboratory has certified as fair, with each face equally likely and each roll independent of the others. During one match the die lands on an even number five times in a row. The spectators, who are betting small sums on the outcome, begin to argue about what the sixth roll is likely to show. Some say an odd number is overdue, others say the streak will continue.",
+    "prompt": "Given the certification, what is the probability that the sixth roll is even?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Less than one half, because the run of evens makes an odd number due."
+      },
+      {
+        "id": "b",
+        "label": "More than one half, because five evens in a row show the die favours evens."
+      },
+      {
+        "id": "c",
+        "label": "About one third, because the die must balance out within a few more rolls."
+      },
+      {
+        "id": "d",
+        "label": "Exactly one half, because each roll is independent and the die is fair."
+      }
+    ],
+    "correctId": "d",
+    "intuitiveWrongId": "a",
+    "explanation": "Each roll of a fair die is independent, so the sixth roll has the same distribution as the first: three even faces out of six, a probability of exactly one half. The die has no memory, and nothing in the physical process counts previous results or pushes the sequence back towards balance. The belief that an odd number is due is the gambler's fallacy. Long-run frequencies do approach one half, but they do so because future rolls dilute the early run, not because future rolls compensate for it. Option b has a legitimate cousin, since a die of unknown fairness would make five evens mild evidence of bias, but the laboratory certification removes that possibility here. Option c invents a balancing mechanism. The lesson is that independence means the past tells you nothing, unless fairness itself is in doubt."
+  },
+  {
+    "id": "trap-t1-b1-03",
+    "kind": "trap",
+    "difficulty": 1,
+    "category": "Percentages",
+    "context": "A manufacturing firm in Gdańsk funds its maintenance department with a yearly budget of 240,000 zloty. In a year of weak sales the board reduces that budget by 25 percent. The following year, with sales recovered, the board announces that it will increase the budget by 25 percent over the reduced figure. The finance director says the department is therefore back where it started, and asks the analyst to confirm the new budget for the planning documents.",
+    "prompt": "What is the maintenance budget after the 25 percent increase, in zloty?",
+    "options": [
+      {
+        "id": "a",
+        "label": "The budget is 225,000 zloty, which is 15,000 below the original."
+      },
+      {
+        "id": "b",
+        "label": "The budget is 240,000 zloty, back to the original level."
+      },
+      {
+        "id": "c",
+        "label": "The budget is 210,000 zloty, which is 30,000 below the original."
+      },
+      {
+        "id": "d",
+        "label": "The budget is 235,000 zloty, which is 5,000 below the original."
+      }
+    ],
+    "correctId": "a",
+    "intuitiveWrongId": "b",
+    "explanation": "The first change reduces 240,000 by 25 percent, which is 60,000, leaving 180,000. The second change adds 25 percent of the reduced figure, not of the original: 25 percent of 180,000 is 45,000, giving 225,000. The budget is therefore 15,000 below where it began, a net fall of 6.25 percent. The intuitive answer of 240,000 assumes that a 25 percent rise undoes a 25 percent fall, but the two percentages apply to different bases. A fall of 25 percent needs a rise of one third, 33.3 percent, to recover: 180,000 × 4/3 = 240,000. In general, a fall of p percent is reversed only by a rise larger than p percent, and the gap grows with p. Equal percentage moves in opposite directions never cancel, so the base always matters."
+  },
+  {
+    "id": "trap-t1-b1-04",
+    "kind": "trap",
+    "difficulty": 1,
+    "category": "Rates and Averages",
+    "context": "A field technician for a telecom company in Chile drives 120 km from the depot to a remote tower along a single mountain road. Heavy traffic on the way there limits her to an average of 60 km/h. On the return, over the same 120 km, the road is clear but wet and she averages 40 km/h. Her manager wants to record the average speed for the whole round trip in the vehicle log, to compare it against the company's fuel model.",
+    "prompt": "What was her average speed for the whole round trip?",
+    "options": [
+      {
+        "id": "a",
+        "label": "50 km/h, the arithmetic mean of 60 and 40."
+      },
+      {
+        "id": "b",
+        "label": "52 km/h, because the faster leg dominates the journey."
+      },
+      {
+        "id": "c",
+        "label": "48 km/h, total distance divided by total time."
+      },
+      {
+        "id": "d",
+        "label": "45 km/h, because the slower leg should count for more."
+      }
+    ],
+    "correctId": "c",
+    "intuitiveWrongId": "a",
+    "explanation": "Average speed is total distance divided by total time. The outbound leg takes 120 ÷ 60 = 2 hours and the return takes 120 ÷ 40 = 3 hours. The round trip covers 240 km in 5 hours, so the average is 240 ÷ 5 = 48 km/h. The arithmetic mean of 50 would be correct only if equal time, not equal distance, were spent at each speed. Here more time is spent at the slower speed, so the average is pulled below 50. The result is the harmonic mean of 60 and 40, which weights each speed by the time it takes: 2 × 60 × 40 ÷ 100 = 48. Option d points in the right direction but has no justification and the wrong value, and option b moves the wrong way. The lesson is to average rates over the quantity that sits in the denominator, here time."
+  },
+  {
+    "id": "trap-t1-b1-05",
+    "kind": "trap",
+    "difficulty": 1,
+    "category": "Counting and Overlap",
+    "context": "A logistics firm in Johannesburg surveys all 100 of its warehouse staff about their qualifications. Seventy report holding a forklift licence and 60 report holding a first-aid certificate. A safety officer wants to be sure the firm always has enough dual-qualified staff to cover each shift, so she asks for a guaranteed lower bound on the number of employees who hold both. She has no information on how the two qualifications are distributed or whether they are related to each other.",
+    "prompt": "What is the smallest number of employees who could hold both qualifications?",
+    "options": [
+      {
+        "id": "a",
+        "label": "None, since nothing in the survey links the two qualifications."
+      },
+      {
+        "id": "b",
+        "label": "10 employees, since the two groups differ by 10 in size."
+      },
+      {
+        "id": "c",
+        "label": "42 employees, found by multiplying 70 percent by 60 percent of 100."
+      },
+      {
+        "id": "d",
+        "label": "30 employees, since the group sizes sum to 130 in a workforce of 100."
+      }
+    ],
+    "correctId": "d",
+    "intuitiveWrongId": "c",
+    "explanation": "The two groups total 70 + 60 = 130 memberships among only 100 people, so the groups must overlap. The union of the groups cannot exceed 100 people, and the union equals 70 + 60 minus the overlap. So 130 minus the overlap is at most 100, which means the overlap is at least 30. This minimum is reached when every employee holds at least one qualification. Option c assumes the two qualifications are unrelated, which gives an expected overlap of 42 but is not a guaranteed minimum, as the officer needs. Option a would require 130 distinct people, and option b is below the bound. The general rule is that two groups of sizes A and B within a population of N must share at least A + B − N members; the independence assumption answers a different question."
+  },
+  {
+    "id": "trap-t1-b1-06",
+    "kind": "trap",
+    "difficulty": 1,
+    "category": "Exponential Growth",
+    "context": "An algae bloom on a reservoir in Kerala doubles in area every day. Left unchecked, it will cover the entire surface on day 48, counting from the day it was first measured. A water authority needs to decide when to begin treatment and wants to know how advanced the bloom is at the midpoint of that period. The reservoir's surface area is fixed, and the doubling continues unchanged until the surface is fully covered.",
+    "prompt": "On which day will the bloom cover exactly half of the reservoir?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Day 47, one doubling before full cover."
+      },
+      {
+        "id": "b",
+        "label": "Day 24, halfway through the 48 days."
+      },
+      {
+        "id": "c",
+        "label": "Day 46, two doublings before full cover."
+      },
+      {
+        "id": "d",
+        "label": "Day 40, since growth is slow at first and then accelerates."
+      }
+    ],
+    "correctId": "a",
+    "intuitiveWrongId": "b",
+    "explanation": "Because the area doubles each day, the area on any day is half of the area on the following day. If the whole surface is covered on day 48, half is covered on day 47. Working backwards, a quarter is covered on day 46 and an eighth on day 45. The intuitive answer of day 24 treats growth as if it were linear, adding equal area per day, in which case the halfway point would fall at the halfway date. Under doubling, almost all the coverage appears in the last few days: on day 24 the bloom covers one part in 2^24, under one in sixteen million of the surface. Option c describes a quarter, not a half. The lesson is that exponential growth is deceptive early and abrupt late, so a warning that waits for visible spread may arrive with one day left."
+  },
+  {
+    "id": "trap-t1-b2-01",
+    "kind": "trap",
+    "difficulty": 1,
+    "category": "Rates and Scaling",
+    "context": "A workshop in Tallinn has five identical machines that each make one widget in five minutes, all working at the same time and independently of each other. A production planner is estimating capacity for a much larger order. The same model of machine will be used, each working at the same constant rate with no setup time, no breakdowns and no shared bottleneck. The order requires 100 widgets, and the planner has access to 100 such machines, all of which can be started together at the same moment.",
+    "prompt": "How long will 100 machines take to make 100 widgets?",
+    "options": [
+      {
+        "id": "a",
+        "label": "100 minutes, scaling the numbers up in proportion."
+      },
+      {
+        "id": "b",
+        "label": "20 minutes, since more machines divide the time."
+      },
+      {
+        "id": "c",
+        "label": "5 minutes, since each machine still needs five minutes per widget."
+      },
+      {
+        "id": "d",
+        "label": "50 minutes, halfway between the small and large cases."
+      }
+    ],
+    "correctId": "c",
+    "intuitiveWrongId": "a",
+    "explanation": "Each machine makes one widget in five minutes. With five machines running together, five widgets appear after five minutes, so the rate is one widget per machine per five minutes. With 100 machines, each one makes one widget in five minutes, giving 100 widgets after 5 minutes. The intuitive answer of 100 minutes copies the pattern of five, five, five into one hundred, one hundred, one hundred, as if time scaled with the numbers. But the time one machine needs for one widget does not change with the number of machines; only the total output per unit time does. Option b divides time by an unrelated factor, and option d invents a midpoint. A reliable method is to compute the rate first, one widget per five minutes per machine, then multiply by machines and time. The lesson is to find the rate before scaling."
+  },
+  {
+    "id": "trap-t1-b2-02",
+    "kind": "trap",
+    "difficulty": 1,
+    "category": "Counting",
+    "context": "At a conference in Nairobi, eight delegates attend an opening dinner. Before it begins, every delegate shakes hands once with every other delegate, and nobody shakes the same person's hand twice. The organiser wants to schedule time for the introductions and needs the total number of handshakes. She has the guest list and the table plan, and assumes that nobody refuses to take part and that every delegate is present from the start.",
+    "prompt": "How many handshakes take place in total before dinner begins?",
+    "options": [
+      {
+        "id": "a",
+        "label": "28 handshakes, counting each pair of delegates only once."
+      },
+      {
+        "id": "b",
+        "label": "56 handshakes, since each of the 8 delegates shakes hands with 7 others."
+      },
+      {
+        "id": "c",
+        "label": "64 handshakes, since each of the 8 delegates shakes hands with all 8."
+      },
+      {
+        "id": "d",
+        "label": "36 handshakes, found by adding the numbers from 1 to 8."
+      }
+    ],
+    "correctId": "a",
+    "intuitiveWrongId": "b",
+    "explanation": "Each handshake involves a pair of delegates. The number of pairs among 8 people is 8 × 7 ÷ 2 = 28. Multiplying 8 × 7 = 56 counts each handshake twice, once from each participant's side, because the handshake between delegates A and B appears both as A shaking B's hand and as B shaking A's hand. Option c is worse, since it counts a delegate shaking their own hand. Option d adds the numbers from 1 to 8, but the first delegate shakes 7 hands, the next adds 6 new ones, and so on, giving 7 + 6 + 5 + 4 + 3 + 2 + 1 = 28. The lesson is to check whether a count treats ordered pairs when the event involves unordered pairs, and to halve the result when it does."
+  },
+  {
+    "id": "trap-t1-b2-03",
+    "kind": "trap",
+    "difficulty": 1,
+    "category": "Counting",
+    "context": "A farmer in Patagonia plans a straight fence along one side of a paddock, 20 metres long. A post is to be set at both ends and then every 4 metres along the line, so the posts are evenly spaced at 4-metre intervals. The supplier sells posts individually, and the farmer wants to order exactly the right number. The fence is a single straight run, not a closed loop, and no gates or gaps interrupt it.",
+    "prompt": "How many posts does the farmer need for the 20-metre fence?",
+    "options": [
+      {
+        "id": "a",
+        "label": "5 posts, since 20 divided by 4 is 5."
+      },
+      {
+        "id": "b",
+        "label": "6 posts, one for each interval plus one for the extra end."
+      },
+      {
+        "id": "c",
+        "label": "4 posts, since the two end posts are not counted in the spacing."
+      },
+      {
+        "id": "d",
+        "label": "10 posts, since each of the 5 intervals needs a post at each end."
+      }
+    ],
+    "correctId": "b",
+    "intuitiveWrongId": "a",
+    "explanation": "The fence has 20 ÷ 4 = 5 intervals. Posts stand at the boundaries between intervals and at both ends, so a single straight run of n intervals needs n + 1 posts: here 6, at 0, 4, 8, 12, 16 and 20 metres. Dividing length by spacing counts intervals, not posts, and so misses the final post. Option d overcounts in the opposite direction by giving each interval its own pair of posts, ignoring that neighbouring intervals share the post between them. Option c leaves out the end posts, which the farmer explicitly wants. The pattern is called a fence-post error and applies to counting days between dates, floors in a building, or items in any sequence. For a closed loop the count would instead equal the number of intervals, 5."
+  },
+  {
+    "id": "trap-t1-b2-04",
+    "kind": "trap",
+    "difficulty": 1,
+    "category": "Probability",
+    "context": "A forecaster in Dunedin reports a 30 percent chance of rain on Saturday and a 30 percent chance of rain on Sunday. The two forecasts are made independently, and for the purposes of the question the weather on one day does not affect the other. An event organiser is planning an outdoor weekend market and wants to cancel only if the chance of at least one rainy day is above half. She is not interested in how much rain falls, only in whether it rains at all on either day.",
+    "prompt": "What is the probability that it rains on at least one of the two days?",
+    "options": [
+      {
+        "id": "a",
+        "label": "60 percent, found by adding 30 percent and 30 percent."
+      },
+      {
+        "id": "b",
+        "label": "30 percent, since the days are independent and each has the same chance."
+      },
+      {
+        "id": "c",
+        "label": "9 percent, found by multiplying 30 percent by 30 percent."
+      },
+      {
+        "id": "d",
+        "label": "51 percent, found as one minus the chance of two dry days, 0.7 × 0.7."
+      }
+    ],
+    "correctId": "d",
+    "intuitiveWrongId": "a",
+    "explanation": "The easiest route is the complement: the probability of no rain on both days is 0.7 × 0.7 = 0.49, so the probability of at least one rainy day is 1 − 0.49 = 0.51, or 51 percent. Adding 30 and 30 gives 60 percent, but this counts the case where both days are rainy twice. The probability of both days being rainy is 0.3 × 0.3 = 0.09, and subtracting it from 0.6 gives the same 0.51. Option b ignores that there are two chances for rain, and option c is the probability of rain on both days, not at least one. Since 51 percent exceeds one half, the organiser should cancel under her rule. The lesson is that probabilities of events that can overlap cannot simply be added; use the complement or subtract the overlap."
+  }
+]

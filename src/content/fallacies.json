@@ -1,0 +1,282 @@
+[
+  {
+    "id": "fallacy-t1-b1-01",
+    "kind": "fallacy",
+    "difficulty": 1,
+    "category": "Informal fallacy",
+    "context": "At a town council meeting in Ghent, an engineer presents a report arguing that the proposed bridge's foundations are too shallow for the soil conditions along the river. The deputy mayor responds: 'This is the same engineer who was dismissed from her previous firm for filing late reports. She has no credibility, and I see no reason to give her foundations analysis a second thought. The bridge goes ahead as designed, and I would ask the council to vote accordingly.'",
+    "prompt": "Which flaw best describes the reasoning above?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Straw man: replacing her claim with a weaker version that is easier to attack."
+      },
+      {
+        "id": "b",
+        "label": "Appeal to authority: treating an official's position as proof that the design is sound."
+      },
+      {
+        "id": "c",
+        "label": "Ad hominem: rejecting her argument by attacking her record rather than her analysis."
+      },
+      {
+        "id": "d",
+        "label": "False dilemma: presenting the bridge as either built as designed or not built at all."
+      }
+    ],
+    "correctId": "c",
+    "explanation": "The deputy mayor never addresses the engineer's claim about foundation depth and soil. Instead he points to her dismissal from an earlier job and concludes that her analysis deserves no attention. That is an ad hominem: it targets the person rather than the argument. Her record of late reports has no bearing on whether the soil data support her conclusion, which can be checked on its own merits. It is not a straw man, because he does not distort her claim; he simply ignores it. It is not an appeal to authority, since he cites no expert on his side, and no alternatives are offered, so false dilemma does not fit. A valid response would engage with the soil data and foundation calculations, perhaps by commissioning an independent geotechnical review of the site."
+  },
+  {
+    "id": "fallacy-t1-b1-02",
+    "kind": "fallacy",
+    "difficulty": 1,
+    "category": "Informal fallacy",
+    "context": "In a policy debate in a Canadian city, a councillor proposes lowering the speed limit on residential streets from 50 to 40 km/h. An opponent replies: 'The councillor wants us all crawling through our own neighbourhoods at walking pace. Nobody can run a business or get to a hospital at five kilometres an hour. A proposal that makes a ten-minute trip take an hour is absurd, and it should be rejected by everyone who lives here.'",
+    "prompt": "Which flaw best describes the reasoning above?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Straw man: attacking an exaggerated version of the proposal rather than the actual 40 km/h limit."
+      },
+      {
+        "id": "b",
+        "label": "Ad hominem: dismissing the proposal because of the councillor's character or motives."
+      },
+      {
+        "id": "c",
+        "label": "False dilemma: claiming that only two options exist, a high limit or a standstill."
+      },
+      {
+        "id": "d",
+        "label": "Post hoc: assuming the lower limit caused a later problem merely because it came first."
+      }
+    ],
+    "correctId": "a",
+    "explanation": "The proposal is a reduction from 50 to 40 km/h, a change of twenty percent. The opponent attacks a different proposal, a limit of five kilometres an hour, which no one has suggested, and then treats its rejection as a rejection of the real one. That is a straw man: a distorted version of the position is refuted instead of the position itself. It is not an ad hominem, since the councillor's character is not attacked. It is not a false dilemma, because the opponent does not claim that only two options exist. Post hoc concerns causation inferred from sequence, which does not arise here. A valid argument against the proposal would address the real change, for instance by estimating the added journey time on a typical street against the expected reduction in injuries."
+  },
+  {
+    "id": "fallacy-t1-b1-03",
+    "kind": "fallacy",
+    "difficulty": 1,
+    "category": "Informal fallacy",
+    "context": "A regional sales director sends a memo to her staff: 'We have two choices for next year. Either we cut the travel budget by 40 percent, or we make redundancies in the support team. I do not want to lay anyone off, so the travel cut is the only responsible option, and I expect everyone to support it.' The memo does not mention other sources of savings, such as the office lease, the planned software upgrade or supplier contracts, and no other options were discussed in the meeting that preceded it.",
+    "prompt": "Which flaw best describes the reasoning above?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Appeal to authority: citing an expert's status in place of giving reasons."
+      },
+      {
+        "id": "b",
+        "label": "Post hoc: inferring a cause because one event followed another."
+      },
+      {
+        "id": "c",
+        "label": "Slippery slope: claiming that one small step will lead to a chain of worse results."
+      },
+      {
+        "id": "d",
+        "label": "False dilemma: presenting two options as the only ones when others may exist."
+      }
+    ],
+    "correctId": "d",
+    "explanation": "The director states that there are two choices, travel cuts or redundancies, and then argues that because redundancies are unacceptable, travel cuts are the only option. The argument is valid in form, but its first premise is unsupported: the memo itself concedes that other sources of savings, such as the lease, the software upgrade and supplier contracts, were never examined. Presenting two options as exhaustive when others plausibly exist is a false dilemma. It is not an appeal to authority, because she cites no expert; her rank is not offered as proof. Post hoc and slippery slope involve causal claims, which are absent. A sound version would show that the alternatives were considered and found inadequate, with figures for each."
+  },
+  {
+    "id": "fallacy-t1-b1-04",
+    "kind": "fallacy",
+    "difficulty": 1,
+    "category": "Informal fallacy",
+    "context": "A wellness blog states: 'A famous retired footballer, who won three league titles, has said in an interview that a daily dose of a particular herbal tonic cured his chronic knee pain. If a champion athlete says it works, you can be sure it works. Our tonic is the same one he uses. Order a month's supply today.' The post cites no clinical trial, no ingredient analysis and no medical opinion, and it does not say whether the footballer was paid for the interview.",
+    "prompt": "Which flaw best describes the reasoning above?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Ad hominem: rejecting a claim by attacking the person who made it."
+      },
+      {
+        "id": "b",
+        "label": "Appeal to authority: treating a famous person's endorsement as proof, outside their expertise."
+      },
+      {
+        "id": "c",
+        "label": "Straw man: refuting an exaggerated version of an opponent's position."
+      },
+      {
+        "id": "d",
+        "label": "False dilemma: presenting only two options when more are available."
+      }
+    ],
+    "correctId": "b",
+    "explanation": "The blog's only support for the tonic is the statement of a famous athlete, and it treats that statement as conclusive. Fame and sporting success confer no expertise in herbal medicine or in assessing whether a treatment works. Even a single person's report of relief is an anecdote: it cannot separate the tonic from natural recovery, other treatments or expectation. This is an appeal to authority in its fallacious form. The form is not always fallacious, since citing a relevant expert who speaks within their field and in agreement with others can be reasonable evidence. Ad hominem, straw man and false dilemma do not fit, because nobody is attacked, no position is distorted and no choice is limited. A valid case would cite controlled trials, with comparison groups."
+  },
+  {
+    "id": "fallacy-t1-b1-05",
+    "kind": "fallacy",
+    "difficulty": 1,
+    "category": "Causal fallacy",
+    "context": "A school principal in Wellington writes in her annual report: 'In March we began playing classical music in the corridors between lessons. Since then, the number of reported playground incidents has fallen by 30 percent compared with the same term last year. The music has clearly calmed the pupils.' The report does not mention that two teachers were added to playground duty in the same month, nor whether the rules for logging incidents changed over the year.",
+    "prompt": "Which flaw best describes the reasoning above?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Hasty generalisation: drawing a broad conclusion from too small a sample."
+      },
+      {
+        "id": "b",
+        "label": "Appeal to authority: relying on the principal's position as proof of the claim."
+      },
+      {
+        "id": "c",
+        "label": "Post hoc: inferring that the music caused the fall merely because the fall followed it."
+      },
+      {
+        "id": "d",
+        "label": "Slippery slope: claiming that one change will inevitably lead to a chain of worse events."
+      }
+    ],
+    "correctId": "c",
+    "explanation": "The report observes that incidents fell after the music began and concludes that the music caused the fall. Sequence alone does not establish causation. Other changes occurred in the same period, including two extra teachers on playground duty and possible changes to how incidents were recorded, and year-to-year variation or a different cohort could also explain the figure. That is the post hoc fallacy. Hasty generalisation does not fit, since the report makes no claim beyond this school. Appeal to authority does not fit either: the principal offers a comparison, not her rank, as evidence. There is no chain of consequences, so slippery slope is out. A valid version would compare against a similar school without the music, or alternate the music across terms."
+  },
+  {
+    "id": "fallacy-t1-b1-06",
+    "kind": "fallacy",
+    "difficulty": 1,
+    "category": "Informal fallacy",
+    "context": "A parent writes to a school newsletter: 'If the school allows students to use phones at lunchtime, soon they will be using them in the corridors, then in lessons, and then they will stop paying attention to anything. Within a year, exam results will collapse and the school will lose its reputation. We must therefore ban phones entirely, including at lunch.' The letter offers no evidence from other schools and does not explain why each step would follow from the one before.",
+    "prompt": "Which flaw best describes the reasoning above?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Slippery slope: asserting a chain of consequences without showing that each step follows."
+      },
+      {
+        "id": "b",
+        "label": "False dilemma: presenting a total ban and unrestricted use as the only possibilities."
+      },
+      {
+        "id": "c",
+        "label": "Ad hominem: dismissing the proposal by attacking the people who support it."
+      },
+      {
+        "id": "d",
+        "label": "Post hoc: concluding that one event caused another because it came first."
+      }
+    ],
+    "correctId": "a",
+    "explanation": "The letter moves from lunchtime phone use to corridors, to lessons, to lost attention, to collapsing results and a ruined reputation, treating each step as inevitable. None is argued for. Even if each step were fairly likely, the probabilities multiply: five steps that are each 70 percent likely give an overall chance of about 17 percent. That is a slippery slope. The letter does hint at two options, a ban or free use, but it does not claim that these are the only ones, so false dilemma is not decisive. No person is attacked, and no past event is being explained, ruling out ad hominem and post hoc. Slippery slope arguments can be sound when each link is supported with evidence, such as data from comparable schools."
+  },
+  {
+    "id": "fallacy-t1-b2-01",
+    "kind": "fallacy",
+    "difficulty": 1,
+    "category": "Informal fallacy",
+    "context": "A start-up founder in Singapore tells her board: 'Eight of our ten largest competitors have already moved their customer data to the same cloud provider, and the trade press says it is now the industry standard. That is all the evidence we need. If everyone else is doing it, it must be the right choice for us, and we should sign the contract this quarter.' The board packet contains no cost comparison, no security review and no analysis of the firm's own data volumes or legal obligations.",
+    "prompt": "Which flaw best describes the reasoning above?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Appeal to authority: relying on the trade press as an expert source."
+      },
+      {
+        "id": "b",
+        "label": "Post hoc: inferring a cause because one event followed another."
+      },
+      {
+        "id": "c",
+        "label": "Straw man: attacking a weaker version of an opposing position."
+      },
+      {
+        "id": "d",
+        "label": "Bandwagon: treating widespread adoption as proof the choice is right for her firm."
+      }
+    ],
+    "correctId": "d",
+    "explanation": "The founder's only argument is that most competitors have adopted the provider. Popularity can be a clue, since many adopters may have investigated carefully, but it is not itself a reason that the choice suits this firm, whose data volumes, regulations and budget may differ. That is the bandwagon fallacy, or appeal to popular opinion. It is not quite an appeal to authority: the trade press is reporting a trend, not offering expert analysis of the firm's needs. Post hoc and straw man do not apply, as no causal claim and no opposing position appear in the passage. A sound version would use adoption as a starting point and then show cost, security and migration analysis for this firm, perhaps with references from competitors of similar size."
+  },
+  {
+    "id": "fallacy-t1-b2-02",
+    "kind": "fallacy",
+    "difficulty": 1,
+    "category": "Informal fallacy",
+    "context": "A restaurateur in Lyon writes in an industry forum: 'I hired two graduates from one particular hospitality school last year, and both left within three months. Graduates of that school clearly have no staying power, and I will not consider any more of them.' The school graduates around 400 students a year. The post does not say how the two hires were treated or paid, how the jobs were structured, or whether any graduates of other schools had been hired for comparison.",
+    "prompt": "Which flaw best describes the reasoning above?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Ad hominem: attacking the school's staff rather than answering a claim."
+      },
+      {
+        "id": "b",
+        "label": "Hasty generalisation: drawing a broad conclusion about a large group from two cases."
+      },
+      {
+        "id": "c",
+        "label": "False dilemma: presenting two options as the only ones available."
+      },
+      {
+        "id": "d",
+        "label": "Post hoc: assuming the training caused the departures because they followed hiring."
+      }
+    ],
+    "correctId": "b",
+    "explanation": "The restaurateur draws a general conclusion about all graduates of a school that produces around 400 a year from just two cases. Two people leaving within three months is a very small sample, and the post does not say how the jobs were structured, how the two were treated or paid, or whether other graduates stayed. That is a hasty generalisation. It is not an ad hominem, since nobody's character is attacked, and it is not post hoc, because no causal claim is made, only a claim about a group. No options are offered, so false dilemma does not fit. A sound version would sample more graduates, compare them with hires from other schools, and consider the working conditions the two experienced."
+  },
+  {
+    "id": "fallacy-t1-b2-03",
+    "kind": "fallacy",
+    "difficulty": 1,
+    "category": "Informal fallacy",
+    "context": "A product page for a skin cream reads: 'Our cream contains only natural ingredients, so it is gentler and safer than the synthetic creams on the pharmacy shelf. Nature has been refining these plants for millions of years, and nothing made in a laboratory can match that. Choose natural, choose safe.' The page lists a plant extract that is known to cause contact allergy in some users, but it does not mention this, and it gives no test results for either type of product.",
+    "prompt": "Which flaw best describes the reasoning above?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Appeal to nature: assuming that natural means safe and that synthetic means harmful."
+      },
+      {
+        "id": "b",
+        "label": "Appeal to authority: citing an expert's status in place of giving reasons."
+      },
+      {
+        "id": "c",
+        "label": "Slippery slope: claiming that one step leads inevitably to worse results."
+      },
+      {
+        "id": "d",
+        "label": "Straw man: refuting an exaggerated version of an opponent's position."
+      }
+    ],
+    "correctId": "a",
+    "explanation": "The page asserts that natural ingredients are gentler and safer and that synthetic ones cannot match them, with no evidence about either product. Whether a substance is natural or synthetic says little about its safety: many natural substances are toxic or allergenic, and many synthetic ones are well tolerated. The page itself includes a plant extract known to cause allergic reactions in some users. That is an appeal to nature. It is not an appeal to authority, since no expert is cited; there is no distorted opposing view that would make it a straw man; and there is no chain of consequences for a slippery slope. A valid version would present test results for the cream's safety and tolerance and compare them with those of the alternatives."
+  },
+  {
+    "id": "fallacy-t1-b2-04",
+    "kind": "fallacy",
+    "difficulty": 1,
+    "category": "Informal fallacy",
+    "context": "At a company meeting in Manila, a staff member asks why the quarterly safety audit found three fire exits on the warehouse floor blocked by stock. The operations manager replies: 'I understand the concern, but let's remember that we have just had our best sales quarter in five years, and the team has worked incredibly hard. I think we should be celebrating that.' He then moves on to the next agenda item without returning to the question about the exits or saying when they will be cleared.",
+    "prompt": "Which flaw best describes the reasoning above?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Straw man: misstating the question in order to answer a weaker one."
+      },
+      {
+        "id": "b",
+        "label": "False dilemma: forcing a choice between celebrating results and discussing safety."
+      },
+      {
+        "id": "c",
+        "label": "Red herring: shifting to an unrelated topic instead of answering the question asked."
+      },
+      {
+        "id": "d",
+        "label": "Ad hominem: attacking the staff member rather than answering the query."
+      }
+    ],
+    "correctId": "c",
+    "explanation": "The staff member asked why fire exits were blocked. The manager answers with a different subject, record sales, and invites the room to celebrate. Sales results have no bearing on whether fire exits were blocked or why, so the reply diverts attention rather than addressing the question. This is a red herring. It is not a straw man, because the manager does not misstate the question; he simply does not answer it. It is not an ad hominem, as nobody is attacked, and it is not a false dilemma, because he never argues that the room must choose between celebrating and fixing the exits. A valid response would state why the exits were blocked, what risk this creates, and when it will be corrected."
+  }
+]

@@ -1,0 +1,336 @@
+[
+  {
+    "id": "lesson-mul5",
+    "skillId": "mul5",
+    "title": "Multiplying by 5",
+    "tier": 1,
+    "blurb": "Turn any times-5 into a halving problem.",
+    "steps": [
+      {
+        "heading": "The idea",
+        "body": "Five is ten divided by two. So instead of multiplying by 5, multiply by 10 (which only adds a zero) and then halve the result.",
+        "example": "46 × 10 = 460\n460 ÷ 2 = 230"
+      },
+      {
+        "heading": "Odd numbers",
+        "body": "Halving an odd number leaves a half, which is awkward. Avoid it by halving after you have added the zero: the number you halve is always even.",
+        "example": "37 × 10 = 370\n370 ÷ 2 = 185"
+      },
+      {
+        "heading": "Why it works",
+        "body": "n × 5 = n × (10 ÷ 2) = (n × 10) ÷ 2. The two sides are the same quantity written in two orders, so the result is exact for every number."
+      },
+      {
+        "heading": "Where people slip",
+        "body": "The common error is stopping after the zero and forgetting to halve. A quick sanity check: the answer should be exactly half of the number with a zero added."
+      }
+    ]
+  },
+  {
+    "id": "lesson-add-comp",
+    "skillId": "add_comp",
+    "title": "Add by rounding",
+    "tier": 1,
+    "blurb": "Round one number up to something easy, then correct.",
+    "steps": [
+      {
+        "heading": "The idea",
+        "body": "Find a number that sits just below a round number. Add the round number instead, then take back the amount you added by mistake.",
+        "example": "47 + 38: 38 is 2 short of 40\n47 + 40 = 87\n87 − 2 = 85"
+      },
+      {
+        "heading": "Bigger numbers",
+        "body": "The same move works at any size. Round to the nearest hundred when the number is just under one.",
+        "example": "468 + 97: 97 is 3 short of 100\n468 + 100 = 568\n568 − 3 = 565"
+      },
+      {
+        "heading": "Why it works",
+        "body": "If b = R − e, where R is the round number and e the shortfall, then a + b = a + R − e. Adding R overshoots by exactly e, so subtracting e restores the true sum."
+      },
+      {
+        "heading": "Where people slip",
+        "body": "Getting the direction of the correction wrong. When you round up you have added too much, so you subtract. Always ask which way you moved before correcting."
+      }
+    ]
+  },
+  {
+    "id": "lesson-sub-comp",
+    "skillId": "sub_comp",
+    "title": "Subtract by rounding",
+    "tier": 1,
+    "blurb": "Subtract a round number, then give back the difference.",
+    "steps": [
+      {
+        "heading": "The idea",
+        "body": "To subtract a number that is just under a round number, subtract the round number instead. You will have taken away too much, so add the difference back.",
+        "example": "83 − 47: 47 is 3 less than 50\n83 − 50 = 33\n33 + 3 = 36"
+      },
+      {
+        "heading": "Bigger numbers",
+        "body": "Round up to the nearest hundred when the number is just below one.",
+        "example": "412 − 298: 298 is 2 less than 300\n412 − 300 = 112\n112 + 2 = 114"
+      },
+      {
+        "heading": "Why it works",
+        "body": "If b = R − e, then a − b = a − (R − e) = a − R + e. Subtracting R removes e too much, and adding e puts it back."
+      },
+      {
+        "heading": "Where people slip",
+        "body": "This correction runs the opposite way to addition. When you round the subtracted number up you subtract too much, so you add. Mixing the two rules up is the usual mistake."
+      }
+    ]
+  },
+  {
+    "id": "lesson-mul9",
+    "skillId": "mul9",
+    "title": "Multiplying by 9 and 99",
+    "tier": 1,
+    "blurb": "Use 10 − 1 and 100 − 1.",
+    "steps": [
+      {
+        "heading": "The idea",
+        "body": "Nine is one less than ten. Multiply by 10, then subtract the number once.",
+        "example": "36 × 10 = 360\n360 − 36 = 324"
+      },
+      {
+        "heading": "Ninety-nine",
+        "body": "Ninety-nine is one less than a hundred, so the same move works with two zeros.",
+        "example": "47 × 100 = 4,700\n4,700 − 47 = 4,653"
+      },
+      {
+        "heading": "Why it works",
+        "body": "n × 9 = n × (10 − 1) = n × 10 − n, and n × 99 = n × (100 − 1) = n × 100 − n. Multiplication distributes over subtraction, so the result is exact."
+      },
+      {
+        "heading": "Where people slip",
+        "body": "Subtracting 1, 9 or 99 instead of the number itself. What you subtract is always n, the number you started with."
+      }
+    ]
+  },
+  {
+    "id": "lesson-mul11",
+    "skillId": "mul11",
+    "title": "Multiplying by 11",
+    "tier": 1,
+    "blurb": "Add each digit to its neighbour.",
+    "steps": [
+      {
+        "heading": "Two-digit numbers",
+        "body": "Keep the outer digits and put their sum in the middle. For 23, write 2, then 2 + 3, then 3.",
+        "example": "23 × 11 = 253"
+      },
+      {
+        "heading": "When the middle passes 9",
+        "body": "If the middle sum is 10 or more, write its last digit and carry 1 into the digit on its left.",
+        "example": "78: 7, then 7 + 8 = 15, then 8\nCarry the 1: 7 + 1 = 8, write 5, then 8\n78 × 11 = 858"
+      },
+      {
+        "heading": "Three digits",
+        "body": "Write the first digit, the sum of the first two, the sum of the last two, and the last digit. Then carry from the right wherever a sum exceeds 9.",
+        "example": "342 × 11: 3, 3 + 4 = 7, 4 + 2 = 6, 2\n342 × 11 = 3,762"
+      },
+      {
+        "heading": "Why it works",
+        "body": "n × 11 = n × 10 + n. Adding a number to a copy of itself shifted one place left lines each digit up with its neighbour, which is exactly why neighbouring digits are summed."
+      }
+    ]
+  },
+  {
+    "id": "lesson-sq5",
+    "skillId": "sq5",
+    "title": "Squares ending in 5",
+    "tier": 1,
+    "blurb": "Multiply the front part by the next number up, then add 25.",
+    "steps": [
+      {
+        "heading": "The idea",
+        "body": "To square a number ending in 5, take the digits in front of the 5 and multiply them by the next whole number. Then write 25 after the result.",
+        "example": "35²: 3 × 4 = 12\n35² = 1,225"
+      },
+      {
+        "heading": "Another case",
+        "body": "It works the same way whatever the leading digits are.",
+        "example": "85²: 8 × 9 = 72\n85² = 7,225"
+      },
+      {
+        "heading": "Past 100",
+        "body": "For numbers like 115, the leading part is 11, so multiply 11 by 12 and write 25 after it.",
+        "example": "11 × 12 = 132\n115² = 13,225"
+      },
+      {
+        "heading": "Why it works",
+        "body": "A number ending in 5 is 10n + 5. Squaring gives 100n² + 100n + 25, which is 100 × n(n + 1) + 25. The 100 shifts n(n + 1) two places left, leaving room for 25."
+      },
+      {
+        "heading": "Where people slip",
+        "body": "Multiplying the leading part by itself instead of by the next number up. The second factor is always one larger than the first."
+      }
+    ]
+  },
+  {
+    "id": "lesson-mul25",
+    "skillId": "mul25",
+    "title": "Multiplying by 25",
+    "tier": 1,
+    "blurb": "A quarter of a hundred.",
+    "steps": [
+      {
+        "heading": "The idea",
+        "body": "Twenty-five is a hundred divided by four. Multiply by 100 by adding two zeros, then divide by 4.",
+        "example": "36 × 100 = 3,600\n3,600 ÷ 4 = 900"
+      },
+      {
+        "heading": "Numbers that are not multiples of 4",
+        "body": "The result is still a whole number, because the number with two zeros added is always divisible by 4. Halve twice instead of dividing in one go if that is easier.",
+        "example": "34 × 100 = 3,400\n3,400 ÷ 4 = 850"
+      },
+      {
+        "heading": "Why it works",
+        "body": "n × 25 = n × (100 ÷ 4) = (n × 100) ÷ 4. Any number with two zeros added is a multiple of 100, and 100 is a multiple of 4, so the division is exact."
+      },
+      {
+        "heading": "Where people slip",
+        "body": "Halving once instead of dividing by 4. Halving gives you the answer for 50, not 25."
+      }
+    ]
+  },
+  {
+    "id": "lesson-pct",
+    "skillId": "pct",
+    "title": "Percentages from building blocks",
+    "tier": 1,
+    "blurb": "Build any percentage from 50%, 25%, 10%, 5% and 1%.",
+    "steps": [
+      {
+        "heading": "The blocks",
+        "body": "Ten percent means dividing by 10. Five percent is half of that. One percent means dividing by 100. Fifty percent is half, and 25 percent is half of that again."
+      },
+      {
+        "heading": "Combine them",
+        "body": "Split the percentage into blocks you can do instantly, work out each one, then add the results.",
+        "example": "15% of 80: 10% of 80 = 8\n5% of 80 = 4\n8 + 4 = 12"
+      },
+      {
+        "heading": "A harder one",
+        "body": "Larger or odder percentages need more blocks, but each one stays easy.",
+        "example": "35% of 200: 25% of 200 = 50\n10% of 200 = 20\n50 + 20 = 70"
+      },
+      {
+        "heading": "Why it works",
+        "body": "Percentages add: 15% = 10% + 5%, and the percentage of a number is linear in the percentage. So adding the parts gives the same result as computing the whole in one step."
+      },
+      {
+        "heading": "Where people slip",
+        "body": "Choosing blocks that are not easy. If a block needs long division, split it further. Only use pieces you can compute in your head."
+      }
+    ]
+  },
+  {
+    "id": "lesson-dblhalf",
+    "skillId": "dblhalf",
+    "title": "Double and halve",
+    "tier": 2,
+    "blurb": "Trade size between the two factors.",
+    "steps": [
+      {
+        "heading": "The idea",
+        "body": "Double one factor and halve the other. The product stays the same, but the sum often becomes much easier.",
+        "example": "35 × 18: double 35 to 70, halve 18 to 9\n70 × 9 = 630"
+      },
+      {
+        "heading": "When to use it",
+        "body": "It shines when one factor ends in 5 and the other is even. Doubling the one ending in 5 gives a multiple of 10.",
+        "example": "15 × 24: double 15 to 30, halve 24 to 12\n30 × 12 = 360"
+      },
+      {
+        "heading": "Why it works",
+        "body": "a × b = (2a) × (b ÷ 2), because the 2 and the ÷ 2 cancel. It needs one factor to be even so the halving stays a whole number."
+      },
+      {
+        "heading": "Where people slip",
+        "body": "Doubling one number without halving the other. You must do both, or the product changes."
+      }
+    ]
+  },
+  {
+    "id": "lesson-split",
+    "skillId": "split",
+    "title": "Break it up",
+    "tier": 3,
+    "blurb": "Split a big multiplication by place value.",
+    "steps": [
+      {
+        "heading": "The idea",
+        "body": "Split the larger number into hundreds, tens and units. Multiply the other number by each part, then add the three results.",
+        "example": "45 × 123: 123 = 100 + 20 + 3\n45 × 100 = 4,500\n45 × 20 = 900\n45 × 3 = 135\n4,500 + 900 + 135 = 5,535"
+      },
+      {
+        "heading": "Another case",
+        "body": "Start with the largest part and add the smaller parts on as you go.",
+        "example": "36 × 142: 142 = 100 + 40 + 2\n36 × 100 = 3,600\n36 × 40 = 1,440\n36 × 2 = 72\n3,600 + 1,440 + 72 = 5,112"
+      },
+      {
+        "heading": "Why it works",
+        "body": "Multiplication distributes over addition: a × (100 + 20 + 3) = a × 100 + a × 20 + a × 3. Every part is a simple multiplication, and the parts add back to the exact answer."
+      },
+      {
+        "heading": "Where people slip",
+        "body": "Losing track of place value. Multiplying by 20 means multiplying by 2 and then adding a zero. Keep the parts in a clear order and add them from largest to smallest."
+      }
+    ]
+  },
+  {
+    "id": "lesson-near100",
+    "skillId": "near100",
+    "title": "Pairs just below 100",
+    "tier": 3,
+    "blurb": "Multiply two numbers close to 100 in two quick steps.",
+    "steps": [
+      {
+        "heading": "The idea",
+        "body": "For two numbers just under 100, note how far each is below 100. Subtract each shortfall from the other number for the left part, and multiply the shortfalls for the right part.",
+        "example": "97 × 94: 97 is 3 below, 94 is 6 below\nLeft part: 97 − 6 = 91\nRight part: 3 × 6 = 18\n97 × 94 = 9,118"
+      },
+      {
+        "heading": "Padding the right part",
+        "body": "The right part always takes two digits. If the product of the shortfalls is a single digit, put a zero in front.",
+        "example": "98 × 97: shortfalls 2 and 3\nLeft part: 98 − 3 = 95\nRight part: 2 × 3 = 06\n98 × 97 = 9,506"
+      },
+      {
+        "heading": "Why it works",
+        "body": "Write the numbers as (100 − x) and (100 − y). Their product is 100 × (100 − x − y) + x × y. The left part is 100 − x − y, which equals either number minus the other shortfall, and the right part is x × y."
+      },
+      {
+        "heading": "Where people slip",
+        "body": "Forgetting to pad the right part. Writing 06 as 6 gives 956 instead of 9,506, an answer that is obviously too small once you estimate."
+      }
+    ]
+  },
+  {
+    "id": "lesson-diffsq",
+    "skillId": "diffsq",
+    "title": "Symmetric pairs",
+    "tier": 3,
+    "blurb": "Two numbers either side of an easy middle value.",
+    "steps": [
+      {
+        "heading": "The idea",
+        "body": "If two numbers sit the same distance either side of an easy middle value, their product is the middle squared minus the distance squared.",
+        "example": "47 × 53: both are 3 from 50\n50² = 2,500\n3² = 9\n2,500 − 9 = 2,491"
+      },
+      {
+        "heading": "Another case",
+        "body": "Spot the middle first. If it is a multiple of ten, the squaring is easy.",
+        "example": "68 × 72: both are 2 from 70\n70² = 4,900\n2² = 4\n4,900 − 4 = 4,896"
+      },
+      {
+        "heading": "Why it works",
+        "body": "(m − d)(m + d) = m² − md + md − d² = m² − d². The cross terms cancel, which is why only the squares are left."
+      },
+      {
+        "heading": "Where people slip",
+        "body": "Subtracting d instead of d squared. The distance gets squared before it is subtracted."
+      }
+    ]
+  }
+]

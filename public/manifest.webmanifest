@@ -1,0 +1,13 @@
+{
+  "name": "Brain Stash",
+  "short_name": "Brain Stash",
+  "description": "A private archive for sharper thinking.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#11110F",
+  "theme_color": "#11110F",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
