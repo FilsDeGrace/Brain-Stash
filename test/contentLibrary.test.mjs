@@ -8,6 +8,8 @@ import {
   isValidDisciplineId,
   normaliseCandidate,
   normaliseTitle,
+  reviewLibraryItem,
+  toDatabaseErrorCode,
   safeSecretMatch,
   sameOrigin,
 } from '../server/libraryCore.js';
@@ -174,4 +176,61 @@ test('generation does not leak another users pending draft through duplicate res
     if (url.pathname.endsWith('/rest/v1/brain_stash_items') && url.searchParams.has('normalized_title')) return jsonResponse([pending]);
     throw new Error(`Unexpected mocked request: ${url.pathname}${url.search}`);
   });
+});
+
+
+test('review decisions are atomic and retries resolve the stored final state', async () => {
+  const id = 'ai-1234567890abcdef12345678';
+  const reviewedRow = {
+    id, discipline_id: 'psychology', title: 'The Mere-Exposure Effect',
+    content: { id, disciplineId: 'psychology', title: 'The Mere-Exposure Effect', summary: 'A sufficiently long summary of this example review item.', status: 'approved' },
+    status: 'approved', source: 'ai', created_at: '2026-10-13T12:00:00Z',
+  };
+  const calls = [];
+  await withLibraryEnvironment(async () => {
+    const result = await reviewLibraryItem(id, 'approved');
+    assert.equal(result.item.status, 'approved');
+    assert.equal(result.alreadyApplied, true);
+  }, async (input, init = {}) => {
+    const url = new URL(String(input));
+    calls.push({ url, method: init.method || 'GET', body: init.body });
+    if ((init.method || 'GET') === 'PATCH') return jsonResponse([]);
+    if ((init.method || 'GET') === 'GET') return jsonResponse([reviewedRow]);
+    throw new Error(`Unexpected request: ${url.pathname}`);
+  });
+  assert.equal(calls.length, 2);
+  assert.equal(calls[0].method, 'PATCH');
+  assert.equal(calls[0].url.searchParams.get('status'), 'eq.pending', 'only pending drafts can transition');
+  assert.equal(calls[1].method, 'GET', 'a retry checks the actual persisted state');
+});
+
+test('review cannot overwrite a decision that already reached the opposite terminal state', async () => {
+  const id = 'ai-1234567890abcdef12345678';
+  const rejectedRow = {
+    id, discipline_id: 'psychology', title: 'The Mere-Exposure Effect',
+    content: { id, disciplineId: 'psychology', title: 'The Mere-Exposure Effect' },
+    status: 'rejected', source: 'ai', created_at: '2026-10-13T12:00:00Z',
+  };
+  await withLibraryEnvironment(async () => {
+    await assert.rejects(reviewLibraryItem(id, 'approved'), /already_reviewed/);
+  }, async (input, init = {}) => {
+    if ((init.method || 'GET') === 'PATCH') return jsonResponse([]);
+    return jsonResponse([rejectedRow]);
+  });
+});
+
+test('review reports a missing row instead of leaving an ambiguous result', async () => {
+  const id = 'ai-1234567890abcdef12345678';
+  await withLibraryEnvironment(async () => {
+    await assert.rejects(reviewLibraryItem(id, 'approved'), /not_found/);
+  }, async (input, init = {}) => {
+    if ((init.method || 'GET') === 'PATCH') return jsonResponse([]);
+    return jsonResponse([]);
+  });
+});
+
+test('database permission errors get a distinct safe diagnostic code', () => {
+  assert.equal(toDatabaseErrorCode(Object.assign(new Error('database_http_403'), { status: 403 })), 'database_permissions');
+  assert.equal(toDatabaseErrorCode(Object.assign(new Error('database_http_400'), { status: 400 })), 'database_schema_error');
+  assert.equal(toDatabaseErrorCode(Object.assign(new Error('database_http_503'), { status: 503 })), 'database_unavailable');
 });

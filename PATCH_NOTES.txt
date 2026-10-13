@@ -1,7 +1,7 @@
 BRAIN STASH — MERGED PROJECT PATCH
 
 APPLYING THE ZIP
-- This archive contains the complete merged project under `brain-stash/`, including the existing Git metadata.
+- This archive contains the complete source project under `brain-stash/`. It does not include Git history; extract it over your existing project folder to preserve your local `.git/` directory.
 - It intentionally omits `node_modules/`, generated `dist/`, and local `.env` files. Dependencies are restored with `npm ci`; Vercel builds `dist/` from source.
 - Do not add or upload an `.env` file. Keep AI credentials in Vercel's Environment Variables.
 
@@ -58,3 +58,12 @@ LATEST VALIDATION
 - `npm run validate`: passed across the existing content banks, all 54 Rebus explanations, all 20 Court cases, and all seven new disciplines (21 starter discoveries).
 - TypeScript parser syntax check: 50 JavaScript/JSX/MJS files, zero syntax errors.
 - Vite production build remains unverified in this environment: the npm install timed out while the registry was unreachable, leaving no usable Vite executable. Run the normal Vercel deployment after applying the Supabase setup and confirm the build logs.
+
+LIBRARY REVIEW RELIABILITY FIX
+- Review decisions update only rows still marked `pending`, so an approval or rejection cannot overwrite an earlier decision.
+- Repeated requests now check the persisted status and safely recognise a decision that already succeeded, even if the first response was lost.
+- When a review request fails, the screen reloads the authoritative pending queue. If it cannot refresh the queue, it removes potentially stale action buttons instead of leaving them active.
+- Replaced ambiguous review errors with actionable messages for token rejection, database permission/schema issues, missing drafts and already-reviewed entries.
+- Updated the Knowledge Wing and review-screen copy to explain the user action and outcome in plain language.
+- Added regression tests for idempotent retries, opposite terminal decisions, missing entries, and database error classification.
+- Validation: `npm test` passed, including 15 shared-library tests; JavaScript and JSX parser checks passed. A Vite production build remains unverified because dependencies cannot be downloaded in this environment.

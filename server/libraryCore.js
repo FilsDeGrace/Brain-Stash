@@ -306,10 +306,33 @@ export async function generateAndStoreCandidate(disciplineId, { actorHash, actor
 
 export async function reviewLibraryItem(id, status) {
   if (typeof id !== 'string' || !/^ai-[a-f0-9]{24}$/.test(id) || !['approved', 'rejected'].includes(status)) throw new Error('invalid_review');
-  const query = new URLSearchParams({ id: `eq.${id}`, status: 'eq.pending', select: 'id,discipline_id,title,content,status,source,created_at' });
-  const updated = await supabaseRequest(`brain_stash_items?${query.toString()}`, { method: 'PATCH', body: { status, reviewed_at: new Date().toISOString() }, prefer: 'return=representation' });
+
+  // This conditional update is the lock: only a row still marked pending can
+  // be reviewed. Concurrent approve/reject requests cannot both win.
+  const fields = 'id,discipline_id,title,content,status,source,created_at';
+  const query = new URLSearchParams({ id: `eq.${id}`, status: 'eq.pending', select: fields });
+  const updated = await supabaseRequest(`brain_stash_items?${query.toString()}`, {
+    method: 'PATCH',
+    body: { status, reviewed_at: new Date().toISOString() },
+    prefer: 'return=representation',
+  });
   const row = Array.isArray(updated) ? updated[0] : updated;
-  return row ? rowToItem(row) : null;
+  if (row) return { item: rowToItem(row), alreadyApplied: false };
+
+  // A timed-out response can hide a successful database update. Read the
+  // current state before reporting failure, making retries safe and clear.
+  const currentQuery = new URLSearchParams({ id: `eq.${id}`, select: fields, limit: '1' });
+  const currentRows = await supabaseRequest(`brain_stash_items?${currentQuery.toString()}`);
+  const currentRow = Array.isArray(currentRows) ? currentRows[0] : currentRows;
+  if (!currentRow) throw new Error('not_found');
+  const currentItem = rowToItem(currentRow);
+  if (currentItem.status === status) return { item: currentItem, alreadyApplied: true };
+  if (currentItem.status === 'approved' || currentItem.status === 'rejected') {
+    const error = new Error('already_reviewed');
+    error.currentStatus = currentItem.status;
+    throw error;
+  }
+  throw new Error('review_conflict');
 }
 
 export function chooseCronDiscipline(date = new Date()) {
@@ -327,6 +350,11 @@ export function toDatabaseErrorCode(error) {
   if (error?.message === 'ai_busy') return 'ai_busy';
   if (error?.message === 'ai_bad_output') return 'ai_bad_output';
   if (error?.message === 'ai_timeout') return 'ai_timeout';
-  if (error?.message === 'invalid_discipline' || error?.message === 'invalid_review') return 'bad_request';
+  if (error?.message === 'invalid_discipline' || error?.message === 'invalid_review' || error?.message === 'review_conflict') return 'bad_request';
+  if (error?.message === 'not_found') return 'not_found';
+  if (error?.message === 'already_reviewed') return 'already_reviewed';
+  if (typeof error?.message === 'string' && /^database_http_401$|^database_http_403$/.test(error.message)) return 'database_permissions';
+  if (typeof error?.message === 'string' && /^database_http_400$|^database_http_404$/.test(error.message)) return 'database_schema_error';
+  if (typeof error?.message === 'string' && /^database_http_[45]\d\d$/.test(error.message)) return 'database_unavailable';
   return 'service_error';
 }

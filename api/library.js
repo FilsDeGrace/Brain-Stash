@@ -29,8 +29,9 @@ export default async function handler(req, res) {
     } catch (error) {
       if (error.message === 'database_unconfigured' && status === 'approved') return send(200, { items: [], configured: false });
       if (error.message === 'database_unconfigured') return send(503, { error: 'database_unconfigured' });
-      console.error('library: listing failed', error?.message || 'error');
-      return send(503, { error: 'library_unavailable' });
+      const code = toDatabaseErrorCode(error);
+      console.error('library: listing failed', code, error?.status || '');
+      return send(503, { error: ['database_permissions', 'database_schema_error', 'database_unavailable'].includes(code) ? code : 'library_unavailable' });
     }
   }
 
@@ -40,13 +41,18 @@ export default async function handler(req, res) {
   if (body.action === 'review') {
     if (!isAdminRequest(req)) return send(403, { error: 'forbidden' });
     try {
-      const item = await reviewLibraryItem(body.id, body.status);
-      if (!item) return send(404, { error: 'not_found' });
-      return send(200, { item });
+      const result = await reviewLibraryItem(body.id, body.status);
+      return send(200, result);
     } catch (error) {
       const code = toDatabaseErrorCode(error);
-      console.error('library: review failed', code);
-      return send(code === 'bad_request' ? 400 : 503, { error: code });
+      // Log only the safe error code and database HTTP status, never secrets or request bodies.
+      console.error('library: review failed', code, error?.status || '');
+      const statusCode = code === 'bad_request' ? 400
+        : code === 'not_found' ? 404
+        : code === 'already_reviewed' ? 409
+        : code === 'database_permissions' || code === 'database_schema_error' ? 503
+        : 503;
+      return send(statusCode, { error: code, ...(error?.currentStatus ? { currentStatus: error.currentStatus } : {}) });
     }
   }
 
@@ -57,7 +63,7 @@ export default async function handler(req, res) {
   } catch (error) {
     const code = toDatabaseErrorCode(error);
     if (code === 'service_error') console.error('library: generation failed', error?.message || 'error');
-    const status = code === 'bad_request' ? 400 : code === 'duplicate_rejected' || code === 'duplicate_pending' || code === 'duplicate_bundled' ? 409 : code === 'quota_exhausted' || code === 'ai_busy' ? 429 : code === 'database_unconfigured' || code === 'ai_unconfigured' ? 503 : 502;
+    const status = code === 'bad_request' ? 400 : code === 'duplicate_rejected' || code === 'duplicate_pending' || code === 'duplicate_bundled' ? 409 : code === 'quota_exhausted' || code === 'ai_busy' ? 429 : ['database_unconfigured', 'ai_unconfigured', 'database_permissions', 'database_schema_error', 'database_unavailable'].includes(code) ? 503 : 502;
     return send(status, { error: code });
   }
 }

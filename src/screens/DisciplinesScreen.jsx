@@ -57,7 +57,7 @@ export default function DisciplinesScreen({
           <div className="discipline-card-bottom"><span>{entry.items.length} STARTER DISCOVERIES</span><Icon name="arrow" size={16}/></div>
         </button>)}
       </div>
-      <div className="discipline-footer"><Icon name="book" size={17}/><p>New AI discoveries enter the shared library after review, so useful knowledge can grow without publishing unchecked drafts.</p></div>
+      <div className="discipline-footer"><Icon name="book" size={17}/><p>Explore a growing collection of ideas, with new discoveries reviewed before they are shared.</p></div>
     </section>;
   }
 
@@ -98,7 +98,7 @@ export default function DisciplinesScreen({
     <button className="text-back" onClick={() => onBack(null)}><Icon name="back" size={15}/> ALL DISCIPLINES</button>
     <div className="page-heading"><div><span className="eyebrow">DISCIPLINE FILE · {discipline.shortTitle.toUpperCase()}</span><h1>{discipline.title}</h1><p>{discipline.description}</p></div><span className="heading-glyph"><Icon name={discipline.icon || 'book'} size={27}/></span></div>
     {discipline.disclaimer && <div className="finance-disclaimer">{discipline.disclaimer}</div>}
-    <div className="generate-panel"><div className="generate-panel-mark"><Icon name="spark" size={22}/></div><div className="generate-panel-copy"><strong>Expand this discipline</strong><p>{libraryConfigured === false ? 'New AI discoveries are not available yet. You can still explore the starter collection below.' : 'Ask for a fresh discovery. It will be saved as a draft and checked before joining the shared library.'}</p><small>{isLoadingShared ? 'Checking the shared library…' : libraryConfigured === false ? 'STARTER COLLECTION AVAILABLE' : 'SHARED LIBRARY · REVIEW BEFORE PUBLISHING'}</small></div><button className="button button-primary" onClick={() => onGenerate(discipline.id)} disabled={isGenerating || isLoadingShared || libraryConfigured === false}>{libraryConfigured === false ? 'Unavailable' : isGenerating ? 'Generating…' : 'Generate'} <Icon name="arrow" size={15}/></button></div>
+    <div className="generate-panel"><div className="generate-panel-mark"><Icon name="spark" size={22}/></div><div className="generate-panel-copy"><strong>Expand this discipline</strong><p>{libraryConfigured === false ? 'New AI discoveries are not available yet. You can still explore the starter collection below.' : 'Generate a new discovery for this discipline. It will be checked before it is shared.'}</p><small>{isLoadingShared ? 'Checking the shared library…' : libraryConfigured === false ? 'STARTER COLLECTION AVAILABLE' : 'NEW DISCOVERIES · CHECKED BEFORE SHARING'}</small></div><button className="button button-primary" onClick={() => onGenerate(discipline.id)} disabled={isGenerating || isLoadingShared || libraryConfigured === false}>{libraryConfigured === false ? 'Unavailable' : isGenerating ? 'Generating…' : 'Generate'} <Icon name="arrow" size={15}/></button></div>
     {generationError && <p className="inline-error" role="status">{generationError}</p>}
     <div className="section-heading discipline-list-heading"><div><span className="eyebrow">THE FILES</span><h2>Discoveries</h2></div><span className="count-label">{items.length} ENTRIES</span></div>
     <div className="knowledge-list">
