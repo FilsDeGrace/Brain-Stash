@@ -1,0 +1,1885 @@
+[
+  {
+    "id": "court-t1-b2-01",
+    "kind": "court",
+    "difficulty": 1,
+    "category": "Contracts & Promises",
+    "title": "The Glossary",
+    "context": "A translation agency agreed in writing to translate a 40,000-word equipment manual from German into Portuguese for a fixed fee, due on 15 March. On 10 March the client's project lead emailed asking for a short glossary of key terms 'if you have time'. The agency's coordinator replied 'yes, we will add it'. The manual was delivered on 15 March. The glossary followed on 22 March. The client has paid nothing, stating that the project was delivered late and that the agency broke its promise. The agency has invoiced the full fee for the manual and nothing extra for the glossary. The written agreement says nothing about glossaries, and no new date was set for it in any message.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the agency",
+        "argument": "The contract was for the manual, and the manual arrived on the due date. The glossary was a favour the client asked for five days before the deadline, with no price and no date attached. Withholding the whole fee for a courtesy that came a week later turns a gesture of goodwill into a pretext for not paying."
+      },
+      {
+        "id": "b",
+        "name": "For the client",
+        "argument": "The agency said yes. A promise to add a glossary became part of the deal, and the client received a complete package only on 22 March. A supplier that cannot keep to a date it accepted has no claim to the full fee, and the client should not be left paying in full for a project that arrived late."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on the client's refusal to pay the fee?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Client may withhold the whole fee: the project was not complete on the due date, so the agency failed to perform as agreed."
+      },
+      {
+        "id": "b",
+        "label": "Client need not pay yet: the agency promised the glossary, so the job was not finished until it arrived and payment was not yet due."
+      },
+      {
+        "id": "c",
+        "label": "Fee for the manual is payable in full: the contract covered only the manual, delivered on time, and no date was ever agreed for the glossary."
+      },
+      {
+        "id": "d",
+        "label": "Fee is payable with a deduction: the agency accepted the glossary request, so the fee should reflect the week that it ran late."
+      }
+    ],
+    "correctId": "c",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "scope",
+        "role": "deciding",
+        "label": "The written contract covered only the manual, which arrived on the due date; the glossary was a separate request with no price and no agreed date."
+      },
+      {
+        "id": "if-time",
+        "role": "acceptable",
+        "label": "The client's own wording, 'if you have time', made the glossary optional and gave no deadline that could later be missed."
+      },
+      {
+        "id": "yes-promise",
+        "role": "trap",
+        "label": "The agency replied that it would add the glossary, and a promise once given must be kept to the same standard as the original contract."
+      },
+      {
+        "id": "package",
+        "role": "trap",
+        "label": "The client expected a complete package, so anything delivered after the due date counts as late delivery of the whole job."
+      },
+      {
+        "id": "goodwill",
+        "role": "trap",
+        "label": "The agency is a small supplier that was doing the client a favour, so withholding payment would be harsh on it."
+      },
+      {
+        "id": "length",
+        "role": "irrelevant",
+        "label": "The manual was long, at 40,000 words, so the agency must have worked hard to deliver it on time."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "package"
+      ],
+      "b": [
+        "yes-promise"
+      ],
+      "c": [
+        "scope",
+        "if-time",
+        "goodwill"
+      ],
+      "d": [
+        "yes-promise"
+      ]
+    },
+    "trap": {
+      "type": "Conflated obligations",
+      "note": "The client's wording merges two separate obligations into one project, so the lateness of an optional extra looks like lateness of the contract itself. The dispute turns on what was agreed, not on what was said afterwards."
+    },
+    "canonicalRatio": "The contract covered only the manual, delivered on the agreed date; the glossary was an optional later request with no price or deadline, so its later arrival cannot defeat payment for the manual.",
+    "explanation": "The written agreement fixed a fee for the manual and a due date of 15 March, and the manual arrived on that date. The glossary was requested five days earlier with the words 'if you have time', carried no price, and was given no date in the agency's reply. A deadline that was never set cannot have been missed, and nothing in the exchange changes what the client owes for the manual. Option a treats manual and glossary as one package, but the contract describes only the manual. Option b gives the agency's 'yes' more weight than it can bear: agreeing to try an optional extra does not make payment for finished work conditional on it. Option d assumes a delay that was never defined, so there is nothing to deduct for. The ruling would change if the client had named a date for the glossary and the agency had accepted it, or if the contract had listed the glossary as a deliverable. Even then, the remedy would attach to the glossary, not to the manual."
+  },
+  {
+    "id": "court-t1-b2-02",
+    "kind": "court",
+    "difficulty": 1,
+    "category": "Authority & Proportionality",
+    "title": "The Flagged Pallet",
+    "context": "A dairy distributor in Gdańsk has a rule that any chilled pallet flagged by the receiving scanner must be held until a quality inspector signs it off. A dock supervisor with nine years' service saw a flagged pallet of yoghurt twelve minutes before the last truck of the evening left for a supermarket chain that fines late deliveries. The inspector was on a break for another forty minutes. The supervisor loaded the pallet and logged the release as 'urgent, inspector unavailable'. The inspector tested a retained sample the next morning and found the pallet within specification. The company opened a disciplinary procedure for breach of the hold rule. The supervisor says no harm resulted and a missed delivery would have cost the company more than any risk.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the company",
+        "argument": "The hold rule applies to every flagged pallet precisely because the scanner cannot tell a harmless flag from a dangerous one. The supervisor made that call himself and was lucky. If outcomes decide whether a rule was broken, every rule becomes advisory and is enforced only after something goes wrong."
+      },
+      {
+        "id": "b",
+        "name": "For the supervisor",
+        "argument": "Nine years without a mark on his record, a penalty about to land, and the only inspector on a break. He acted for the company, not for himself, and the pallet was sound. Punishing a good decision teaches staff to let deliveries fail rather than think."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on whether the supervisor breached the hold rule?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Breach: the hold rule required a sign-off before release and he released without one; a sound result does not change what the rule required."
+      },
+      {
+        "id": "b",
+        "label": "No breach: the rule exists to keep unsafe goods from customers, and no unsafe goods were released."
+      },
+      {
+        "id": "c",
+        "label": "No breach: a dock supervisor in charge of an evening departure must be free to use judgment when a deadline is at risk."
+      },
+      {
+        "id": "d",
+        "label": "No breach can be found unless he knew the pallet might be unsafe; the facts show only a decision taken under time pressure."
+      }
+    ],
+    "correctId": "a",
+    "intuitiveWrongId": "b",
+    "factors": [
+      {
+        "id": "authority",
+        "role": "deciding",
+        "label": "The rule required sign-off before release and he released without it; whether a rule was broken depends on what was done, not on how things turned out."
+      },
+      {
+        "id": "scanner",
+        "role": "acceptable",
+        "label": "A scanner flag cannot distinguish a harmless flag from a dangerous one, which is why the rule removes the decision from the dock."
+      },
+      {
+        "id": "outcome",
+        "role": "trap",
+        "label": "The pallet was within specification, so the rule's purpose was met and nothing was breached."
+      },
+      {
+        "id": "deadline",
+        "role": "trap",
+        "label": "A missed delivery would have cost more than the risk, so the supervisor's decision was the right one for the company."
+      },
+      {
+        "id": "service",
+        "role": "trap",
+        "label": "Nine years of service without a mark on his record show he is trustworthy enough to be allowed discretion."
+      },
+      {
+        "id": "product",
+        "role": "irrelevant",
+        "label": "Yoghurt is a lower-risk chilled product than raw meat, so a mistake with it would have been less serious."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "authority",
+        "scanner"
+      ],
+      "b": [
+        "outcome"
+      ],
+      "c": [
+        "deadline",
+        "service"
+      ],
+      "d": []
+    },
+    "trap": {
+      "type": "Outcome bias",
+      "note": "A good result makes a decision look justified in hindsight, but the question is whether the rule was followed. The outcome is evidence of the risk that was taken, not of authority that was held."
+    },
+    "canonicalRatio": "The hold rule required sign-off before release and he released without it; a sound result does not show the rule was followed, though it may bear on the sanction.",
+    "explanation": "The rule says a flagged pallet must be held until an inspector signs it off. The pallet was flagged, no sign-off existed, and the supervisor loaded it. Those facts settle whether the rule was followed, and the next morning's result does not alter them. A rule that applies only when the outcome is bad is not enforced as a rule, because it would be reopened every time a risk turned out well. Option b confuses the purpose of the rule with its content. The scanner cannot tell a harmless flag from a dangerous one, which is why the rule removes the decision from the dock. Option c asks for a discretion the rule does not give, and a shortage of inspectors was a reason to ask for cover, not to act alone. Option d imports a requirement the rule does not contain, since it is framed by what is done and not by what is known. The good result and his nine years of service may properly bear on the sanction, but not on whether there was a breach."
+  },
+  {
+    "id": "court-t1-b2-03",
+    "kind": "court",
+    "difficulty": 1,
+    "category": "Evidence & Proof",
+    "title": "The Doorstep Photo",
+    "context": "An online retailer in Auckland sold a camera for 1,200 dollars to a customer who paid in advance. The courier's system recorded the parcel as delivered at 14:05 and attached a photograph of a parcel on a doorstep. The customer says nothing arrived and that the doorstep in the photograph is not hers. The photograph shows no house number and no feature that identifies the address, and the courier's record holds no signature or location point. The retailer refuses a refund, saying that the courier's record proves delivery and that the customer has offered nothing beyond her word. Neither side has any further evidence, and the customer has no history of similar complaints.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the retailer",
+        "argument": "The courier's system recorded delivery at a specific minute and attached a photograph. That is a business record made at the time, before any dispute existed. The customer offers only her word against it, and a refund policy that pays out on an unsupported statement invites every buyer to claim non-delivery."
+      },
+      {
+        "id": "b",
+        "name": "For the customer",
+        "argument": "A photograph of a doorstep that nobody can place proves nothing about where the parcel went. She has no history of complaints and no reason to lie. A retailer that is paid in advance and cannot show where its goods ended up should refund the buyer."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on the customer's claim for a refund?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Refund refused: the courier's record was made at the time of delivery, and the customer has offered only her word against it."
+      },
+      {
+        "id": "b",
+        "label": "Refund refused: the customer must prove that the parcel was not delivered, and she has produced no evidence of that."
+      },
+      {
+        "id": "c",
+        "label": "Refund due: the customer has no history of complaints, so her account should be believed over the courier's record."
+      },
+      {
+        "id": "d",
+        "label": "Refund due: the retailer was paid in advance and must show delivery to this address, and a photograph that does not identify the address does not do so."
+      }
+    ],
+    "correctId": "d",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "burden",
+        "role": "deciding",
+        "label": "The retailer was paid and owed delivery, so it must show delivery to this address; the record it relies on does not identify the address."
+      },
+      {
+        "id": "photo",
+        "role": "acceptable",
+        "label": "The photograph has no house number or other feature tying it to the customer's address, so it does not show where the parcel was left."
+      },
+      {
+        "id": "record",
+        "role": "trap",
+        "label": "A courier's record is made at the time and before any dispute, so it should be preferred to a later statement."
+      },
+      {
+        "id": "character",
+        "role": "trap",
+        "label": "The customer has no history of complaints, so she is unlikely to be lying about the parcel."
+      },
+      {
+        "id": "floodgates",
+        "role": "trap",
+        "label": "Refunding without proof invites every buyer to claim non-delivery, so the retailer must be protected from unsupported claims."
+      },
+      {
+        "id": "price",
+        "role": "irrelevant",
+        "label": "The camera cost 1,200 dollars, a large sum, so the customer's loss is serious."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "record",
+        "floodgates"
+      ],
+      "b": [
+        "floodgates"
+      ],
+      "c": [
+        "character",
+        "price"
+      ],
+      "d": [
+        "burden",
+        "photo"
+      ]
+    },
+    "trap": {
+      "type": "Burden reversal",
+      "note": "Asking the customer to prove a negative reverses who must prove what. The party owed delivery must show that it happened, and a record that cannot be tied to the address does not."
+    },
+    "canonicalRatio": "The retailer took payment and owed delivery, so it must show delivery to this address; a photograph that cannot be tied to her address does not, and she need not prove that nothing arrived.",
+    "explanation": "The retailer took payment in advance and owed delivery, so it is the party that must show the goods arrived. Its only proof is a courier entry and a photograph of a doorstep with no house number and no other feature tying it to the customer's address. A record that cannot be connected to the address does not show delivery to it, and the customer is not required to prove that nothing arrived, since that would ask her to prove a negative. Option a gives the courier's entry more weight than it can carry, because a record made at the time is useful only if it identifies the place. Option b reverses the burden. Option c rests the result on her clean history, which is not evidence about this parcel, and the outcome should not depend on whether she is thought to be honest. The ruling would change if the record carried a location point at her address, a signature, or a photograph showing her own door."
+  },
+  {
+    "id": "court-t1-b2-04",
+    "kind": "court",
+    "difficulty": 1,
+    "category": "Fairness & Consistency",
+    "title": "The Late Receipts",
+    "context": "A university research group's travel policy says that expense claims filed more than 30 days after a trip are not reimbursed 'unless the lab manager finds good cause'. Two researchers returned from the same conference in Santiago and each filed a claim late, one on day 34 and the other on day 33. They gave the same documented reason: the airline had not issued their receipts until day 31. The lab manager reimbursed the senior researcher, who leads a large grant, and refused the junior researcher's claim, saying that a deadline is a deadline. The policy does not list what counts as good cause. The junior researcher asks to be treated as her colleague was.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the manager",
+        "argument": "The policy sets a limit of thirty days and the junior researcher missed it. A manager who waives deadlines whenever someone has an explanation will soon have no deadline at all. The limit is the only thing that keeps claims coming in on time, and it should be applied as written."
+      },
+      {
+        "id": "b",
+        "name": "For the junior researcher",
+        "argument": "The same airline delay, the same conference, a claim one day earlier than her colleague's, and yet only one was paid. Whatever the manager meant by good cause, it was met in both cases. A rule applied to one researcher and not to the other is not a rule but a preference."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on the junior researcher's challenge to the refusal of her claim?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Refusal upheld: the 30-day limit is clear, she missed it, and the manager is entitled to apply it as written."
+      },
+      {
+        "id": "b",
+        "label": "Refusal cannot stand: both claims gave the same good cause, and seniority or grant size is not a cause the policy recognises, so her claim must be treated as his was."
+      },
+      {
+        "id": "c",
+        "label": "Refusal upheld: reimbursing the senior researcher was the error, and a mistake in one person's favour does not oblige the manager to repeat it."
+      },
+      {
+        "id": "d",
+        "label": "Refusal stands unless the policy defines good cause: without a definition, the manager's finding cannot be reviewed at all."
+      }
+    ],
+    "correctId": "b",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "same-test",
+        "role": "deciding",
+        "label": "Both claims gave the same documented reason, the policy allows a waiver for good cause, and seniority or grant size is not a cause the policy recognises."
+      },
+      {
+        "id": "discretion",
+        "role": "acceptable",
+        "label": "The policy gives the manager discretion, so the question is whether it was exercised by the same test for both, not whether a strict rule applied."
+      },
+      {
+        "id": "limit",
+        "role": "trap",
+        "label": "She exceeded the limit, and a time limit must be applied as written or it stops meaning anything."
+      },
+      {
+        "id": "two-wrongs",
+        "role": "trap",
+        "label": "If the senior researcher was reimbursed wrongly, repeating the error for the junior one would compound it, so the refusal should stand."
+      },
+      {
+        "id": "seniority",
+        "role": "trap",
+        "label": "Senior researchers carry more responsibility and bring in funding, so they can reasonably be given more flexibility than junior ones."
+      },
+      {
+        "id": "venue",
+        "role": "irrelevant",
+        "label": "The conference was held in Santiago, and travel to conferences is a normal part of academic work."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "limit",
+        "seniority"
+      ],
+      "b": [
+        "same-test",
+        "discretion"
+      ],
+      "c": [
+        "two-wrongs"
+      ],
+      "d": []
+    },
+    "trap": {
+      "type": "Two wrongs",
+      "note": "An earlier mistake does not justify repeating it, but nothing shows it was a mistake. The question is whether the discretion was exercised by the same test for both researchers."
+    },
+    "canonicalRatio": "Both claims gave the same documented cause, and seniority is not a ground the policy recognises, so the discretion to waive the limit was not exercised by the same test for both.",
+    "explanation": "The policy sets a 30-day limit but lets the manager waive it for good cause. That gives the manager discretion, and discretion is exercised properly only on grounds that bear on the question. Both researchers gave the same documented reason: the airline did not issue the receipts until day 31. The manager accepted that reason for the senior researcher and refused it for the junior one, citing the deadline, so the only difference in treatment was seniority or grant size, which has no connection to whether the lateness was excusable. Option a ignores the waiver clause. Option c is right that a past error need not be repeated, but nothing shows the first reimbursement was wrong; the facts show an unexplained difference, and the manager must resolve it by the cause of the lateness. Option d fails because a discretion without a definition must still be exercised consistently. The ruling would change if the manager could point to a real difference between the cases, such as a missing receipt or an earlier warning."
+  },
+  {
+    "id": "court-t2-b2-01",
+    "kind": "court",
+    "difficulty": 2,
+    "category": "Contracts & Promises",
+    "title": "Business Hours",
+    "context": "A bakery chain in Lisbon runs its tills on software supplied by a company in Bengaluru. The contract, written entirely by the supplier and signed without negotiation, promises support 'during business hours' and defines neither the hours nor a time zone. The supplier's helpdesk answers from 09:00 to 18:00 India time, which is 04:30 to 13:30 in Lisbon in summer. The bakeries open at 06:00, close at 19:00, and take a third of their daily sales between 16:00 and 18:00. In July the tills failed at 15:50 and the helpdesk did not answer until 04:30 the next morning. The chain claims breach of the support promise. The supplier says it supported the system during its own business hours, as it does for every customer.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the chain",
+        "argument": "The software exists to run tills while shops are open. A promise of support during business hours, made to a bakery, means the hours in which bakeries trade. The supplier wrote the words, chose not to define them, and cannot now fall back on the one reading that happens to suit its helpdesk rota."
+      },
+      {
+        "id": "b",
+        "name": "For the supplier",
+        "argument": "Every customer receives the same terms and the same helpdesk, whatever their time zone. A support service has to keep fixed hours or it cannot be run at all. If each customer could name its own business hours after the contract was signed, the supplier would owe round-the-clock support at a flat price."
+      }
+    ],
+    "prompt": "On these facts, which reading of 'business hours' should govern, and was the support promise breached?",
+    "options": [
+      {
+        "id": "a",
+        "label": "The supplier's reading governs: the helpdesk hours were its normal operating hours, and the chain accepted the contract as it was offered."
+      },
+      {
+        "id": "b",
+        "label": "The chain's reading governs: the supplier wrote the unclear term and could have defined it, so the doubt is resolved against the supplier."
+      },
+      {
+        "id": "c",
+        "label": "The term is void for uncertainty: with no defined hours, neither side can enforce the support promise at all."
+      },
+      {
+        "id": "d",
+        "label": "No ruling is possible without evidence of what business hours mean in the software support trade."
+      }
+    ],
+    "correctId": "b",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "drafter",
+        "role": "deciding",
+        "label": "The supplier wrote the term without negotiation and could have defined it; where a drafter leaves a term open to two readings, the doubt is resolved against that drafter."
+      },
+      {
+        "id": "purpose",
+        "role": "acceptable",
+        "label": "A support promise made to a business that trades every day is naturally read as covering the hours in which that business operates."
+      },
+      {
+        "id": "standard",
+        "role": "trap",
+        "label": "The supplier offers identical terms and hours to every customer, and uniform terms are needed to run a support service."
+      },
+      {
+        "id": "accepted",
+        "role": "trap",
+        "label": "The chain signed without objection, so it accepted the supplier's way of working."
+      },
+      {
+        "id": "void",
+        "role": "trap",
+        "label": "A term with no defined hours is too uncertain to enforce, so neither party can rely on it."
+      },
+      {
+        "id": "zone",
+        "role": "irrelevant",
+        "label": "Lisbon is four and a half hours behind Bengaluru in summer, which is a fact about the two places rather than about the contract."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "standard",
+        "accepted"
+      ],
+      "b": [
+        "drafter",
+        "purpose"
+      ],
+      "c": [
+        "void"
+      ],
+      "d": []
+    },
+    "trap": {
+      "type": "Status quo bias",
+      "note": "The supplier's usual practice feels like the natural meaning because it is familiar. A habit of the drafter is not evidence of what both parties meant when the wording was left open."
+    },
+    "canonicalRatio": "The supplier chose the wording and left it open to two readings, so the doubt is resolved against it; the chain's reading also fits the purpose of support for a business that trades daily.",
+    "explanation": "The clause says 'during business hours' and the supplier wrote it without negotiation. Both readings are reasonable: the supplier's own working day, or the hours in which the customer's shops trade. Where one party chose the wording and left it open, the doubt is resolved against that party, who could have settled it with a few words. The purpose of a till-support promise points the same way, since a bakery that opens at 06:00 needs help while it is selling, and 16:00 to 18:00 is its busiest period. Option a mistakes the supplier's usual practice for the meaning of the contract; a habit of the drafter shows what it did, not what both sides understood. Option c would leave the chain with no support promise at all, although both sides plainly intended one. Option d demands a trade custom that nothing suggests exists, and the doubt can be resolved without it. The ruling would change if the contract or the sales material had stated the helpdesk hours before signing, or if the chain had negotiated the term."
+  },
+  {
+    "id": "court-t2-b2-02",
+    "kind": "court",
+    "difficulty": 2,
+    "category": "Authority & Proportionality",
+    "title": "Four Days Late",
+    "context": "A construction firm contracted to complete a warehouse extension, priced at 2.4 million, by 1 September. The contract fixes damages for delay at 0.1% of the price per day, allows termination only for material breach or abandonment, and does not make time of the essence. The project had run for fourteen months. On 5 September, with the works 97% complete, the client terminated the contract, citing the missed date, and refused to pay the final instalment of 600,000 for the work done. It plans to hire another firm to finish. The contractor says it was a few days from finishing, had offered 11 September as its completion date, and had not stopped working.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the client",
+        "argument": "A completion date is the core of a construction contract. The contractor missed it, kept the site, and offered a new date of its own choosing. A client cannot be made to wait indefinitely for work it needs, and it should be free to finish the project with a contractor it can rely on."
+      },
+      {
+        "id": "b",
+        "name": "For the contractor",
+        "argument": "The works were 97% complete and a week from handover. The contract set a daily rate for delay, and that is what the client agreed to accept for lateness. Ending the contract four days late and keeping 600,000 for finished work is a windfall, not a remedy."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on the client's termination of the contract and its refusal to pay the final instalment?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Termination valid: the completion date was missed, and a client need not wait for a contractor that is already late."
+      },
+      {
+        "id": "b",
+        "label": "Termination invalid, and the client forfeits any claim for delay: a party that wrongly ends a contract loses its right to deductions."
+      },
+      {
+        "id": "c",
+        "label": "Termination valid only if the client can prove an actual loss from the delay, which it has not yet done."
+      },
+      {
+        "id": "d",
+        "label": "Termination was not justified: the contract priced delay at a daily rate, so the remedy is that deduction, with the balance payable once the work is finished."
+      }
+    ],
+    "correctId": "d",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "priced-delay",
+        "role": "deciding",
+        "label": "The contract set a daily rate for delay, which shows the parties agreed that lateness is met by that sum and does not on its own justify ending the contract."
+      },
+      {
+        "id": "proportion",
+        "role": "acceptable",
+        "label": "Four days late on a fourteen-month project that is 97% complete, with completion offered within a week, is a minor breach that does not justify forfeiting the balance."
+      },
+      {
+        "id": "date",
+        "role": "trap",
+        "label": "The completion date was missed, and a date in a contract must mean something or deadlines become advisory."
+      },
+      {
+        "id": "forfeit",
+        "role": "trap",
+        "label": "A client that wrongly terminates should lose its right to any deduction, so that wrongful termination carries a price."
+      },
+      {
+        "id": "actual-loss",
+        "role": "trap",
+        "label": "Delay damages should be allowed only where the client can show an actual loss, so the client must prove its loss before any deduction."
+      },
+      {
+        "id": "market",
+        "role": "irrelevant",
+        "label": "Other contractors in the region are available and would charge similar prices, so the client's alternative is realistic."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "date"
+      ],
+      "b": [
+        "forfeit"
+      ],
+      "c": [
+        "actual-loss"
+      ],
+      "d": [
+        "priced-delay",
+        "proportion"
+      ]
+    },
+    "trap": {
+      "type": "Disproportionate remedy",
+      "note": "A missed date feels like a failure of the whole contract, but the parties priced lateness in advance. The remedy should match the breach, and ending the contract is a far larger step than four days' delay warrants."
+    },
+    "canonicalRatio": "The parties priced delay at a daily rate and limited termination to material breach, so four days' lateness on a nearly finished project is met by that deduction, not by ending the contract.",
+    "explanation": "The parties priced lateness in advance: 0.1% of the price for each day, which is 2,400 a day, or about 24,000 by the contractor's offered date of 11 September. That is the agreed measure of what delay costs the client, and it shows they did not treat a short delay as ending the contract. The termination clause is limited to material breach or abandonment. Four days late on a fourteen-month project that is 97% complete, with work continuing and a completion date offered, is neither. Option a treats the date as sacred, though the contract does not make time of the essence. Option b adds a penalty for wrongful termination that the contract does not contain; the client's claim for delay survives and is simply paid through the daily rate. Option c demands proof of actual loss, which the agreed rate makes unnecessary. The ruling would change if the contractor had stopped work, if the delay had become long enough to defeat the project's purpose, or if the contract had made time of the essence."
+  },
+  {
+    "id": "court-t2-b2-03",
+    "kind": "court",
+    "difficulty": 2,
+    "category": "Contracts & Promises",
+    "title": "The Misprinted Run",
+    "context": "A trade association ordered 10,000 brochures on recycled paper from a printer for its annual fair, at a quoted price of 0.50 per brochure. The printer delivered the full count the day before the fair. At the fair, 1,800 were found to have a colour misprint that made the logos unreadable, and the association set them aside and handed the remaining 8,200, which met the specification, to visitors. It has paid nothing and says the printer failed to deliver what was ordered. The printer invoices 5,000 for the full order. The association has not claimed any loss from the shortfall, and no terms of sale address misprints.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the printer",
+        "argument": "The order was delivered in full and on time. The association used 8,200 brochures and benefited from every one. A customer cannot take the goods, hand them to visitors, and then refuse to pay anything because a minority of the run was flawed. The invoice is for the order as placed."
+      },
+      {
+        "id": "b",
+        "name": "For the association",
+        "argument": "The association ordered 10,000 working brochures and received fewer. A printer that delivers part of what it promised has not performed its contract, and a customer should not have to pay for an incomplete job at an event that mattered to it. The fair has come and gone and cannot be rerun."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on what the association must pay the printer?",
+    "options": [
+      {
+        "id": "a",
+        "label": "The association pays the unit price for the 8,200 brochures it used and nothing for the 1,800 rejected ones, keeping any claim for loss from the shortfall."
+      },
+      {
+        "id": "b",
+        "label": "The association pays in full: it kept and used the brochures, which amounts to accepting the order as performed."
+      },
+      {
+        "id": "c",
+        "label": "The association owes nothing: the printer did not deliver the order it promised, so it has not earned any part of the price."
+      },
+      {
+        "id": "d",
+        "label": "The association pays for 8,200 brochures at a reduced rate: an incomplete order is worth less per unit than a complete one."
+      }
+    ],
+    "correctId": "a",
+    "intuitiveWrongId": "c",
+    "factors": [
+      {
+        "id": "accepted-use",
+        "role": "deciding",
+        "label": "The association kept and used 8,200 brochures that met the specification, and the price was quoted per unit, so it must pay the unit price for what it accepted."
+      },
+      {
+        "id": "separable",
+        "role": "acceptable",
+        "label": "The order divides into units with a unit price, so performance can be paid for in proportion, and the defective units are the only part not performed."
+      },
+      {
+        "id": "all-or-nothing",
+        "role": "trap",
+        "label": "The contract was for 10,000 brochures, and a supplier that does not deliver the whole order has not performed the contract at all."
+      },
+      {
+        "id": "windfall",
+        "role": "trap",
+        "label": "Paying for 8,200 brochures after a short delivery rewards a supplier that failed, so the association should receive them free."
+      },
+      {
+        "id": "inconvenience",
+        "role": "trap",
+        "label": "The association was inconvenienced by the shortfall at the fair, so the price should be reduced to reflect that."
+      },
+      {
+        "id": "paper",
+        "role": "irrelevant",
+        "label": "The brochures were printed on recycled paper, which is a point in the printer's favour."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "accepted-use",
+        "separable"
+      ],
+      "b": [
+        "paper"
+      ],
+      "c": [
+        "all-or-nothing",
+        "windfall"
+      ],
+      "d": [
+        "inconvenience"
+      ]
+    },
+    "trap": {
+      "type": "All-or-nothing reasoning",
+      "note": "Treating performance as either complete or worthless ignores that this order divides into units with a price each. The fair outcome follows the units actually delivered and accepted."
+    },
+    "canonicalRatio": "The price was quoted per brochure, so the association owes for the 8,200 it accepted and used, not for the 1,800 it rejected, and keeps any claim for loss from the shortfall.",
+    "explanation": "The price was quoted per brochure, so the order divides into units. The association accepted and used 8,200 that met the specification and must pay for them at the quoted rate, which comes to 4,100. It rejected 1,800 that did not and need not pay for those. Option b treats keeping the good brochures as acceptance of the whole order, but the association set the defective ones aside promptly. Option c treats the shortfall as a failure of the whole contract, which would let the association keep the benefit of 8,200 brochures for nothing. Option d invents a discount for incompleteness: the unit price already says what each brochure is worth, and any harm from the shortfall belongs in a separate claim for loss, which the association has not made. The ruling would change if the contract had made the order indivisible, if the brochures were useless without the full set, or if the association had suffered provable loss, which it could set against the price."
+  },
+  {
+    "id": "court-t2-b2-04",
+    "kind": "court",
+    "difficulty": 2,
+    "category": "Responsibility & Causation",
+    "title": "The Removed Stop",
+    "context": "A hardware retailer sold a folding loft ladder with a bolted safety stop at each hinge and a printed warning, in bold on the box and on the side of the ladder, never to remove the stops. The buyer removed one stop with a spanner because the ladder would not pass through his loft hatch with it fitted. Weeks later the ladder folded under him and he fell, breaking his hip. An independent inspection found that the ladder folded at the hinge where the stop had been removed. It also found a loose rivet at the other hinge, which had not given way and which the retailer's quality records show was a known batch fault. The buyer claims for his injuries.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the buyer",
+        "argument": "The retailer sold a ladder with a manufacturing fault it already knew about. A defective product sold to a householder who then falls from it should make the seller answerable. The stop was a bolt, not a lock, and any buyer might remove it for a tight hatch. A warning cannot excuse a product that was never right."
+      },
+      {
+        "id": "b",
+        "name": "For the retailer",
+        "argument": "The warning was clear and the stop was bolted on for a reason. The buyer chose to remove it with a spanner, and the fall happened at the hinge where he had done so. A seller cannot be responsible for what a buyer does after ignoring an explicit warning."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on the buyer's claim against the retailer for his injuries?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Retailer liable in full: the ladder was sold with a known defect, and an injury that follows the use of a defective product makes the seller answerable."
+      },
+      {
+        "id": "b",
+        "label": "Retailer liable in part: it should have foreseen that a buyer might modify the ladder and built a stop that could not be removed."
+      },
+      {
+        "id": "c",
+        "label": "Retailer not liable for the injury: the buyer's deliberate removal of a clearly warned stop caused the fall, and the unrelated loose rivet played no part."
+      },
+      {
+        "id": "d",
+        "label": "No ruling is possible until it is known whether the loose rivet would have failed if the buyer had left the stop in place."
+      }
+    ],
+    "correctId": "c",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "operative-cause",
+        "role": "deciding",
+        "label": "The fall happened at the hinge where the buyer had removed the stop, so his deliberate act, not the unrelated rivet, was the operative cause of the injury."
+      },
+      {
+        "id": "warning",
+        "role": "acceptable",
+        "label": "The stop was bolted on and the packaging and ladder warned in bold against removing it, so the retailer had told the buyer what removal risked."
+      },
+      {
+        "id": "defect",
+        "role": "trap",
+        "label": "The ladder had a real defect, and a seller of a defective product should answer for any injury that follows its use."
+      },
+      {
+        "id": "foreseeable",
+        "role": "trap",
+        "label": "Buyers often modify ladders to fit awkward spaces, so the retailer should have designed the stop so that it could not be removed."
+      },
+      {
+        "id": "sympathy",
+        "role": "trap",
+        "label": "The buyer suffered a serious injury, and the retailer is a large business better able to bear the loss."
+      },
+      {
+        "id": "price",
+        "role": "irrelevant",
+        "label": "The ladder was a budget model sold at a low price, and cheaper products tend to be less carefully made."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "defect",
+        "sympathy"
+      ],
+      "b": [
+        "foreseeable"
+      ],
+      "c": [
+        "operative-cause",
+        "warning"
+      ],
+      "d": []
+    },
+    "trap": {
+      "type": "Cause by association",
+      "note": "A real defect and a real injury invite the conclusion that one caused the other. The defect must connect to the harm, and here the inspection places the failure at a different hinge."
+    },
+    "canonicalRatio": "The ladder folded at the hinge where the buyer had removed a clearly warned stop; his deliberate act caused the fall, and the loose rivet at the other hinge did not contribute.",
+    "explanation": "The inspection places the failure at the hinge from which the buyer removed the stop, after a bold warning not to do so. That deliberate act, not the loose rivet, caused the fall. The rivet at the other hinge was a genuine fault, but it did not give way and played no part in the injury. Option a assumes that a defect followed by an injury means the defect caused it, which the inspection contradicts. Option b asks the seller to design against buyers who ignore explicit instructions; a bolted stop with a prominent warning is a reasonable safeguard, and a seller is not required to make a safety part impossible to remove. Option d asks for further evidence about the rivet, but the question is already answered: the ladder folded at the other hinge. The ruling would change if the stop had been removed without any warning being given, or if the inspection had found that the rivet contributed to the fold."
+  },
+  {
+    "id": "court-t3-b2-01",
+    "kind": "court",
+    "difficulty": 3,
+    "category": "Evidence & Proof",
+    "title": "Two Paid Experts",
+    "context": "A homeowner in Wellington claims on her insurance after a storm tore tiles from her roof and let rain into the ceiling. The insurer refused, relying on a report by a roof assessor who inspected three weeks later. The report says the discolouration and cracking show long-term deterioration that predates the storm. The assessor earns about 85% of her income from this insurer. The homeowner relies on a surveyor she hired after the refusal, who says the damage is recent. Photographs taken by her neighbour on the morning after the storm, with a date stamp, show displaced tiles and clean, pale fracture edges on broken ones. The insurer's report does not mention the photographs, although it lists them as supplied to the assessor.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the insurer",
+        "argument": "The assessor has inspected roofs for this insurer for eleven years and her method is routine. The homeowner's surveyor was hired after the claim was refused, by the person who stands to gain. Where two paid experts disagree, the claimant has not carried her burden of proof."
+      },
+      {
+        "id": "b",
+        "name": "For the homeowner",
+        "argument": "An assessor who earns most of her income from the insurer will find what the insurer needs to find, and her report should carry no weight at all. The homeowner has no such arrangement and has lived under that roof for twelve years. The claim should be paid in full."
+      }
+    ],
+    "prompt": "On this evidence, how do you rule on the homeowner's claim?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Claim upheld: the dated photographs showing fresh fractures are unanswered by the insurer's assessor, and that, not who paid either expert, decides the weight."
+      },
+      {
+        "id": "b",
+        "label": "Claim rejected: the insurer's assessor has examined many roofs, and the homeowner's surveyor was paid by the party that wants a payout."
+      },
+      {
+        "id": "c",
+        "label": "Claim upheld: the insurer's assessor earns most of her income from the insurer, so her report should be disregarded entirely."
+      },
+      {
+        "id": "d",
+        "label": "Claim rejected: when two experts disagree, the claimant has not shown it is more likely than not that the storm caused the damage."
+      }
+    ],
+    "correctId": "a",
+    "intuitiveWrongId": "c",
+    "factors": [
+      {
+        "id": "photos",
+        "role": "deciding",
+        "label": "The dated photographs of displaced tiles and pale, clean fracture edges are physical evidence that the insurer's assessor never addresses, so her conclusion is unsupported on the point that matters."
+      },
+      {
+        "id": "reasoning",
+        "role": "acceptable",
+        "label": "Expert opinion carries weight according to how well its reasoning meets the physical evidence, not according to who pays for it, since both experts are paid by a party."
+      },
+      {
+        "id": "interest",
+        "role": "trap",
+        "label": "The insurer's assessor earns most of her income from this insurer and so has a reason to find wear rather than storm damage."
+      },
+      {
+        "id": "experience",
+        "role": "trap",
+        "label": "The insurer's assessor has examined thousands of roofs, so her experience should outweigh the other expert's opinion."
+      },
+      {
+        "id": "burden",
+        "role": "trap",
+        "label": "The homeowner carries the burden of proof, and a disagreement between experts leaves that burden unmet."
+      },
+      {
+        "id": "claims",
+        "role": "irrelevant",
+        "label": "Storm damage claims across the region rose that month, which shows the storm was severe."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "photos",
+        "reasoning"
+      ],
+      "b": [
+        "experience",
+        "burden"
+      ],
+      "c": [
+        "interest"
+      ],
+      "d": [
+        "burden"
+      ]
+    },
+    "trap": {
+      "type": "Ad hominem on experts",
+      "note": "Attacking who pays an expert is easy and feels decisive, but both experts are paid by a party. What separates the two reports is whether each engages with the dated physical evidence."
+    },
+    "canonicalRatio": "Both experts are paid by a party, so the weight of each report turns on whether it meets the dated physical evidence, and only the homeowner's does; the insurer's report is silent on it.",
+    "explanation": "The weight of an expert report depends on how well it meets the physical evidence, and here the decisive evidence is the date-stamped photographs showing displaced tiles and pale, clean fracture edges the morning after the storm. The insurer's assessor was given them and does not mention them, so her conclusion about long-term deterioration is unsupported on the one point that can be checked. Option b prefers experience over engagement with the evidence, and it attacks the homeowner's surveyor for a feature the assessor shares, since both are paid by someone with a stake. Option c goes too far the other way: dependence on an insurer is a reason to look harder at the report, not to disregard it, and the report would carry weight if it explained the photographs. Option d is right that the homeowner carries the burden, but evidence that points one way and is unanswered can meet it. The ruling would change if the assessor had addressed the photographs, or if their dates were in doubt."
+  },
+  {
+    "id": "court-t3-b2-02",
+    "kind": "court",
+    "difficulty": 3,
+    "category": "Contracts & Promises",
+    "title": "True but Incomplete",
+    "context": "A buyer purchased a flat in Porto for 310,000. The seller had told her that the building had 'recent façade repairs, completed and paid for'. A month before signing, the owners' association had voted to charge each flat a levy of 22,000 for further structural work on the same façade, to be collected in six months. The seller attended the vote. The sale contract contained a clause stating that the seller 'has disclosed all matters known to the seller that materially affect the property's value or the buyer's cost of ownership'. The buyer did not ask about levies and did not read the association's minutes, which were available on request. She discovered the levy after completion and claims the clause was breached.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the buyer",
+        "argument": "The seller chose what to say. He described the repairs as finished and paid for while knowing another 22,000 bill was coming, and he signed a clause promising full disclosure. A statement that is true word by word can still be built to mislead, and this one was."
+      },
+      {
+        "id": "b",
+        "name": "For the seller",
+        "argument": "Everything the seller said was accurate: the repairs were completed and paid for. The minutes were available on request and the buyer never asked. Anyone buying in an association building knows that levies happen. The clause cannot make a seller answerable for what a buyer chose not to read."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on the buyer's claim that the disclosure clause was breached?",
+    "options": [
+      {
+        "id": "a",
+        "label": "No breach: every statement the seller made was true, and the buyer could have asked about the levy."
+      },
+      {
+        "id": "b",
+        "label": "No breach: the association's minutes were available, and a buyer who chooses not to read them cannot blame the seller."
+      },
+      {
+        "id": "c",
+        "label": "Breach: the clause required disclosure of all known material matters, and the pending levy was one, so true statements about completed repairs do not satisfy it."
+      },
+      {
+        "id": "d",
+        "label": "Breach only if the seller intended to deceive; the facts do not show intent, so the clause gives no remedy."
+      }
+    ],
+    "correctId": "c",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "clause",
+        "role": "deciding",
+        "label": "The contract promised disclosure of all known material matters, and the levy was known and material, so accurate statements about completed repairs do not satisfy that promise."
+      },
+      {
+        "id": "misleading",
+        "role": "acceptable",
+        "label": "Describing the repairs as completed and paid for gave the impression that the façade costs were over, and the seller knew otherwise."
+      },
+      {
+        "id": "true",
+        "role": "trap",
+        "label": "Every statement the seller made was accurate, and a seller who tells no lies has no case to answer."
+      },
+      {
+        "id": "inquiry",
+        "role": "trap",
+        "label": "The minutes were available and the buyer never asked, so she had the means to find out and bears the consequence."
+      },
+      {
+        "id": "intent",
+        "role": "trap",
+        "label": "A breach requires an intention to deceive, which the facts do not show, so the seller cannot be held to the clause."
+      },
+      {
+        "id": "tenure",
+        "role": "irrelevant",
+        "label": "The seller had owned the flat for fourteen years, which gave him long familiarity with the building."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "true"
+      ],
+      "b": [
+        "inquiry"
+      ],
+      "c": [
+        "clause",
+        "misleading"
+      ],
+      "d": [
+        "intent"
+      ]
+    },
+    "trap": {
+      "type": "Truthful omission",
+      "note": "Literal truth feels like a defence, but a duty to disclose all material matters is measured against what was left out, not only against what was said."
+    },
+    "canonicalRatio": "The seller promised to disclose all known material matters, and the 22,000 levy was one; accurate statements about the completed repairs do not discharge that promise.",
+    "explanation": "The sale contract promised disclosure of all matters known to the seller that materially affect value or the buyer's cost of ownership. The seller knew of a 22,000 levy, about 7% of the 310,000 price, voted a month before signing, and described the façade work as completed and paid for. Each statement was true, but a promise of full disclosure is measured against what was left out, and the omission made a true statement misleading. Option a defends the seller by the accuracy of his words, which answers a different question from the one the clause asks. Option b places the duty to investigate on the buyer, but a clause obliging the seller to disclose would mean little if the buyer must still search for what the seller has agreed to reveal. Option d requires intent to deceive, which the clause does not mention; it turns on what the seller knew and whether it was material. The ruling would change if the levy had been disclosed in the documents the buyer received, or if the contract had not contained the clause."
+  },
+  {
+    "id": "court-t3-b2-03",
+    "kind": "court",
+    "difficulty": 3,
+    "category": "Fairness & Consistency",
+    "title": "The Moved Weights",
+    "context": "A city arts fund in Brisbane announced that applications would be 'scored on the following weights': artistic merit 50%, feasibility 30%, community reach 20%. After the committee scored every application, the highest-ranked was a large established company, with 80 for merit, 90 for feasibility and 60 for reach, giving 79.0. The runner-up was a small emerging group scoring 75, 65 and 90, giving 75.0. The chair, concerned that the fund should back newer groups, proposed new weights of 30%, 20% and 50%, and the committee adopted them. On the new weights the company scores 72.0 and the group 80.5, so the group received the grant. The company challenges the decision.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the company",
+        "argument": "The weights were published before anyone wrote an application, and applicants made choices on that basis. The committee looked at the scores, disliked the winner, and changed the formula until someone else won. That is not a scoring system; it is a decision in search of a justification."
+      },
+      {
+        "id": "b",
+        "name": "For the fund",
+        "argument": "The fund exists to develop new voices, and the committee remains free to say what it values. A formula is a tool for the committee, not a contract with applicants. The outcome fits the fund's purpose, and no applicant was deceived about what the fund was for."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on the company's challenge to the re-weighted result?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Re-weighting upheld: a fund may set its own priorities, and favouring emerging groups is a legitimate aim."
+      },
+      {
+        "id": "b",
+        "label": "Re-weighting not permitted: applicants prepared on the published weights, and weights chosen after seeing the scores cannot be separated from the outcome they produced."
+      },
+      {
+        "id": "c",
+        "label": "Re-weighting upheld: the committee has discretion over the final decision, and the published weights were only guidance."
+      },
+      {
+        "id": "d",
+        "label": "No ruling is possible without knowing whether the new weights were a better measure of the fund's purpose than the old ones."
+      }
+    ],
+    "correctId": "b",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "after-the-fact",
+        "role": "deciding",
+        "label": "The weights were changed after the scores were known, so they were chosen with the result in view, and applicants had prepared on the published weights."
+      },
+      {
+        "id": "published",
+        "role": "acceptable",
+        "label": "The fund announced that applications would be scored on the stated weights, and applicants relied on that announcement in deciding what to submit."
+      },
+      {
+        "id": "aim",
+        "role": "trap",
+        "label": "Supporting emerging groups is a legitimate aim of the fund, and a legitimate aim justifies the change."
+      },
+      {
+        "id": "discretion",
+        "role": "trap",
+        "label": "Committees have discretion over funding decisions, so the published weights were only guidance and could be changed."
+      },
+      {
+        "id": "better",
+        "role": "trap",
+        "label": "The new weights better reflect the fund's purpose, so the result is a better one even if the process was untidy."
+      },
+      {
+        "id": "budget",
+        "role": "irrelevant",
+        "label": "The fund's budget this year was smaller than last year, which put pressure on the committee."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "aim",
+        "better"
+      ],
+      "b": [
+        "after-the-fact",
+        "published"
+      ],
+      "c": [
+        "discretion"
+      ],
+      "d": [
+        "better"
+      ]
+    },
+    "trap": {
+      "type": "Post-hoc criteria",
+      "note": "Changing the measure after seeing the result lets the outcome choose the rule. A worthy aim does not make the process neutral, because the new weights cannot be separated from the result they were adopted to produce."
+    },
+    "canonicalRatio": "The weights were announced in advance and changed only after the scores revealed the winner, so the new formula cannot be separated from its result; a legitimate aim should have been announced beforehand.",
+    "explanation": "The weights were announced before applications were written, and applicants chose what to submit with them in mind. The committee changed them after the scores were known and after seeing who would win, which makes the new weights inseparable from the result they produced: the same applicants, scored on the new weights, gave the opposite order. A scoring system that can be rewritten once the results are visible stops measuring anything. Option a defends the aim, but a legitimate aim could have been announced in advance; the fault lies in the timing, not the aim. Option c treats the weights as guidance, contradicting an announcement that applications would be scored on them. Option d asks whether the new weights are better, which is not the question: even a better formula adopted after the results cannot be treated as neutral. The ruling would change if the weights had been published as provisional, or if the fund had reopened the call with the new weights and invited fresh applications."
+  },
+  {
+    "id": "court-t3-b2-04",
+    "kind": "court",
+    "difficulty": 3,
+    "category": "Responsibility & Causation",
+    "title": "The Silent Alarm",
+    "context": "A fishing co-operative's freezer room failed overnight and its stock, valued at 64,000, thawed. The service contractor's own visit report had noted a worn compressor belt and promised a replacement, which it never fitted. The belt snapped at 01:00. Two weeks earlier, the co-operative's staff had switched off the room's temperature alarm because it produced frequent false alerts. With the alarm active, the on-call manager would have been phoned at 01:40 and could have moved the stock to a neighbour's freezer before it thawed. An engineer's report concludes that the loss would have been avoided if either the belt had been replaced or the alarm had been working. The co-operative claims the full value of the stock from the contractor.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the co-operative",
+        "argument": "The contractor wrote down that the belt was worn, promised to replace it, and did nothing. Everything that followed began with that failure. Without it there would have been no breakdown, no thaw and no claim. The contractor should pay for the stock in full."
+      },
+      {
+        "id": "b",
+        "name": "For the contractor",
+        "argument": "The co-operative switched off its own alarm and left a freezer full of stock unmonitored. Its staff chose to remove the one safeguard that would have raised the alarm in time. A business that disables its own warning system cannot ask someone else to pay for what it let happen."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on the co-operative's claim for the full value of the stock?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Contractor liable in full: but for the broken belt there would have been no failure, so its breach is the cause of the loss."
+      },
+      {
+        "id": "b",
+        "label": "Co-operative bears the whole loss: it disabled its own alarm after the contractor's last visit, so its decision was the real cause."
+      },
+      {
+        "id": "c",
+        "label": "Contractor liable in full: the alarm gave false alerts, so switching it off was reasonable and cannot count against the co-operative."
+      },
+      {
+        "id": "d",
+        "label": "Responsibility is shared: the loss needed both the unreplaced belt and the disabled alarm, so neither party can treat the other's lapse as the whole cause."
+      }
+    ],
+    "correctId": "d",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "both-necessary",
+        "role": "deciding",
+        "label": "An engineer found the loss would have been avoided if either the belt had been replaced or the alarm had worked, so each lapse was necessary to the loss and neither is the sole cause."
+      },
+      {
+        "id": "own-decision",
+        "role": "acceptable",
+        "label": "The co-operative's staff disabled the alarm on their own decision, which makes that lapse the co-operative's responsibility even though the contractor's lapse started the failure."
+      },
+      {
+        "id": "but-for",
+        "role": "trap",
+        "label": "But for the broken belt there would have been no loss, so the contractor's breach is the cause and the only one that counts."
+      },
+      {
+        "id": "timing",
+        "role": "trap",
+        "label": "The contractor's lapse came first in time, so it is the original cause and the later lapse does not reduce its responsibility."
+      },
+      {
+        "id": "false-alerts",
+        "role": "trap",
+        "label": "The alarm produced frequent false alerts, so disabling it was reasonable and cannot count against the co-operative."
+      },
+      {
+        "id": "value",
+        "role": "irrelevant",
+        "label": "The stock was worth 64,000, which is a large sum for a small co-operative."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "but-for",
+        "timing"
+      ],
+      "b": [
+        "own-decision"
+      ],
+      "c": [
+        "false-alerts"
+      ],
+      "d": [
+        "both-necessary",
+        "own-decision"
+      ]
+    },
+    "trap": {
+      "type": "Single-cause thinking",
+      "note": "Asking who started the chain suggests a single culprit. When each of two lapses was needed for the loss, responsibility has to be divided rather than assigned to whichever lapse came first."
+    },
+    "canonicalRatio": "Either lapse alone would have prevented the loss, so each was necessary to it; neither the contractor nor the co-operative can treat the other's lapse as the whole cause.",
+    "explanation": "The engineer's finding settles the causal structure: either lapse alone would have prevented the loss, so each was necessary to it. When two failures are both needed for a loss, neither can be the sole cause, and the claim can be neither met in full by one side nor defeated by it. The contractor's lapse started the failure and the co-operative's lapse removed the safeguard that would have contained it, so responsibility is shared and the claim reduced to reflect the co-operative's part. Option a uses 'but for' as if only one cause could pass the test, when here both do. Option b ignores the contractor's unkept promise. Option c treats the reason for the switch-off as a justification, but false alerts called for fixing the alarm or arranging other cover, not for leaving the room unmonitored. The ruling would change if the alarm had been disabled on the contractor's advice, or if the engineer had found that the stock could not have been saved even with the alarm working."
+  },
+  {
+    "id": "court-t4-b2-01",
+    "kind": "court",
+    "difficulty": 4,
+    "category": "Evidence & Proof",
+    "title": "One in Five Thousand",
+    "context": "A burglary at a laboratory-supply store left behind a torn work glove. A forensic report states that the glove's dye signature is found in about one in 5,000 gloves of its type sold in the region. Police searched the sales records of the glove's only regional distributor, which show the dye batch each of 25,000 buyers received, and arrested an electrician whose purchase matches the signature. He says he was at home that night. No witness, camera or other evidence places him at the store, and nothing from the store was found in his possession. The prosecution relies on the report alone. The standard of proof is beyond reasonable doubt.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the prosecution",
+        "argument": "The scientist reports that this dye signature appears in one pair of gloves in five thousand. The accused owns that pair. The chance that an innocent man would own those gloves is one in five thousand, and the court should not let a technicality about search pools excuse a burglar."
+      },
+      {
+        "id": "b",
+        "name": "For the defence",
+        "argument": "Gloves are bought by thousands of people, and the accused is an electrician who wears them every day. A match to a glove proves only that he owns gloves. The report is worthless against him, and the court should give it no weight. Nobody saw him anywhere near the store."
+      }
+    ],
+    "prompt": "On this evidence, how do you rule on the charge?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Guilt proven: a one-in-5,000 match rate means there is only a one-in-5,000 chance that an innocent person would own such gloves."
+      },
+      {
+        "id": "b",
+        "label": "Guilt proven: the expert is neutral, the statistic is correctly stated, and the accused offers no explanation for owning the gloves."
+      },
+      {
+        "id": "c",
+        "label": "Not proven: gloves are widely sold, so any match is weak evidence and the report should carry no weight at all."
+      },
+      {
+        "id": "d",
+        "label": "Not proven: with 25,000 buyers searched at a one-in-5,000 match rate, about five other buyers would match by chance, so the match leaves him one of roughly six."
+      }
+    ],
+    "correctId": "d",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "pool",
+        "role": "deciding",
+        "label": "The match rate must be applied to the pool that was searched: 25,000 buyers at one in 5,000 gives about five innocent matches, so the match narrows the field to roughly six people."
+      },
+      {
+        "id": "alone",
+        "role": "acceptable",
+        "label": "No other evidence connects the accused to the store, so the match alone must carry the case, and it cannot."
+      },
+      {
+        "id": "inverted",
+        "role": "trap",
+        "label": "A one-in-5,000 chance of a random match means a one-in-5,000 chance that the accused is innocent."
+      },
+      {
+        "id": "no-weight",
+        "role": "trap",
+        "label": "Gloves are widely sold, so the match is worthless and should be given no weight at all."
+      },
+      {
+        "id": "explain",
+        "role": "trap",
+        "label": "The accused offers no explanation for owning the gloves, and an innocent person would have one."
+      },
+      {
+        "id": "night",
+        "role": "irrelevant",
+        "label": "The burglary took place at night, when the store was unattended and few people were nearby."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "inverted"
+      ],
+      "b": [
+        "explain"
+      ],
+      "c": [
+        "no-weight"
+      ],
+      "d": [
+        "pool",
+        "alone"
+      ]
+    },
+    "trap": {
+      "type": "Prosecutor's fallacy",
+      "note": "The match rate says how often an innocent person would match, not how likely a matching person is to be innocent. The two differ whenever many people were checked, because chance matches then appear."
+    },
+    "canonicalRatio": "A one-in-5,000 match rate applied to 25,000 searched buyers yields about five chance matches, so the match leaves the accused as one of roughly six, far short of proof beyond reasonable doubt.",
+    "explanation": "The report says one glove in 5,000 carries the signature. That is how often a random glove would match, not the chance that a matching owner is innocent. Police found the accused by searching 25,000 buyers, and at one in 5,000 about five other buyers would match by chance, alongside the actual wearer if he was among them. A match narrows 25,000 people to roughly six, and with no other evidence the accused is one of about six equally supported suspects, nowhere near proof beyond reasonable doubt. Option a reads the match rate as the chance of innocence, a common error known as the prosecutor's fallacy. Option b leans on the absence of an explanation, but owning gloves needs none. Option c goes too far: the match does narrow the field from 25,000 to about six, so it has real weight, just not enough alone. The ruling would change if any independent evidence connected him to the store, or if the search had been limited to a small group already suspected."
+  },
+  {
+    "id": "court-t4-b2-02",
+    "kind": "court",
+    "difficulty": 4,
+    "category": "Evidence & Proof",
+    "title": "The Logo at Dusk",
+    "context": "A cyclist was hit by a delivery van that drove off. Two firms, Q and R, run all the delivery vans in the district: 10% are Q's and 90% are R's, and vans of both firms are on the road the same hours with similar accident rates. A witness who saw the van briefly at dusk says the logo was Q's. Later tests under similar lighting showed that she names the correct firm's logo 85% of the time, whichever firm it is. There is no camera footage and no other evidence. The cyclist sues Q alone for 20,000. The court must decide on the balance of probabilities, meaning whether it is more likely than not that the van was Q's.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For firm Q",
+        "argument": "The only evidence is one witness at dusk, a brief glimpse of a logo. Firm Q runs a tenth of the vans in the district. Honest testimony cannot support a finding against a defendant on those figures, and the cyclist has produced nothing else. The cyclist chose to sue Q alone."
+      },
+      {
+        "id": "b",
+        "name": "For the cyclist",
+        "argument": "The witness has no connection to either firm and is right 85 times in a hundred. Nobody has contradicted her. The cyclist was left on the road with a broken wrist, and a court that sets aside a reliable and honest witness leaves victims with no remedy."
+      }
+    ],
+    "prompt": "On this evidence, how do you rule on the cyclist's claim against firm Q?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Claim succeeds: the witness is 85% reliable, so it is 85% likely that the van was Q's."
+      },
+      {
+        "id": "b",
+        "label": "Claim not made out: with Q running only 10% of the vans, the chance the van was Q's is about 39%, below the 'more likely than not' threshold."
+      },
+      {
+        "id": "c",
+        "label": "Claim succeeds: honest testimony that nobody has contradicted must be accepted, and the cyclist has nothing else to rely on."
+      },
+      {
+        "id": "d",
+        "label": "Claim fails: an identification made at dusk is inherently unreliable, and no weight can be placed on it."
+      }
+    ],
+    "correctId": "b",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "base-rate",
+        "role": "deciding",
+        "label": "Q runs only 10% of the vans, so even a witness who is right 85% of the time names Q wrongly more often than rightly; the chance the van was Q's is about 39%."
+      },
+      {
+        "id": "threshold",
+        "role": "acceptable",
+        "label": "The standard is more likely than not, so a probability below one half on the only evidence fails that standard even though the witness is honest and fairly reliable."
+      },
+      {
+        "id": "reliability",
+        "role": "trap",
+        "label": "The witness is 85% reliable, so the identification is 85% likely to be correct."
+      },
+      {
+        "id": "unrebutted",
+        "role": "trap",
+        "label": "The testimony is honest and unrebutted, and a court must accept honest evidence that nobody has contradicted."
+      },
+      {
+        "id": "dusk",
+        "role": "trap",
+        "label": "A glimpse at dusk is inherently unreliable, so the court should give the identification no weight at all."
+      },
+      {
+        "id": "injury",
+        "role": "irrelevant",
+        "label": "The cyclist suffered a broken wrist and missed six weeks of work."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "reliability"
+      ],
+      "b": [
+        "base-rate",
+        "threshold"
+      ],
+      "c": [
+        "unrebutted",
+        "injury"
+      ],
+      "d": [
+        "dusk"
+      ]
+    },
+    "trap": {
+      "type": "Base-rate neglect",
+      "note": "The witness's accuracy is the chance she names correctly given the true firm, not the chance the firm is right given what she said. When one firm is rare, wrong namings of it can outnumber right ones."
+    },
+    "canonicalRatio": "Because Q runs only a tenth of the vans, an 85%-reliable identification of Q is right only about 39% of the time, short of the more-likely-than-not standard the claim requires.",
+    "explanation": "Take 1,000 hit-and-run incidents involving these vans. About 100 involve a Q van and 900 an R van. The witness names Q correctly for 85 of the Q incidents and wrongly for 15% of the R incidents, which is 135. So she names Q in 220 incidents, and only 85 of them involve a Q van: about 39%. Her reliability is the chance she names correctly given the true firm, not the chance the firm is right given what she said. With Q running only 10% of the vans, the base rate pulls the probability below one half, and the standard is more likely than not. Option a reads reliability as the answer. Option c treats honest, unrebutted testimony as binding regardless of its strength. Option d overcorrects: the identification has real weight, since it raises Q from 10% to about 39%, but not enough alone. The ruling would change if Q ran about half the vans, if the witness were much more reliable, or if any other evidence pointed to Q."
+  },
+  {
+    "id": "court-t4-b2-03",
+    "kind": "court",
+    "difficulty": 4,
+    "category": "Evidence & Proof",
+    "title": "Twenty of Two Hundred",
+    "context": "A city transport authority contracted a firm to run a fleet of 200 buses, which average nine years old. The contract allows termination if more than 10% of the fleet is found with defective brakes. On one day, inspectors drew 20 buses by random-number draw from the fleet list and tested their brakes: 9 failed. The authority terminated the contract. The firm says that the authority tested only 20 of the 200 buses, that it cannot know the failure rate for the other 180, and that the 11 buses that passed show its maintenance is sound. No earlier inspection data exist, and nothing suggests the inspectors knew which buses were in worse condition.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the firm",
+        "argument": "Twenty buses are a tenth of the fleet. The authority tested nobody else, and eleven of the twenty passed. A contract worth millions has been ended on a morning's sample, and the firm should not lose it without a full inspection of every vehicle. The authority could have tested every bus within a week."
+      },
+      {
+        "id": "b",
+        "name": "For the authority",
+        "argument": "Nine failures in twenty is 45%, more than four times the limit the firm agreed to. The buses were chosen at random, so the sample is fair. Public safety cannot wait for an inspection of every bus before a contractor with failing brakes is stopped."
+      }
+    ],
+    "prompt": "On this evidence, how do you rule on the firm's challenge to the termination?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Termination not justified: a sample of 20 buses is too small to say anything reliable about a fleet of 200."
+      },
+      {
+        "id": "b",
+        "label": "Termination not justified: 11 of the 20 sampled buses passed, so most of the fleet is sound and the firm is meeting the contract."
+      },
+      {
+        "id": "c",
+        "label": "Termination justified: if the fleet were within the 10% limit, a random sample of 20 would almost never show nine failures, so breach is far more likely than not."
+      },
+      {
+        "id": "d",
+        "label": "No ruling is possible: the sample shows what happened to twenty buses, and the true failure rate across the fleet remains unknown."
+      }
+    ],
+    "correctId": "c",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "improbable",
+        "role": "deciding",
+        "label": "If the fleet were within the 10% limit, a random sample of 20 would show nine or more failures fewer than once in ten thousand times, so breach is far more likely than not."
+      },
+      {
+        "id": "random",
+        "role": "acceptable",
+        "label": "The buses were chosen by random draw, so the sample was not steered toward suspect vehicles and its result can fairly be applied to the whole fleet."
+      },
+      {
+        "id": "small",
+        "role": "trap",
+        "label": "A sample of 20 buses is too small to say anything reliable about a fleet of 200."
+      },
+      {
+        "id": "majority",
+        "role": "trap",
+        "label": "Eleven of the twenty sampled buses passed, so most of the fleet is sound and the firm is meeting the contract."
+      },
+      {
+        "id": "unknown",
+        "role": "trap",
+        "label": "The authority has shown only what happened to twenty buses, so the true failure rate across the fleet remains unknown and no breach is proven."
+      },
+      {
+        "id": "age",
+        "role": "irrelevant",
+        "label": "The fleet's buses average nine years old, which is typical for city fleets."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "small"
+      ],
+      "b": [
+        "majority"
+      ],
+      "c": [
+        "improbable",
+        "random"
+      ],
+      "d": [
+        "unknown"
+      ]
+    },
+    "trap": {
+      "type": "Sample-size reflex",
+      "note": "A small sample feels untrustworthy, but what matters is how unlikely the result would be if the claim were false. A random sample can be decisive when the result lies far from what the claim predicts."
+    },
+    "canonicalRatio": "A random sample of 20 showing nine failures would almost never occur if the fleet were within the 10% limit, so breach is far more likely than not even though the whole fleet was not tested.",
+    "explanation": "The buses were chosen by random draw, so the sample was not steered toward suspect vehicles. Even if the fleet were exactly at the contract's limit of 10%, which means 20 defective buses out of 200, drawing nine or more defective ones in a sample of 20 would happen fewer than once in ten thousand times, and a lower failure rate would make it rarer still. A fleet at or under the limit would almost never produce this sample, so breach is far more likely than not. Option a says twenty buses cannot speak for two hundred, but a random sample is exactly the tool for that, and the result here lies far beyond what the limit predicts. Option b counts passes as if the limit were a majority, when it is 10%. Option d demands a certainty the standard does not require: breach need only be more likely than not. The ruling would change if the buses had been picked by suspicion or convenience, or if the contract had required every bus to be tested."
+  },
+  {
+    "id": "court-t4-b2-04",
+    "kind": "court",
+    "difficulty": 4,
+    "category": "Authority & Proportionality",
+    "title": "The Forty Per Cent Line",
+    "context": "A university's misconduct panel found a master's student guilty of plagiarism after similarity software reported a 46% overlap between her thesis and other sources. The university's regulations say the panel must be 'satisfied on the evidence that the student presented another person's work as her own'. An internal practice note says reports above 40% are presumed to be plagiarism unless the student proves otherwise. The report's own breakdown attributes 31 of the 46 points to quoted passages with citations, 9 points to a standard description of a published method, and 6 points to text with no obvious source. The student pointed to the citations and the method passage; the panel treated the 40% figure as conclusive and did not examine the matched passages. The student appeals.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the university",
+        "argument": "A similarity score above 40% is far beyond anything innocent work produces, and the practice note exists so that panels do not have to trawl through every thesis. The student is the only person who knows where her words came from, and it is fair to ask her to account for them."
+      },
+      {
+        "id": "b",
+        "name": "For the student",
+        "argument": "The software counts every quotation and every standard method description as overlap. The panel looked at one number and never looked at the passages. She cited every source she used, and a finding of dishonesty cannot rest on a figure that nobody read behind. A process that skipped the evidence cannot be rescued by a threshold."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on the student's appeal against the finding?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Finding set aside: the regulations required the panel to be satisfied on the evidence, and it presumed copying from a score and asked the student to disprove it."
+      },
+      {
+        "id": "b",
+        "label": "Finding upheld: the student gave no explanation of the unexplained overlap, so the panel was entitled to find copying."
+      },
+      {
+        "id": "c",
+        "label": "Finding upheld: universities may set reasonable thresholds, and 46% is well above the 40% line the panel applied."
+      },
+      {
+        "id": "d",
+        "label": "Finding set aside: similarity software is unreliable and cannot be used as evidence of plagiarism at all."
+      }
+    ],
+    "correctId": "a",
+    "intuitiveWrongId": "c",
+    "factors": [
+      {
+        "id": "burden-misplaced",
+        "role": "deciding",
+        "label": "The regulations required the panel to be satisfied that the student passed off another's work as her own; it instead presumed copying from a score and expected her to disprove it."
+      },
+      {
+        "id": "overlap",
+        "role": "acceptable",
+        "label": "A similarity score measures how much text matches other sources, including quotations and standard method wording, so it cannot by itself show that work was passed off as the student's own."
+      },
+      {
+        "id": "threshold",
+        "role": "trap",
+        "label": "Universities may set reasonable thresholds, and 46% is clearly above the 40% line the panel applied."
+      },
+      {
+        "id": "no-explanation",
+        "role": "trap",
+        "label": "The student gave no explanation of the six unexplained points, so the panel was entitled to infer copying."
+      },
+      {
+        "id": "software",
+        "role": "trap",
+        "label": "Similarity software is unreliable, so its output should be excluded from the evidence altogether."
+      },
+      {
+        "id": "length",
+        "role": "irrelevant",
+        "label": "The thesis ran to 18,000 words, which makes it a major piece of work."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "burden-misplaced",
+        "overlap"
+      ],
+      "b": [
+        "no-explanation"
+      ],
+      "c": [
+        "threshold"
+      ],
+      "d": [
+        "software"
+      ]
+    },
+    "trap": {
+      "type": "Reversed burden",
+      "note": "A presumption drawn from a number turns an indicator into a verdict and requires the accused to disprove it. A threshold can trigger an inquiry, but it cannot replace the finding that the regulations require."
+    },
+    "canonicalRatio": "The regulations required the panel to be satisfied on evidence; it instead presumed plagiarism from a score and reversed the burden, without examining the passages that made up most of the overlap.",
+    "explanation": "The regulations require the panel to be satisfied on the evidence that the student passed off another's work as her own. A similarity score measures how much text matches other sources, including properly cited quotations and standard method wording. The report's own breakdown attributes 40 of the 46 points to those two kinds of overlap, leaving 6 points that no one examined. The panel instead applied a presumption from the number and required the student to disprove it, which reverses the burden the regulations set. Option b treats her failure to explain as an admission, but she did explain most of the overlap, and the panel declined to look. Option c lets a threshold decide the case, whereas a figure can prompt an inquiry but cannot replace the finding the regulations require. Option d goes too far, since the software's output is useful evidence once the matched passages are examined. The finding is set aside and sent back, and a proper examination might still find misconduct in the six unexplained points."
+  },
+  {
+    "id": "court-t5-b2-01",
+    "kind": "court",
+    "difficulty": 5,
+    "category": "Evidence & Proof",
+    "title": "The Armchair Fire",
+    "context": "A landlord claims that a tenant's cigarette caused a fire that burned out a rented flat. The fire investigator's report states that the fire began at an armchair standing next to a wall socket. The socket and the wiring behind it were installed by the landlord and last inspected eleven years ago. The investigator found that a dropped cigarette and an electrical fault at the socket were equally consistent with the burn pattern and could not rank them. The tenant smokes. When first interviewed she said she was at home that evening, but she later admitted she had been at a friend's house until 22:00, shortly before the fire was reported at 22:40. The landlord must show that it is more likely than not that the tenant caused the fire.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the landlord",
+        "argument": "The tenant smokes, the fire began beside her armchair, and she lied to the investigator about where she was that evening. A person with nothing to hide does not change her story. The court should draw the obvious conclusion from her own conduct and find that her cigarette started the fire."
+      },
+      {
+        "id": "b",
+        "name": "For the tenant",
+        "argument": "The landlord's own wiring sat behind the socket, last inspected eleven years ago. The investigator could not say it was a cigarette. The tenant was frightened and confused when first questioned, and an old wiring fault is at least as likely. The landlord should bear the loss of his own flat."
+      }
+    ],
+    "prompt": "On this evidence, how do you rule on the landlord's claim against the tenant?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Claim established: the tenant lied about where she was, and a person who lies about her evening has something to hide."
+      },
+      {
+        "id": "b",
+        "label": "Claim not established: the investigator found a cigarette and an electrical fault equally likely, and her false account does not show how the fire started."
+      },
+      {
+        "id": "c",
+        "label": "Claim established: she smokes and the fire began beside her armchair, so the circumstances make a cigarette the likelier cause."
+      },
+      {
+        "id": "d",
+        "label": "Claim fails and the landlord must pay her losses: the wiring was eleven years old and uninspected, so the fire must be presumed to be an electrical fault."
+      }
+    ],
+    "correctId": "b",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "burden-unmet",
+        "role": "deciding",
+        "label": "The landlord must show a cigarette more likely than not caused the fire, and the investigator found the two causes equally consistent, so the claim stops there."
+      },
+      {
+        "id": "lie-not-cause",
+        "role": "acceptable",
+        "label": "The tenant's inconsistent account bears on her credibility but does not show how the fire started, so it cannot fill the gap in the cause."
+      },
+      {
+        "id": "lied",
+        "role": "trap",
+        "label": "A person who lied about her evening has something to hide, and the court may infer guilt from the lie."
+      },
+      {
+        "id": "smoker",
+        "role": "trap",
+        "label": "The tenant smokes and the fire began beside her armchair, so the circumstances point toward a cigarette."
+      },
+      {
+        "id": "old-wiring",
+        "role": "trap",
+        "label": "The wiring was eleven years old and uninspected, so the landlord's own fault must be presumed to have caused the fire."
+      },
+      {
+        "id": "insurer",
+        "role": "irrelevant",
+        "label": "The landlord's insurer has already paid for the building damage, which is a matter between the landlord and the insurer."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "lied"
+      ],
+      "b": [
+        "burden-unmet",
+        "lie-not-cause"
+      ],
+      "c": [
+        "smoker"
+      ],
+      "d": [
+        "old-wiring"
+      ]
+    },
+    "trap": {
+      "type": "Consciousness of guilt",
+      "note": "A false account makes a witness less credible, but it does not supply the missing link in the claimant's case. The lie may suggest she is hiding something; it does not show what started the fire."
+    },
+    "canonicalRatio": "The investigator found a cigarette and a wiring fault equally consistent with the fire, so the landlord has not shown the cigarette more likely than not; her lie bears on credibility but cannot supply the missing cause.",
+    "explanation": "The landlord carries the burden of showing that a cigarette more likely than not caused the fire. The only expert evidence found a cigarette and a fault at the landlord's own socket equally consistent with the burn pattern, so on the cause the evidence stands at one half, which does not meet a standard of more likely than not. The tenant's false account of her evening goes to her credibility, but a lie about where she was does not show how the fire began, and it cannot supply the missing link. Option a treats the lie as proof. Option c turns a circumstance shared by both explanations into support for one: the armchair stood beside the socket, so its position favours neither. Option d makes the opposite error of presuming a fault from the age of the wiring, when nothing shows one. The claim is simply not established, which is different from finding that the tenant is innocent or that the landlord is at fault. The ruling would change if the investigator could rank the causes, or if other evidence placed a lit cigarette at the armchair."
+  },
+  {
+    "id": "court-t5-b2-02",
+    "kind": "court",
+    "difficulty": 5,
+    "category": "Evidence & Proof",
+    "title": "Which Group",
+    "context": "An endurance athlete received a ban after a doping test came back positive. The test flags 95% of athletes who have doped and falsely flags 1% of those who have not. The tribunal's rules say it may impose a ban only if satisfied that doping is at least 90% likely. An anonymous survey by the sport's federation estimates that 2% of all competitors in the sport dope, and 20% among elite marathon runners. The athlete is an elite marathon runner. Neither side disputes the survey's accuracy; they dispute which group is the right comparison. The positive result is the only evidence, and she says she has never doped.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the federation",
+        "argument": "The test catches almost every doper and falsely flags only one clean athlete in a hundred. She is an elite marathon runner, and the federation's own survey shows that doping in that group is ten times as common as in the sport at large. The tribunal should compare her with her own kind."
+      },
+      {
+        "id": "b",
+        "name": "For the athlete",
+        "argument": "The only fair starting point is the whole sport, where very few athletes dope. A ban ends a career, and it rests on one test that is wrong about one clean athlete in a hundred. Choosing a narrower group simply because it produces a higher figure is selecting the answer."
+      }
+    ],
+    "prompt": "On this evidence, how do you rule on the athlete's appeal against the ban?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Appeal dismissed: she belongs to the group of elite marathon runners, where a positive result makes doping about 96% likely, above the 90% required."
+      },
+      {
+        "id": "b",
+        "label": "Appeal allowed: at the sport-wide figure of 2%, a positive result makes doping only about 66% likely, below the 90% the rules require."
+      },
+      {
+        "id": "c",
+        "label": "Appeal allowed: any test that falsely flags 1% of clean athletes will sanction innocent people, so a positive result alone cannot support a ban."
+      },
+      {
+        "id": "d",
+        "label": "Appeal dismissed: the test catches 95% of dopers and falsely flags only 1% of clean athletes, so she is 99% likely to have doped."
+      }
+    ],
+    "correctId": "a",
+    "intuitiveWrongId": "d",
+    "factors": [
+      {
+        "id": "relevant-class",
+        "role": "deciding",
+        "label": "The athlete belongs to the elite marathon group where 20% dope, and nothing shows she differs from it, so that group, not the sport-wide figure, is the proper comparison."
+      },
+      {
+        "id": "numbers",
+        "role": "acceptable",
+        "label": "With 95% sensitivity, a 1% false-positive rate and 20% prevalence, a positive result makes doping about 96% likely, above the 90% required."
+      },
+      {
+        "id": "wide",
+        "role": "trap",
+        "label": "The sport-wide prevalence of 2% is the neutral starting point, since it assumes nothing about the athlete's category."
+      },
+      {
+        "id": "accuracy",
+        "role": "trap",
+        "label": "The test is 95% sensitive with a 1% false-positive rate, so the athlete is 99% likely to be guilty."
+      },
+      {
+        "id": "mass",
+        "role": "trap",
+        "label": "A 1% false-positive rate means some clean athletes will be sanctioned each year, so no test result alone should support a ban."
+      },
+      {
+        "id": "climate",
+        "role": "irrelevant",
+        "label": "The race was held in a warm climate, which affects finishing times."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "relevant-class",
+        "numbers"
+      ],
+      "b": [
+        "wide"
+      ],
+      "c": [
+        "mass"
+      ],
+      "d": [
+        "accuracy"
+      ]
+    },
+    "trap": {
+      "type": "Reference-class error",
+      "note": "The same positive result carries different weight depending on how common doping is in the group the athlete belongs to. Choosing the group is a judgement, and the narrowest relevant group with reliable data is the better guide."
+    },
+    "canonicalRatio": "She belongs to the elite marathon group where doping is common, and nothing makes her unlike it, so the positive result makes doping about 96% likely there, above the tribunal's 90% requirement.",
+    "explanation": "The same positive result carries different weight depending on how common doping is in the group the athlete belongs to. Among 1,000 elite marathon runners where 20% dope, about 190 of the 200 dopers test positive and 8 of the 800 clean runners are falsely flagged, so about 190 of 198 positives, or 96%, are dopers. At the sport-wide figure of 2%, 19 of 20 dopers test positive and about 10 of 980 clean athletes are flagged, so only about 66% of positives are dopers. Nothing suggests she differs from other elite marathon runners, and the narrowest relevant group with reliable data is a better guide than a broader average that includes sports where doping is rare. Option b uses that broader group. Option d inverts the test's accuracy: a 1% false-positive rate does not say how likely a positive result is to be correct. Option c would reject every test with a false-positive rate. The ruling would change if she showed some feature unlike elite marathon runners, such as a testing circumstance that raises false positives."
+  },
+  {
+    "id": "court-t5-b2-03",
+    "kind": "court",
+    "difficulty": 5,
+    "category": "Responsibility & Causation",
+    "title": "The Alternating Strips",
+    "context": "A farmer sues a seed supplier after a poor crop. Before any dispute, his agronomist sowed one field on a single day with alternating strips of the supplier's lot A and a lot B from another supplier, using the same machine, soil and irrigation, with both lots stored together since purchase. There were eight strips in all, four of each. She counted emergence in 100 seeds per strip. Lot A strips showed 50, 55, 49 and 54 emerged; lot B strips showed 90, 93, 91 and 90. The supplier says that correlation is not causation, that the agronomist is paid by the farmer, and that one field in one season proves nothing about its seed. It offers no test of its own and no other explanation for the gap.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the supplier",
+        "argument": "Correlation is not causation. The only person who counted the seeds is paid by the farmer, and one field in one season proves nothing about a seed lot. Farming is full of things that go wrong, and a poor result does not make the seed defective without more."
+      },
+      {
+        "id": "b",
+        "name": "For the farmer",
+        "argument": "The strips sat side by side, sown the same day with the same machine, and one lot did far worse than the other. The supplier has offered no data and no other explanation. A seller whose seed fails a fair test should answer for it, and the court should not hide behind slogans."
+      }
+    ],
+    "prompt": "On this evidence, how do you rule on the farmer's claim that lot A was defective?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Claim not established: the agronomist is paid by the farmer, and one field in one season cannot prove that the seed lot was at fault."
+      },
+      {
+        "id": "b",
+        "label": "Claim not established: the gap shows only a correlation between lot and emergence, and correlation does not show that the seed caused it."
+      },
+      {
+        "id": "c",
+        "label": "Claim established only if the farmer also shows that drought or soil conditions did not affect the strips; the trial leaves that open."
+      },
+      {
+        "id": "d",
+        "label": "Claim established: the strips differed only in the seed lot, so the consistent gap in emergence is attributable to lot A."
+      }
+    ],
+    "correctId": "d",
+    "intuitiveWrongId": "b",
+    "factors": [
+      {
+        "id": "controlled",
+        "role": "deciding",
+        "label": "The strips alternated in one field on one day with the same machine, soil, irrigation and storage, so the only systematic difference between them was the seed lot."
+      },
+      {
+        "id": "consistent",
+        "role": "acceptable",
+        "label": "Every lot A strip emerged below every lot B strip, by at least 35 points, so the gap is consistent across all eight strips and unlikely to be chance."
+      },
+      {
+        "id": "paid",
+        "role": "trap",
+        "label": "The agronomist is paid by the farmer, so her figures cannot be relied upon."
+      },
+      {
+        "id": "correlation",
+        "role": "trap",
+        "label": "The result shows only a correlation, and correlation does not prove that the seed caused the poor emergence."
+      },
+      {
+        "id": "one-season",
+        "role": "trap",
+        "label": "A single field in one season proves nothing about the supplier's seed."
+      },
+      {
+        "id": "strain",
+        "role": "irrelevant",
+        "label": "The farmer's poor crop caused him serious financial strain, which the court should take into account."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "paid",
+        "one-season"
+      ],
+      "b": [
+        "correlation"
+      ],
+      "c": [],
+      "d": [
+        "controlled",
+        "consistent"
+      ]
+    },
+    "trap": {
+      "type": "Correlation reflex",
+      "note": "Citing correlation against causation is sound against uncontrolled observation, but it is a reflex when the design holds the other factors equal. The question is whether anything other than the seed differed between the strips."
+    },
+    "canonicalRatio": "The strips were alternated in one field on one day under the same conditions, so the only systematic difference was the seed lot, and the consistent gap is attributable to lot A.",
+    "explanation": "The strips alternate across the same field, sown on one day with one machine, one soil and one irrigation regime, with both lots stored together. The only systematic difference between the strips is the seed lot, so this is a controlled comparison, not a loose correlation. The result is also consistent: every lot A strip is lower than every lot B strip, by at least 35 points, which makes a chance difference very unlikely across eight strips. Option a attacks the agronomist's pay, but the figures were recorded before any dispute and can be checked, and the supplier has offered no data of its own. Option b treats any association as mere correlation, which is true of loose observation but not of a design that holds other factors equal. Option c asks the farmer to disprove factors the design already held constant. The 'one field, one season' point limits how far the result extends, not whether lot A underperformed here. The ruling would change if the strips had not been interleaved, if the lots had been stored differently, or if the supplier showed a cause unconnected with the seed."
+  },
+  {
+    "id": "court-t5-b2-04",
+    "kind": "court",
+    "difficulty": 5,
+    "category": "Fairness & Consistency",
+    "title": "Three Minutes",
+    "context": "A scholarship fund in Kuala Lumpur had one place left to award. Its published rules say that applications received after 17:00 on 30 June are not considered 'for any reason', and that the rule applies to every applicant. In the past five years it refused seven late applications, six of them with documented emergencies, and made no exceptions. This year an applicant filed at 17:03. Her records show a family medical emergency that afternoon, and the fund does not doubt it. She was the highest-scoring applicant overall. The fund rejected her application, and the place went to the next-ranked applicant. She challenges the rejection, noting that the fund lost nothing by three minutes' delay.",
+    "counsel": [
+      {
+        "id": "a",
+        "name": "For the applicant",
+        "argument": "Three minutes late, with a documented family emergency the fund itself accepts, and the highest score in the field. Nobody was harmed and the place was still open. A rule that serves no purpose in this case should give way to common sense and to the plain purpose of the fund, which is to reward merit."
+      },
+      {
+        "id": "b",
+        "name": "For the fund",
+        "argument": "The rule is published and says no exceptions for any reason. Seven earlier applicants were refused under it, and six had emergencies too. If the deadline bends for a sympathetic case, it will bend for the next one, and the fund will have to judge every story instead of applying one rule."
+      }
+    ],
+    "prompt": "On these facts, how do you rule on the applicant's challenge to the rejection?",
+    "options": [
+      {
+        "id": "a",
+        "label": "Challenge upheld: three minutes late with a documented emergency harms no one, and compassion should outweigh a rule that serves no purpose here."
+      },
+      {
+        "id": "b",
+        "label": "Challenge upheld for her alone: her emergency was documented and she scored highest, so these facts are exceptional enough for a one-off exception."
+      },
+      {
+        "id": "c",
+        "label": "Challenge dismissed: the published rule was applied to her as it was to seven earlier applicants, six with documented emergencies, and sympathy cannot justify treating her differently."
+      },
+      {
+        "id": "d",
+        "label": "Challenge upheld, and all seven earlier refusals must be reopened: a rule that is waived for one applicant cannot stand for the others."
+      }
+    ],
+    "correctId": "c",
+    "intuitiveWrongId": "a",
+    "factors": [
+      {
+        "id": "same-rule",
+        "role": "deciding",
+        "label": "The published rule applied to all applicants and was enforced against seven earlier applicants, six with documented emergencies, so waiving it for her would treat her better than they were treated."
+      },
+      {
+        "id": "no-discretion",
+        "role": "acceptable",
+        "label": "The rules allow no exception for any reason, so the fund had no discretion to exercise in her favour."
+      },
+      {
+        "id": "three-minutes",
+        "role": "trap",
+        "label": "Three minutes' delay harms no one, so a rule that serves no purpose in this case should give way."
+      },
+      {
+        "id": "highest",
+        "role": "trap",
+        "label": "She was the highest-scoring applicant, so merit should outweigh a technical lateness."
+      },
+      {
+        "id": "emergency",
+        "role": "trap",
+        "label": "Her emergency was documented and the fund does not doubt it, so the lateness was not her fault."
+      },
+      {
+        "id": "donor",
+        "role": "irrelevant",
+        "label": "The fund is financed by a private donor rather than by public money."
+      }
+    ],
+    "consistency": {
+      "a": [
+        "three-minutes",
+        "emergency"
+      ],
+      "b": [
+        "highest",
+        "emergency"
+      ],
+      "c": [
+        "same-rule",
+        "no-discretion"
+      ],
+      "d": []
+    },
+    "trap": {
+      "type": "Sympathy bias",
+      "note": "A sympathetic case invites an exception that would make the rule mean different things to different people. The fairness question is whether she is treated as the earlier applicants were."
+    },
+    "canonicalRatio": "The rule is published, allows no exception, and was enforced against seven earlier applicants, six with emergencies; waiving it for her would treat her better than they were treated.",
+    "explanation": "The rule is published, applies to every applicant, and allows no exception for any reason. Seven earlier applicants were refused under it, six of them with documented emergencies, so waiving it now would treat her better than they were treated for the same lateness. Her emergency is real and the fund accepts it, and her score was the highest, but neither is a ground the rule recognises, and the fund was entitled to apply the rule as written. Option a measures the rule by the harm of three minutes, but its function is to give a line that applies alike to all, and every late applicant could say the same. Option b asks for a one-off exception that only her circumstances would earn, leaving the earlier six refused for equally serious reasons. Option d would reopen refusals that are not before the tribunal and treats the rule as waived, which has not happened. The decision is hard but not unfair. The ruling would change if the fund's rules allowed exceptions, if the lateness had been caused by the fund's own system, or if the fund had made exceptions for others."
+  }
+]

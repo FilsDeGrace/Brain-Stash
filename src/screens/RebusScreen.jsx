@@ -25,8 +25,8 @@ export default function RebusScreen({ imageSrc, imageAlt, entryMode, wordLengths
       </>}
       {hintText && <div className="hint-reveal" role="status"><Icon name="eye" size={14}/><span>HINT: {hintText}</span></div>}
     </div>
-    {complete && <div className="rebus-success" role="status"><span className="success-seal"><Icon name="check" size={23}/></span><div><span className="eyebrow">PUZZLE SOLVED</span><h2>{answerText}</h2><p>{attempt === 'skipped' ? 'The answer is revealed below.' : 'Another pattern added to your mental toolkit.'}</p></div></div>}
-    {complete && <div className="explanation-note"><span className="eyebrow">THE REASONING</span><p>{explanation || 'Look for how the image arranges its words and shapes.'}</p></div>}
+    {complete && <div className="rebus-success" role="status"><span className="success-seal"><Icon name="check" size={23}/></span><div><span className="eyebrow">PUZZLE SOLVED</span><h2>{answerText}</h2><p>Another pattern added to your mental toolkit.</p></div></div>}
+    {complete && explanation && <div className="explanation-note"><span className="eyebrow">THE REASONING</span><p>{explanation}</p></div>}
     <div className="rebus-controls">{!complete ? <><button className="button button-quiet" onClick={onHint} disabled={hintsLeft <= 0 || locked || !canAffordHint} aria-label={canAffordHint ? `Use a hint for ${hintCost} XP` : `Need ${hintCost} XP to use a hint`}><Icon name="eye" size={16}/> Hint <span className="button-cost">{canAffordHint ? `−${hintCost} XP` : `Need ${hintCost} XP`} · {hintsLeft} left</span></button><button className="button button-quiet" onClick={onSkip} disabled={locked}>Skip <Icon name="arrow" size={15}/></button></> : <button className="button button-primary button-wide" onClick={onNext}>Next puzzle <Icon name="arrow" size={17}/></button>}</div>
   </section>;
 }

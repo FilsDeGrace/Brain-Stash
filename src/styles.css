@@ -40,6 +40,7 @@
 [data-mode="rebus"] { --mode-accent: var(--color-rebus); --timer-normal: var(--color-rebus); }
 [data-mode="stash"] { --mode-accent: var(--color-stash); --timer-normal: var(--color-stash); }
 [data-mode="traps"] { --mode-accent: var(--color-traps); --timer-normal: var(--color-traps); }
+[data-mode="court"] { --mode-accent: #9b8bb8; --timer-normal: #9b8bb8; }
 [data-mode] .round-progress > span { background: var(--mode-accent); }
 [data-mode] .question-label { color: var(--mode-accent); }
 [data-mode] .timer-wrap { color: var(--timer-normal); }
@@ -159,6 +160,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 500; }
 .compact-bottom svg { color: var(--bronze); }
 .mode-rebus .compact-bottom svg, .mode-rebus .mode-number { color: var(--terracotta); }
 .mode-traps .compact-bottom svg, .mode-traps .mode-number { color: #b36a70; }
+.mode-court .compact-bottom svg, .mode-court .mode-number { color: #9b8bb8; }
 .home-footnote { display: flex; align-items: center; gap: 8px; margin: 22px 0 0; padding-top: 13px; border-top: 1px solid rgba(185,147,86,.15); }
 .tiny-seal { color: var(--bronze); font-size: 18px; }
 .home-footnote p { flex: 1; margin: 0; color: #776d5d; font-family: var(--font-editorial); font-size: 12px; font-style: italic; }
@@ -548,3 +550,62 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 500; }
 @media (prefers-reduced-motion: reduce) {
   .archive-progress-track > span { transition: none; }
 }
+
+/* Deep Stash walkthroughs */
+.teach-section > p { margin: 7px 0 12px; }
+.teach-lesson h3 { margin: 16px 0 5px; color: var(--bronze); font-family: var(--font-body); font-size: 10px; font-weight: 750; letter-spacing: 1.2px; text-transform: uppercase; }
+.teach-lesson h3:first-child { margin-top: 12px; }
+.teach-lesson p { margin: 0; }
+.teach-lesson ul { margin: 0; padding-left: 18px; color: #c4b69e; font-size: 14px; line-height: 1.55; }
+.teach-lesson li { margin: 0 0 4px; }
+.teach-note, .insight-section .teach-note { margin: 14px 0 0; color: #827766; font-family: var(--font-body); font-size: 10px; letter-spacing: .4px; }
+.teach-diagnosis { margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(145,168,132,.25); }
+.teach-diagnosis p { margin: 0 0 8px; }
+.teach-diagnosis .teach-note { margin-top: 8px; }
+.teach-diagnosis .inline-error, .teach-diagnosis .entry-helper { text-align: left; }
+.teach-section .inline-error, .teach-section .entry-helper { margin: 10px 0 0; font-family: var(--font-body); font-size: 11px; line-height: 1.5; text-align: left; }
+
+
+/* The Court: authored case files and verdict review. */
+.court-screen .round-progress > span { background: #9b8bb8; }
+.court-heading .eyebrow { color: #b7a9d2; }
+.court-case-file { padding: 17px; border: 1px solid #605473; background: linear-gradient(135deg, #201c28, #19171d 74%); }
+.court-file-top { display: flex; justify-content: space-between; gap: 10px; color: #a89abd; font-size: 8px; font-weight: 750; letter-spacing: 1.1px; }
+.court-case-file h2 { margin: 14px 0 10px; font-size: 27px; line-height: 1.1; }
+.court-context, .court-counsel p, .court-ruling > p { color: #c4b9cc; font-size: 13px; line-height: 1.65; }
+.court-context { margin: 0; white-space: pre-line; }
+.court-rule { margin-top: 17px; padding: 13px 0 0; border-top: 1px solid rgba(183,169,210,.25); }
+.court-rule > span, .court-file-top span { overflow-wrap: anywhere; }
+.court-rule > span, .court-ratio > .eyebrow, .court-deciding-factor > .eyebrow, .court-trap-note > .eyebrow { color: #b7a9d2; font-size: 8px; font-weight: 750; letter-spacing: 1.1px; }
+.court-rule p { margin: 8px 0 0; font-family: var(--font-editorial); font-size: 18px; line-height: 1.4; }
+.court-counsel-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 12px 0 23px; }
+.court-counsel { padding: 13px; border: 1px solid var(--border); background: var(--surface); }
+.court-counsel .eyebrow { color: #a89abd; }
+.court-counsel p { margin: 8px 0 0; font-size: 12px; }
+.court-verdict-section { margin-top: 21px; }
+.court-verdict-section .section-heading { align-items: end; }
+.court-verdict-section h2 { margin: 4px 0 0; font-family: var(--font-display); font-size: 22px; }
+.court-options { display: grid; gap: 9px; }
+.court-option { display: grid; grid-template-columns: 28px 1fr auto; align-items: start; gap: 10px; width: 100%; padding: 13px 12px; border: 1px solid var(--border); background: var(--surface); text-align: left; font-size: 12px; line-height: 1.5; cursor: pointer; }
+.court-option:not(:disabled):hover { border-color: #8d7ba7; background: #211d28; }
+.court-option:disabled { opacity: 1; }
+.court-option-letter { display: grid; place-items: center; width: 25px; height: 25px; border: 1px solid #5b4e6c; color: #c1b0dc; font-family: var(--font-display); }
+.court-answer-correct { border-color: rgba(145,168,132,.7); background: rgba(145,168,132,.08); }
+.court-answer-wrong { border-color: rgba(207,121,103,.75); background: rgba(207,121,103,.07); }
+.court-ruling { margin-top: 20px; padding: 15px; border: 1px solid #5f526e; background: #1c1921; }
+.court-ruling-heading { display: flex; align-items: center; gap: 10px; color: #b7a9d2; }
+.court-ruling-heading h2 { margin: 3px 0 0; font-size: 22px; }
+.court-ruling > p { white-space: pre-line; }
+.court-ratio, .court-deciding-factor, .court-trap-note { margin-top: 13px; padding-top: 12px; border-top: 1px solid rgba(183,169,210,.2); }
+.court-ratio p, .court-deciding-factor p, .court-trap-note p { margin: 6px 0 0; color: var(--text); font-size: 12px; line-height: 1.6; }
+.court-factors-wrap { margin-top: 17px; }
+.court-factors { display: grid; gap: 8px; margin-top: 9px; }
+.court-factor { padding: 10px; border: 1px solid var(--border); background: rgba(0,0,0,.12); }
+.court-factor > span { color: #b7a9d2; font-size: 8px; font-weight: 750; letter-spacing: .8px; }
+.court-factor p { margin: 6px 0 0; color: #bfb4c4; font-size: 11px; line-height: 1.5; }
+.court-factor.factor-matches-verdict { border-color: #706185; background: rgba(155,139,184,.08); }
+.court-factor.factor-trap > span { color: #d18a85; }
+.court-factor.factor-irrelevant > span { color: #8a8278; }
+.court-consistency-note { color: var(--text-dim) !important; font-size: 10px !important; }
+.court-navigation { display: flex; justify-content: space-between; gap: 10px; margin: 17px 0 8px; }
+@media (max-width: 460px) { .court-counsel-grid { grid-template-columns: 1fr; } .court-option { font-size: 11px; } .court-case-file { padding: 14px; } .court-navigation .button { padding-inline: 10px; } }

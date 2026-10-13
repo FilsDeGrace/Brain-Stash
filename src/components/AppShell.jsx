@@ -3,13 +3,13 @@ import Icon, { BrandMark } from './Icons.jsx';
 
 const navItems = [
   { id: '/', label: 'Home', icon: 'home' },
-  { id: '/maths', label: 'Play', icon: 'play' },
+  { id: '/play', label: 'Play', icon: 'play' },
   { id: '/collection', label: 'Collection', icon: 'collection' },
   { id: '/profile', label: 'Profile', icon: 'user' },
 ];
 
 export default function AppShell({ children, route, progress, onNavigate, onSettings, showNav = true, backLabel = null, onBack = null }) {
-  const active = route.startsWith('/maths') || route.startsWith('/rebus') || route.startsWith('/traps') || route.startsWith('/fallacies') || route.startsWith('/stash') ? '/maths' : route.startsWith('/collection') ? '/collection' : route.startsWith('/profile') || route.startsWith('/settings') ? '/profile' : '/';
+  const active = route.startsWith('/play') || route.startsWith('/maths') || route.startsWith('/rebus') || route.startsWith('/traps') || route.startsWith('/fallacies') || route.startsWith('/court') || route.startsWith('/stash') ? '/play' : route.startsWith('/collection') ? '/collection' : route.startsWith('/profile') || route.startsWith('/settings') ? '/profile' : '/';
   return <div className="app-frame">
     <header className="topbar">
       <div className="topbar-brand">

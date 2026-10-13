@@ -13,3 +13,14 @@ export function getUnlockedStashTier(cards, sessions) {
 export function getEligibleStashCards(cards, unlockedTier) {
   return cards.filter((card) => stashTier(card) <= unlockedTier);
 }
+
+/**
+ * Chooses the card to show for the current route.
+ * A requested card that exists and is unlocked wins. Otherwise fall back to
+ * today's card, then to the first card in the deck. Always returns a card
+ * object (or null for an empty deck), never a boolean.
+ */
+export function resolveCurrentStash({ requested, locked, daily, deck }) {
+  if (requested && !locked) return requested;
+  return daily || deck?.[0] || null;
+}

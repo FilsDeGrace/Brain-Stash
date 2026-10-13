@@ -2,14 +2,14 @@
 
 Stack: React (Vite) in JSX with JSDoc types, any styling approach (Tailwind recommended, driven by the CSS-variable tokens in section 2).
 
-Purpose: split the app into a **logic layer** (hooks, content, scoring, storage) and a **presentation layer** (screens and components). The design layer can be restyled freely as long as it respects the props below. Client-side only: no server, no API keys in the bundle.
+Purpose: split the app into a **logic layer** (hooks, content, scoring, storage) and a **presentation layer** (screens and components). The design layer can be restyled freely as long as it respects the props below. Client-side, plus one optional serverless function (`api/teach.js`) that holds the AI key. No API keys in the bundle.
 
 ## 1. Ground rules
 
 1. **Presentational components are dumb.** They render props and call callbacks. They never own timers, scoring, storage, or fetches.
 2. **All user-facing text comes from props or content JSON.** No hardcoded strings that explain implementation or history. Every string is written for a first-time stranger.
 3. **Routing:** hash router (`/#/maths`) so it deploys to any static host with no rewrite rules.
-4. **Mode accent:** each screen's root gets `data-mode="maths|rebus|stash|traps"`. The design layer defines one accent colour per mode via CSS variables.
+4. **Mode accent:** each screen's root gets `data-mode="maths|rebus|stash|traps|court"`. The design layer defines one accent colour per mode via CSS variables.
 5. **Input safety:** after an answer is chosen, `locked` is `true`. Components must ignore further taps while locked (no double-submit).
 6. **Accessibility baseline:** tap targets at least 44px, visible focus states, buttons not divs, timer exposed via `aria-live="polite"` at coarse intervals only (not every tick), respect `prefers-reduced-motion`.
 7. **Tab hidden = timer paused** (handled in the logic layer; the UI just receives `paused`).
@@ -54,7 +54,7 @@ src/
 {
   progress: Progress,
   daily: { done: { maths: boolean, rebus: boolean, stash: boolean }, onStart: () => void },
-  modes: Array<{ id: 'maths'|'rebus'|'stash'|'traps', title: string, blurb: string, badge?: string }>,
+  modes: Array<{ id: 'maths'|'rebus'|'stash'|'traps'|'court', title: string, blurb: string, badge?: string }>,
   onSelectMode: (id: string) => void,
   onOpenCollection: () => void,
   onOpenSettings: () => void,

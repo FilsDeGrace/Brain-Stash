@@ -1,12 +1,6 @@
 import React from 'react';
 import Icon from '../components/Icons.jsx';
-
-const modeMeta = {
-  maths: { icon: 'bolt', number: '01', accent: 'bronze' },
-  rebus: { icon: 'eye', number: '02', accent: 'terracotta' },
-  stash: { icon: 'book', number: '03', accent: 'gold' },
-  traps: { icon: 'target', number: '04', accent: 'oxblood' },
-};
+import ModeCards from '../components/ModeCards.jsx';
 
 export default function HomeScreen({ progress, daily, modes, onSelectMode, onOpenCollection }) {
   return <div className="home-screen" data-mode="stash">
@@ -33,21 +27,7 @@ export default function HomeScreen({ progress, daily, modes, onSelectMode, onOpe
 
     <section className="modes-section">
       <div className="section-heading"><div><span className="eyebrow">CHOOSE YOUR PRACTICE</span><h2>The four disciplines</h2></div><span className="section-index">A — D</span></div>
-      <button className="mode-card stash-feature" onClick={() => onSelectMode('stash')} data-mode="stash">
-        <div className="feature-seal"><Icon name="book" size={25}/><span className="seal-tick"/></div>
-        <div className="mode-info"><div className="mode-overline">THE SIGNATURE COLLECTION <span>03</span></div><h3>Deep Stash</h3><p>Principles worth keeping. Discover, test, and collect them.</p><div className="mode-link">OPEN THE ARCHIVE <Icon name="arrow" size={15}/></div></div>
-        <Icon className="mode-chevron" name="arrow" size={18}/>
-      </button>
-      <div className="mode-grid">
-        {modes.filter((mode) => mode.id !== 'stash').map((mode) => {
-          const meta = modeMeta[mode.id];
-          return <button key={mode.id} className={`mode-card compact-mode mode-${mode.id}`} onClick={() => onSelectMode(mode.id)} data-mode={mode.id}>
-            <div className="compact-top"><span className={`mode-icon ${meta.accent}`}><Icon name={meta.icon} size={19}/></span><span className="mode-number">{meta.number}</span></div>
-            <h3>{mode.title}</h3><p>{mode.blurb}</p>
-            <div className="compact-bottom"><span>{mode.badge || 'PRACTICE'}</span><Icon name="arrow" size={15}/></div>
-          </button>;
-        })}
-      </div>
+      <ModeCards modes={modes} onSelectMode={onSelectMode} />
     </section>
     <section className="home-footnote"><span className="tiny-seal">✳</span><p>Knowledge kept close. Progress kept private.</p><button onClick={onOpenCollection}>VIEW YOUR ARCHIVE <Icon name="arrow" size={13}/></button></section>
   </div>;

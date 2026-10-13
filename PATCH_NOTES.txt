@@ -1,0 +1,38 @@
+BRAIN STASH — MERGED PROJECT PATCH
+
+APPLYING THE ZIP
+- This archive contains the complete merged project under `brain-stash/`, including the existing Git metadata.
+- It intentionally omits `node_modules/`, generated `dist/`, and local `.env` files. Dependencies are restored with `npm ci`; Vercel builds `dist/` from source.
+- Do not add or upload an `.env` file. Keep AI credentials in Vercel's Environment Variables.
+
+VERCEL AI SETTINGS
+Keep the existing `AI_API_KEY` and `AI_BASE_URL`. Add this variable:
+  Name: AI_MODELS
+  Value: gemini-2.5-flash,gemini-2.5-flash-lite
+Do not use quotation marks or brackets. The comma separates the primary model from the fallback model. The function tries the listed models in order and retains support for the legacy `AI_MODEL` variable.
+
+CHANGES INCLUDED
+- Added comma-separated AI_MODELS parsing and sequential Gemini fallback.
+- Rebus re-entry resumes the current day's saved puzzle state, including its solved state.
+- Rebus XP rewards are protected by puzzle ID and persist in local storage; replaying a solved puzzle cannot mint its 20 XP reward again.
+- Skipping moves to a fresh unsolved puzzle without exposing the answer or granting a solve reward.
+- Rebus explanations are authored per puzzle; the validator checks all 54 entries for unique IDs, non-placeholder explanations, and required fields.
+- Integrated The Court's 20 case files into Home and Play navigation, and added the verdict, ruling, explanation, and factor-analysis screen.
+- Added guard rails for Deep Stash archive entries with missing or malformed quiz data, so the app shows a recovery message instead of trying to render an invalid quiz.
+- Added AI teaching API/client modules and the Play screen dependencies required by the updated app.
+
+VALIDATION RESULTS
+- `npm test`: passed.
+- Math engine: 178,752 checks passed.
+- Timer race regression tests: passed.
+- Deep Stash progression checks: passed.
+- Rebus one-time reward regression checks: passed.
+- AI teaching checks and AI_MODELS fallback checks: passed.
+- Content validation passed: 12 maths lessons, 54 Rebus puzzles, 22 Deep Stash cards, 15 Mind Trap questions, and 10 fallacy questions.
+- Rebus validation passed for all 54 puzzles.
+- Court validation passed for all 20 cases across tiers 1–5.
+- Static local-import check: all relative imports resolve.
+- TypeScript parser syntax check: 38 JavaScript/JSX files, zero syntax errors.
+
+BUILD NOTE
+A Vite production build could not be completed in this environment because the npm registry connection failed with `EAI_AGAIN` while downloading dependencies. The source-level checks and test suite pass, but the next successful install/deployment should still be treated as the final production build verification.

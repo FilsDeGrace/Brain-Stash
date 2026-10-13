@@ -12,17 +12,23 @@ import ResultScreen from '../screens/ResultScreen.jsx';
 import SettingsScreen from '../screens/SettingsScreen.jsx';
 import ProfileScreen from '../screens/ProfileScreen.jsx';
 import ReasoningHubScreen from '../screens/ReasoningHubScreen.jsx';
+import PlayScreen from '../screens/PlayScreen.jsx';
+import CourtScreen from '../screens/CourtScreen.jsx';
 import Icon from '../components/Icons.jsx';
 import { clearStored, dayBefore, localDayStamp, readStored, writeStored } from '../engine/storage.js';
 import { useCountdown } from '../engine/useCountdown.js';
+import { useTeaching } from '../engine/useTeaching.js';
+import { diagnoseKey, lessonKey } from '../engine/teachClient.js';
 import { createRng, generateRound, hashSeed, listSkills } from '../engine/mathEngine.js';
 import { entryModeFor, isCorrect as isRebusCorrect, normalize as normalizeRebusAnswer } from '../engine/rebusMatch.js';
-import { getEligibleStashCards, getUnlockedStashTier, stashTier } from '../engine/stashProgression.js';
+import { claimPuzzleReward } from '../engine/rebusRewards.js';
+import { getEligibleStashCards, getUnlockedStashTier, resolveCurrentStash, stashTier } from '../engine/stashProgression.js';
 import mathLessons from '../content/mathLessons.json';
 import rebusDeck from '../content/rebus.json';
 import stashDeck from '../content/stash.json';
 import trapQuestions from '../content/traps.json';
 import fallacyQuestions from '../content/fallacies.json';
+import courtDeck from '../content/court.json';
 
 const emptyProgress = { streak: 0, xp: 0, level: 1, xpToNext: 120, lastActiveDate: null, mathTier: 1, mathsRounds: 0 };
 const defaultSettings = { timerLength: 15, timerPreset: '15', soundOn: true, reducedMotion: false };
@@ -32,6 +38,7 @@ const modeCards = [
   { id: 'rebus', title: 'Rebus', blurb: 'Decode the picture. Find the phrase.', badge: '54 PUZZLES' },
   { id: 'stash', title: 'Deep Stash', blurb: 'Principles worth keeping.', badge: 'DAILY IDEA' },
   { id: 'traps', title: 'Mind Traps', blurb: 'Challenge intuition, then explore fallacies.', badge: 'LOGIC & REASONING' },
+  { id: 'court', title: 'The Court', blurb: 'Weigh evidence. Test arguments. Deliver a verdict.', badge: '20 CASE FILES' },
 ];
 const mathSkillIds = new Set(listSkills().map((skill) => skill.id));
 
@@ -144,8 +151,31 @@ export default function App() {
   const [stepIndex, setStepIndex] = useState(0);
   const [quiz, setQuiz] = useState(() => emptyQuiz());
   const [lastResult, setLastResult] = useState(null);
-  const [rebusIndex, setRebusIndex] = useState(() => seededIndex(today, rebusDeck.length));
-  const [rebusSession, setRebusSession] = useState(() => ({ puzzleId: null, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false }));
+  const [rebusSolvedIds, setRebusSolvedIds] = useState(() => {
+    const stored = readStored('rebus-solved-ids', []);
+    return Array.isArray(stored) ? stored.map(String) : [];
+  });
+  const rebusSolvedRef = useRef(new Set(rebusSolvedIds));
+  const [rebusIndex, setRebusIndex] = useState(() => {
+    const stored = readStored(`rebus-session-${today}`, null);
+    const storedIndex = rebusDeck.findIndex((puzzle) => puzzle.id === stored?.puzzleId);
+    return stored?.dayStamp === today && storedIndex >= 0 ? storedIndex : seededIndex(today, rebusDeck.length);
+  });
+  const [rebusSession, setRebusSession] = useState(() => {
+    const stored = readStored(`rebus-session-${today}`, null);
+    if (stored?.dayStamp === today && rebusDeck.some((puzzle) => puzzle.id === stored.puzzleId)) {
+      return { puzzleId: null, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false, ...stored };
+    }
+    return { dayStamp: today, puzzleId: null, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false };
+  });
+  const [courtIndex, setCourtIndex] = useState(() => {
+    const stored = Number(readStored('court-index', seededIndex(today, courtDeck.length)));
+    return Number.isInteger(stored) && stored >= 0 && stored < courtDeck.length ? stored : seededIndex(today, courtDeck.length);
+  });
+  const [courtAnswers, setCourtAnswers] = useState(() => {
+    const stored = readStored('court-answers', {});
+    return stored && typeof stored === 'object' && !Array.isArray(stored) ? stored : {};
+  });
   const quizAdvanceLock = useRef(null);
   const rebusAwardLock = useRef(false);
   const stashFinishLocks = useRef(new Set());
@@ -170,6 +200,12 @@ export default function App() {
   useEffect(() => { writeStored('saved-cards', savedCards); }, [savedCards]);
   useEffect(() => { writeStored(`daily-${today}`, daily); }, [daily, today]);
   useEffect(() => { writeStored('stash-sessions', stashSessions); }, [stashSessions]);
+  useEffect(() => { writeStored('rebus-solved-ids', rebusSolvedIds); }, [rebusSolvedIds]);
+  useEffect(() => {
+    if (rebusSession?.dayStamp === today && rebusSession.puzzleId) writeStored(`rebus-session-${today}`, rebusSession);
+  }, [rebusSession, today]);
+  useEffect(() => { writeStored('court-index', courtIndex); }, [courtIndex]);
+  useEffect(() => { writeStored('court-answers', courtAnswers); }, [courtAnswers]);
 
   const navigate = (path) => {
     if (getRoute() === path) setRoute(path);
@@ -193,6 +229,22 @@ export default function App() {
     const nextXp = Math.max(0, current.xp - amount);
     return { ...current, xp: nextXp, ...xpProgress(nextXp) };
   });
+
+  // Each authored puzzle can award XP only once per local profile. A replay may
+  // still count as today's activity, but never re-mints the puzzle reward.
+  const claimRebusReward = (puzzleId, amount = 20) => {
+    const claim = claimPuzzleReward(rebusSolvedRef.current, puzzleId);
+    if (!claim.claimed) {
+      recordActivity('rebus', 0);
+      return false;
+    }
+    rebusSolvedRef.current = claim.solvedIds;
+    const solved = [...claim.solvedIds];
+    setRebusSolvedIds(solved);
+    writeStored('rebus-solved-ids', solved);
+    recordActivity('rebus', amount);
+    return true;
+  };
 
   const buildQuiz = (mode, skillId = 'mixed') => {
     let questions;
@@ -295,45 +347,68 @@ export default function App() {
   const stashRouteId = route.startsWith('/stash/') ? route.split('/')[2] : null;
   const requestedStash = stashDeck.find((card) => String(card.id) === String(stashRouteId));
   const stashLocked = Boolean(requestedStash && stashTier(requestedStash) > stashUnlockedTier);
-  const currentStash = (requestedStash && !stashLocked) || dailyStash || stashDeck[0];
+  const resolvedCurrentStash = resolveCurrentStash({ requested: requestedStash, locked: stashLocked, daily: dailyStash, deck: stashDeck });
+  const currentStash = resolvedCurrentStash || {
+    id: '__archive-entry-unavailable__', tier: 1, category: 'Archive', title: 'Archive entry unavailable',
+    summary: '', example: '', whyItMatters: '', quiz: { prompt: '', options: [], correctId: '' },
+  };
   const stashSession = stashSessions[currentStash.id] || { selectedId: null, correctId: null, locked: false, completed: false };
+  const hasValidStashQuiz = Boolean(currentStash.quiz && currentStash.quiz.correctId && Array.isArray(currentStash.quiz.options) && currentStash.quiz.options.length);
+  const currentStashQuiz = hasValidStashQuiz ? currentStash.quiz : { prompt: '', options: [], correctId: '' };
   const saved = savedCards.some((entry) => String(entry.id) === String(currentStash.id));
+  const teaching = useTeaching();
+  const missedOptionId = hasValidStashQuiz && stashSession.locked && stashSession.selectedId && stashSession.selectedId !== currentStashQuiz.correctId ? stashSession.selectedId : null;
+  const lessonState = teaching.stateFor(lessonKey(currentStash));
+  const diagnosisState = missedOptionId ? teaching.stateFor(diagnoseKey(currentStash, missedOptionId)) : null;
 
   const saveStashCard = () => {
     setSavedCards((current) => current.some((entry) => String(entry.id) === String(currentStash.id)) ? current : [...current, { id: currentStash.id, savedAt: Date.now() }]);
   };
 
   const answerStashQuiz = (optionId) => {
-    if (stashSession.locked) return;
-    if (settings.soundOn) playFeedback(optionId === currentStash.quiz.correctId);
+    if (!hasValidStashQuiz || stashSession.locked) return;
+    if (settings.soundOn) playFeedback(optionId === currentStashQuiz.correctId);
     setStashSessions((current) => {
       if (current[currentStash.id]?.locked) return current;
-      return { ...current, [currentStash.id]: { ...(current[currentStash.id] || stashSession), selectedId: optionId, correctId: currentStash.quiz.correctId, locked: true, completed: Boolean(current[currentStash.id]?.completed) } };
+      return { ...current, [currentStash.id]: { ...(current[currentStash.id] || stashSession), selectedId: optionId, correctId: currentStashQuiz.correctId, locked: true, completed: Boolean(current[currentStash.id]?.completed) } };
     });
   };
 
   const finishStash = () => {
-    if (!stashSession.locked || stashSession.completed || stashFinishLocks.current.has(String(currentStash.id))) return;
+    if (!hasValidStashQuiz || !stashSession.locked || stashSession.completed || stashFinishLocks.current.has(String(currentStash.id))) return;
     stashFinishLocks.current.add(String(currentStash.id));
     const isDailyCard = currentStash.id === dailyStash?.id;
-    recordActivity('stash', stashSession.selectedId === currentStash.quiz.correctId ? 25 : 15, {}, isDailyCard);
+    recordActivity('stash', stashSession.selectedId === currentStashQuiz.correctId ? 25 : 15, {}, isDailyCard);
     setStashSessions((current) => ({ ...current, [currentStash.id]: { ...stashSession, completed: true } }));
   };
 
   const startRebus = () => {
-    rebusAwardLock.current = false;
-    const index = seededIndex(today, rebusDeck.length);
-    setRebusIndex(index);
-    setRebusSession({ puzzleId: rebusDeck[index].id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
+    const existingIndex = rebusDeck.findIndex((puzzle) => puzzle.id === rebusSession.puzzleId);
+    // Re-entering from Home resumes today's session (including a solved state).
+    // A new daily session is created only when the date changes or no session exists.
+    if (rebusSession.dayStamp !== today || existingIndex < 0) {
+      const index = seededIndex(today, rebusDeck.length);
+      setRebusIndex(index);
+      setRebusSession({ dayStamp: today, puzzleId: rebusDeck[index].id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
+      rebusAwardLock.current = false;
+    } else {
+      setRebusIndex(existingIndex);
+      rebusAwardLock.current = rebusSession.status === 'finished';
+    }
     navigate('/rebus');
   };
 
   useEffect(() => {
-    if (route === '/rebus' && !rebusSession.puzzleId) {
-      const puzzle = rebusDeck[rebusIndex];
-      if (puzzle) setRebusSession({ puzzleId: puzzle.id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
+    if (route === '/rebus' && (rebusSession.dayStamp !== today || !rebusSession.puzzleId || !rebusDeck.some((puzzle) => puzzle.id === rebusSession.puzzleId))) {
+      const index = seededIndex(today, rebusDeck.length);
+      const puzzle = rebusDeck[index];
+      if (puzzle) {
+        setRebusIndex(index);
+        setRebusSession({ dayStamp: today, puzzleId: puzzle.id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
+        rebusAwardLock.current = false;
+      }
     }
-  }, [route, rebusIndex, rebusSession.puzzleId]);
+  }, [route, today, rebusIndex, rebusSession.dayStamp, rebusSession.puzzleId]);
 
   const currentPuzzle = rebusDeck.find((puzzle) => puzzle.id === rebusSession.puzzleId) || rebusDeck[rebusIndex] || rebusDeck[0];
   const currentEntryMode = entryModeFor(currentPuzzle);
@@ -346,7 +421,7 @@ export default function App() {
     if (answerCorrect) rebusAwardLock.current = true;
     setRebusSession((current) => ({ ...current, attempt, status: 'finished', awarded: answerCorrect, inputValue: currentPuzzle.answer }));
     if (settings.soundOn) playFeedback(answerCorrect);
-    if (answerCorrect && !rebusSession.awarded) recordActivity('rebus', 20);
+    if (answerCorrect && !rebusSession.awarded) claimRebusReward(currentPuzzle.id, 20);
   };
 
   const placeRebusTile = (tileId) => {
@@ -357,7 +432,7 @@ export default function App() {
       if (isRebusCorrect(currentPuzzle, nextString)) {
         if (settings.soundOn) playFeedback(true);
         setRebusSession((current) => ({ ...current, selectedTileIds: nextIds, attempt: 'none', status: 'finished', inputValue: currentPuzzle.answer, awarded: true }));
-        if (!rebusAwardLock.current) { rebusAwardLock.current = true; recordActivity('rebus', 20); }
+        if (!rebusAwardLock.current) { rebusAwardLock.current = true; claimRebusReward(currentPuzzle.id, 20); }
       } else {
         if (settings.soundOn) playFeedback(false);
         setRebusSession((current) => ({ ...current, selectedTileIds: nextIds, attempt: 'wrong' }));
@@ -400,7 +475,11 @@ export default function App() {
         const actualCost = Math.min(progress.xp, currentPuzzle.hintCost);
         setRebusSession((current) => ({ ...current, selectedTileIds: [...current.selectedTileIds, matching.id], hintCount: current.hintCount + 1, hintText: `The next letter is ${nextChar.toUpperCase()}.`, status: 'finished', inputValue: currentPuzzle.answer, awarded: true }));
         if (settings.soundOn) playFeedback(true);
-        if (!rebusAwardLock.current) { rebusAwardLock.current = true; recordActivity('rebus', 20 - actualCost); }
+        if (!rebusAwardLock.current) {
+          rebusAwardLock.current = true;
+          if (rebusSolvedRef.current.has(String(currentPuzzle.id))) recordActivity('rebus', -actualCost);
+          else claimRebusReward(currentPuzzle.id, 20 - actualCost);
+        }
       } else {
         spendXp(currentPuzzle.hintCost);
         setRebusSession((current) => ({ ...current, hintCount: current.hintCount + 1, hintText: `The next letter is ${nextChar.toUpperCase()}.` }));
@@ -417,12 +496,33 @@ export default function App() {
 
   const nextRebus = () => {
     rebusAwardLock.current = false;
-    const nextIndex = (rebusIndex + 1) % rebusDeck.length;
+    const currentDeckIndex = Math.max(0, rebusDeck.findIndex((puzzle) => puzzle.id === currentPuzzle.id));
+    const nextIndex = (currentDeckIndex + 1) % rebusDeck.length;
     setRebusIndex(nextIndex);
-    setRebusSession({ puzzleId: rebusDeck[nextIndex].id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
+    setRebusSession({ dayStamp: today, puzzleId: rebusDeck[nextIndex].id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
   };
 
-  const skipRebus = () => { rebusAwardLock.current = false; setRebusSession((current) => ({ ...current, status: 'finished', attempt: 'skipped', inputValue: currentPuzzle.answer })); };
+  // Skip advances without passing through the completed/reveal state or awarding XP.
+  const skipRebus = () => {
+    const currentDeckIndex = Math.max(0, rebusDeck.findIndex((puzzle) => puzzle.id === currentPuzzle.id));
+    const nextIndex = (currentDeckIndex + 1) % rebusDeck.length;
+    rebusAwardLock.current = false;
+    setRebusIndex(nextIndex);
+    setRebusSession({ dayStamp: today, puzzleId: rebusDeck[nextIndex].id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
+  };
+
+  const currentCourtCase = courtDeck[courtIndex] || courtDeck[0] || null;
+  const selectedCourtVerdict = currentCourtCase ? courtAnswers[currentCourtCase.id] || null : null;
+  const selectCourtVerdict = (optionId) => {
+    if (!currentCourtCase || selectedCourtVerdict) return;
+    if (!(currentCourtCase.options || []).some((option) => option.id === optionId)) return;
+    setCourtAnswers((current) => ({ ...current, [currentCourtCase.id]: optionId }));
+  };
+  const moveCourt = (delta) => {
+    const total = courtDeck.length;
+    if (!total) return;
+    setCourtIndex((index) => (index + delta + total) % total);
+  };
 
   const savedEntries = useMemo(() => savedCards.map((entry) => {
     const card = stashDeck.find((item) => String(item.id) === String(entry.id));
@@ -449,6 +549,7 @@ export default function App() {
     if (mode === 'maths') navigate('/maths');
     else if (mode === 'rebus') startRebus();
     else if (mode === 'stash') navigate('/stash');
+    else if (mode === 'court') navigate('/court');
     else navigate('/traps');
   };
 
@@ -464,7 +565,12 @@ export default function App() {
     quizAdvanceLock.current = null;
     setLastResult(null);
     setQuiz(emptyQuiz());
-    setRebusSession({ puzzleId: null, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
+    setRebusSolvedIds([]);
+    rebusSolvedRef.current.clear();
+    setRebusIndex(seededIndex(today, rebusDeck.length));
+    setRebusSession({ dayStamp: today, puzzleId: null, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
+    setCourtAnswers({});
+    setCourtIndex(seededIndex(today, courtDeck.length));
     navigate('/');
   };
 
@@ -475,6 +581,8 @@ export default function App() {
 
   if (route === '/' || route === '') {
     screen = <HomeScreen progress={progress} daily={{ done: daily.done, onStart: () => navigate('/stash') }} modes={modeCards} onSelectMode={openMode} onOpenCollection={() => navigate('/collection')} />;
+  } else if (route === '/play') {
+    screen = <PlayScreen modes={modeCards} onSelectMode={openMode} />;
   } else if (route === '/maths') {
     const lessonViews = mathLessons.map((lesson) => ({ ...lesson, level: `TIER ${lesson.tier}`, duration: `${lesson.steps.length} STEPS`, summary: lesson.blurb, locked: lesson.tier > progress.mathTier }));
     screen = <MathsLessonsScreen lessons={lessonViews} mathTier={progress.mathTier} onOpenLesson={(id) => { const lesson = mathLessons.find((item) => item.id === id); if (lesson && lesson.tier <= progress.mathTier) { setStepIndex(0); navigate(`/maths/lesson/${id}`); } }} onStartRound={() => startQuiz('maths')} />;
@@ -488,6 +596,9 @@ export default function App() {
       screen = <LessonScreen {...lessonView} stepIndex={Math.min(stepIndex, lesson.steps.length - 1)} onNext={() => setStepIndex((index) => Math.min(index + 1, lesson.steps.length - 1))} onBack={() => setStepIndex((index) => Math.max(0, index - 1))} onGoBack={() => navigate('/maths')} onStartRound={() => startQuiz('maths', lesson.skillId)} />;
     }
     backLabel = 'Back to maths'; onBack = () => navigate('/maths');
+  } else if (route === '/court') {
+    screen = <CourtScreen caseItem={currentCourtCase} caseNumber={courtIndex + 1} totalCases={courtDeck.length} selectedId={selectedCourtVerdict} onSelectVerdict={selectCourtVerdict} onNext={() => moveCourt(1)} onPrevious={() => moveCourt(-1)} />;
+    backLabel = 'Back to practice'; onBack = () => navigate('/play');
   } else if (route === '/traps') {
     screen = <ReasoningHubScreen onStartMindTraps={() => startQuiz('traps')} onStartFallacies={() => startQuiz('fallacies')} />;
     backLabel = 'Back to home'; onBack = () => navigate('/');
@@ -509,10 +620,12 @@ export default function App() {
   } else if (route === '/stash' || route.startsWith('/stash/')) {
     if (stashLocked) {
       screen = <div className="screen-page locked-practice" data-mode="stash"><span className="eyebrow">ARCHIVE SEALED</span><h1>Tier {stashTier(requestedStash)} <em>is not open.</em></h1><p>Complete every Tier 1 entry to unlock the next collection of principles.</p><button className="button button-primary" onClick={() => navigate('/stash')}>Return to today’s entry <Icon name="arrow" size={16}/></button></div>;
+    } else if (!hasValidStashQuiz) {
+      screen = <div className="screen-page locked-practice" data-mode="stash"><span className="eyebrow">ARCHIVE FILE UNAVAILABLE</span><h1>This entry is <em>incomplete.</em></h1><p>The selected archive file is missing its reflection question. Your progress is safe. Return to the archive and open another entry.</p><button className="button button-primary" onClick={() => navigate('/stash/archive')}>Back to archive <Icon name="arrow" size={16}/></button></div>;
     } else {
-      const currentQuiz = currentStash.quiz;
+      const currentQuiz = currentStashQuiz;
       const reveal = stashSession.locked ? { selectedId: stashSession.selectedId, correctId: currentQuiz.correctId, timedOut: false } : null;
-      screen = <StashCardScreen card={currentStash} isDailyCard={String(currentStash.id) === String(dailyStash?.id)} saved={saved} quiz={currentQuiz} quizReveal={reveal} locked={stashSession.locked} completed={stashSession.completed} unlockedTier={stashUnlockedTier} onSave={saveStashCard} onSelectQuizOption={answerStashQuiz} onDone={finishStash} onOpenCollection={() => navigate('/collection')} onOpenArchive={() => navigate('/stash/archive')} />;
+      screen = <StashCardScreen card={currentStash} isDailyCard={String(currentStash.id) === String(dailyStash?.id)} saved={saved} quiz={currentQuiz} quizReveal={reveal} locked={stashSession.locked} completed={stashSession.completed} unlockedTier={stashUnlockedTier} canTeach={isOnline} lessonState={lessonState} diagnosisState={diagnosisState} onTeach={() => teaching.teach(currentStash)} onDiagnose={() => missedOptionId && teaching.diagnose(currentStash, missedOptionId)} onSave={saveStashCard} onSelectQuizOption={answerStashQuiz} onDone={finishStash} onOpenCollection={() => navigate('/collection')} onOpenArchive={() => navigate('/stash/archive')} />;
     }
     backLabel = 'Back to home'; onBack = () => navigate('/');
   } else if (route === '/collection') {
