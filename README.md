@@ -22,7 +22,7 @@ npm run build
 npm run preview
 ```
 
-The application uses hash routes (`/#/maths`, `/#/traps`, `/#/fallacies/round`) and does not need server rewrite rules. Publish `dist/` to a static host. The PWA worker pre-caches the application shell and all 50 supplied Rebus images after install; same-origin assets fetched later are cached as well. First install requires a successful online visit. There is no account and no secret key in the browser bundle. The only server-side piece is one optional serverless function for Deep Stash walkthroughs (see below); the app works fully without it.
+The application uses hash routes (`/#/maths`, `/#/traps`, `/#/fallacies/round`) and does not need server rewrite rules. Publish `dist/` to a static host. The PWA worker pre-caches the application shell and all 50 supplied Rebus images after install; same-origin assets fetched later are cached as well. First install requires a successful online visit. There is no account and no secret key in the browser bundle. Server-side features include optional Deep Stash walkthroughs and the AI-assisted shared knowledge library. All seven bundled Knowledge Wing disciplines and the daily/random Stash Drop work without database setup; shared generation needs `docs/shared-library-setup.md`.
 
 ## Deep Stash walkthroughs (optional, needs a deploy with a serverless host)
 
@@ -46,7 +46,10 @@ You already have `AI_API_KEY` and `AI_BASE_URL`; add `AI_MODELS` with exactly th
 - **Mind Traps:** the original 5 examples plus the supplied 10-question bank (15 total).
 - **The Court:** 20 case files across five tiers, with two counsel arguments, four verdict options, deciding/acceptable/trap/irrelevant factors, and written rulings. The Court route is available from Play.
 - **Fallacies:** a separate 10-question untimed route linked from the Mind Traps hub. Scenario/context is shown before the question in both reasoning modes.
-- **Progress and settings:** local XP, levels, streaks, maths tier, saved cards, daily selection/completion, sound feedback, reduced motion, custom maths timer, and text-based result sharing.
+- **Knowledge Wing:** seven starter disciplines (Psychology & Human Nature; Influence & Manipulation; Scale of Reality; Laws, Principles & Mental Models; Practical Intelligence; Hidden Systems; Money, Economics & Financial Psychology), with three authored starter discoveries each.
+- **Stash Drops:** a daily discovery pop-up plus manual Surprise Me, saving to the user's local Collection, and a deeper article with a recall question.
+- **Shared AI library:** Vercel API routes generate reviewed drafts for each Knowledge Wing discipline, enforce database-backed daily quotas, and run one scheduled candidate generation per day. Drafts require review before they are visible to everyone. Set up through `docs/shared-library-setup.md`.
+- **Progress and settings:** local XP, levels, streaks, maths tier, saved cards and discoveries, daily selection/completion, sound feedback, reduced motion, custom maths timer, and text-based result sharing.
 
 The new bank wording, explanations, attribution, and inferred-answer markers are preserved from the supplied files. Content fact-checking was not part of this integration. The Rebus entry mode is derived from the letter-count constant, rather than trusted from a static field in each puzzle.
 
@@ -58,17 +61,17 @@ src/
   engine/       math generator, timer, storage, Rebus matching, timer-state, stash progression and AI walkthrough client logic
   content/      local JSON banks for all modes
   components/   shared brand, icons, shell, and navigation
-  screens/      presentational home, play hub, lesson, quiz, puzzle, archive, result, profile, and settings screens
+  screens/      home, play, quiz, archive, Court, Knowledge Wing, library review and settings screens
 api/             optional serverless function for Deep Stash walkthroughs
 server/          request validation and prompt building used by api/
 public/
   rebus/        50 supplied JPEGs plus 4 original SVG puzzles
   sw.js         production offline cache
 scripts/        content/asset/engine contract validation
- test/          maths engine, timer-race, stash-progression, and AI endpoint regression tests
+ test/          maths engine, timer-race, stash-progression, AI endpoint and shared-library regression tests
 ```
 
-All user progress uses guarded `localStorage` calls and remains on the current browser. In Vite development mode, Brain Stash unregisters an old app service worker and clears its prior caches so stale bundles do not mask code changes. Production mode registers the service worker.
+All user progress and saved discoveries use guarded `localStorage` calls and remain on the current browser; approved AI content is stored in the shared database. In Vite development mode, Brain Stash unregisters an old app service worker and clears its prior caches so stale bundles do not mask code changes. Production mode registers the service worker.
 
 ## Validation
 
@@ -80,4 +83,4 @@ All user progress uses guarded `localStorage` calls and remains on the current b
 4. Local content validation for lesson/skill links, answer IDs, four-option question banks, tier rules, Rebus answer lengths and pools, image paths, and generated tier timers.
 5. AI walkthrough endpoint tests with a mocked provider: request validation and length limits, same-origin and rate-limit handling, missing configuration, malformed model output, and a check that the key never appears in a response.
 
-The full Vite production bundle should also be checked in an environment with the npm dependencies installed using `npm run build`.
+Shared AI library setup: `docs/shared-library-setup.md`. Supabase recommends current `sb_secret_...` API keys for server-side access; the server code also accepts the legacy `service_role` JWT during migration. The full Vite production bundle should also be checked in an environment with npm dependencies installed using `npm run build`.

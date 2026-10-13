@@ -14,6 +14,9 @@ import ProfileScreen from '../screens/ProfileScreen.jsx';
 import ReasoningHubScreen from '../screens/ReasoningHubScreen.jsx';
 import PlayScreen from '../screens/PlayScreen.jsx';
 import CourtScreen from '../screens/CourtScreen.jsx';
+import DisciplinesScreen from '../screens/DisciplinesScreen.jsx';
+import LibraryReviewScreen from '../screens/LibraryReviewScreen.jsx';
+import StashDropModal from '../components/StashDropModal.jsx';
 import Icon from '../components/Icons.jsx';
 import { clearStored, dayBefore, localDayStamp, readStored, writeStored } from '../engine/storage.js';
 import { useCountdown } from '../engine/useCountdown.js';
@@ -29,6 +32,8 @@ import stashDeck from '../content/stash.json';
 import trapQuestions from '../content/traps.json';
 import fallacyQuestions from '../content/fallacies.json';
 import courtDeck from '../content/court.json';
+import disciplines from '../content/disciplines.js';
+import { fetchSharedItems, friendlyLibraryError, generateSharedItem } from '../engine/sharedLibraryClient.js';
 
 const emptyProgress = { streak: 0, xp: 0, level: 1, xpToNext: 120, lastActiveDate: null, mathTier: 1, mathsRounds: 0 };
 const defaultSettings = { timerLength: 15, timerPreset: '15', soundOn: true, reducedMotion: false };
@@ -40,6 +45,59 @@ const modeCards = [
   { id: 'traps', title: 'Mind Traps', blurb: 'Challenge intuition, then explore fallacies.', badge: 'LOGIC & REASONING' },
   { id: 'court', title: 'The Court', blurb: 'Weigh evidence. Test arguments. Deliver a verdict.', badge: '20 CASE FILES' },
 ];
+function stashCardAsDiscovery(card) {
+  const correct = card?.quiz?.options?.find((option) => option.id === card.quiz.correctId)?.label || card?.quiz?.explanation || '';
+  return {
+    id: `deep-stash-${card.id}`,
+    originalCardId: card.id,
+    disciplineId: 'principles',
+    disciplineTitle: 'Laws, Principles & Mental Models',
+    shortTitle: 'Deep Stash',
+    title: card.title,
+    category: card.category || 'Principle',
+    kind: 'principle',
+    summary: card.summary || 'A principle worth examining.',
+    explanation: card.whyItMatters || card.summary || '',
+    example: card.example || '',
+    whyItMatters: card.whyItMatters || '',
+    tryThis: card.example ? `Use this idea in a real decision: ${card.example}` : 'Think of one situation where this principle might help.',
+    question: card.quiz?.prompt || '',
+    answer: correct,
+    sources: [],
+    source: 'deep-stash',
+    status: 'approved',
+  };
+}
+
+function buildDropPool(sharedItems = [], personalItems = [], unlockedTier = 1) {
+  const seedItems = disciplines.flatMap((discipline) => discipline.items.map((item) => ({
+    ...item, disciplineId: discipline.id, disciplineTitle: discipline.title, shortTitle: discipline.shortTitle, disclaimer: discipline.disclaimer || '', source: 'bundled', status: 'approved',
+  })));
+  const deepStashItems = stashDeck.filter((card) => stashTier(card) <= unlockedTier).map(stashCardAsDiscovery);
+  const all = [...sharedItems, ...personalItems, ...seedItems, ...deepStashItems];
+  const seen = new Set();
+  return all.filter((item) => {
+    if (!item?.id || !item?.title || !item?.summary || seen.has(String(item.id))) return false;
+    seen.add(String(item.id));
+    return true;
+  });
+}
+
+function chooseRandomDrop(items, excludeId = null) {
+  const pool = items.filter((item) => String(item.id) !== String(excludeId));
+  const available = pool.length ? pool : items;
+  return available.length ? available[Math.floor(Math.random() * available.length)] : null;
+}
+
+function initialDrop(today, unlockedTier = 1) {
+  const stored = readStored('daily-drop-state', null);
+  const storedCard = stored?.item?.originalCardId ? stashDeck.find((card) => String(card.id) === String(stored.item.originalCardId)) : null;
+  const storedCardIsAvailable = !storedCard || stashTier(storedCard) <= unlockedTier;
+  if (stored?.date === today && stored?.item?.id && storedCardIsAvailable) return stored.item;
+  const candidates = readStored('generated-knowledge-items', []);
+  return chooseRandomDrop(buildDropPool([], Array.isArray(candidates) ? candidates : [], unlockedTier));
+}
+
 const mathSkillIds = new Set(listSkills().map((skill) => skill.id));
 
 function getRoute() {
@@ -145,8 +203,21 @@ export default function App() {
     return merged;
   });
   const [savedCards, setSavedCards] = useState(() => readStored('saved-cards', []));
+  const [savedKnowledgeItems, setSavedKnowledgeItems] = useState(() => { const value = readStored('saved-knowledge-items', []); return Array.isArray(value) ? value : []; });
+  const [sharedItems, setSharedItems] = useState([]);
+  const [sharedItemsLoading, setSharedItemsLoading] = useState(true);
+  const [sharedLibraryConfigured, setSharedLibraryConfigured] = useState(null);
+  const [generatedItems, setGeneratedItems] = useState(() => { const value = readStored('generated-knowledge-items', []); return Array.isArray(value) ? value : []; });
+  const [generation, setGeneration] = useState({ disciplineId: null, loading: false, error: '' });
   const [daily, setDaily] = useState(() => ({ ...dailyDefaults, ...readStored(`daily-${today}`, dailyDefaults) }));
   const [stashSessions, setStashSessions] = useState(() => readStored('stash-sessions', {}));
+  const initialStashTier = getUnlockedStashTier(stashDeck, stashSessions);
+  const [dropItem, setDropItem] = useState(() => initialDrop(today, initialStashTier));
+  const [dropVisible, setDropVisible] = useState(() => !readStored(`drop-dismissed-${today}`, false));
+  const [dropIsDaily, setDropIsDaily] = useState(() => {
+    const stored = readStored('daily-drop-state', null);
+    return stored?.date === today ? stored.isDaily !== false : true;
+  });
   const [activeCategory, setActiveCategory] = useState(null);
   const [stepIndex, setStepIndex] = useState(0);
   const [quiz, setQuiz] = useState(() => emptyQuiz());
@@ -179,6 +250,7 @@ export default function App() {
   const quizAdvanceLock = useRef(null);
   const rebusAwardLock = useRef(false);
   const stashFinishLocks = useRef(new Set());
+  const generationLock = useRef(false);
 
   useEffect(() => {
     const update = () => setRoute(getRoute());
@@ -195,9 +267,27 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isOnline) { setSharedItemsLoading(false); return undefined; }
+    const controller = new AbortController();
+    let active = true;
+    setSharedItemsLoading(true);
+    fetchSharedItems({ signal: controller.signal }).then((result) => {
+      if (!active) return;
+      setSharedItems(Array.isArray(result.items) ? result.items : []);
+      setSharedLibraryConfigured(result.configured !== false);
+    }).catch(() => {
+      // The bundled library remains available if a static preview has no /api route or the network is down.
+    }).finally(() => { if (active) setSharedItemsLoading(false); });
+    return () => { active = false; controller.abort(); };
+  }, [isOnline]);
+
   useEffect(() => { writeStored('progress', progress); }, [progress]);
   useEffect(() => { writeStored('settings', settings); document.documentElement.classList.toggle('reduce-motion', Boolean(settings.reducedMotion)); }, [settings]);
   useEffect(() => { writeStored('saved-cards', savedCards); }, [savedCards]);
+  useEffect(() => { writeStored('saved-knowledge-items', savedKnowledgeItems); }, [savedKnowledgeItems]);
+  useEffect(() => { writeStored('generated-knowledge-items', generatedItems); }, [generatedItems]);
+  useEffect(() => { if (dropItem?.id) writeStored('daily-drop-state', { date: today, item: dropItem, isDaily: dropIsDaily }); }, [dropItem, dropIsDaily, today]);
   useEffect(() => { writeStored(`daily-${today}`, daily); }, [daily, today]);
   useEffect(() => { writeStored('stash-sessions', stashSessions); }, [stashSessions]);
   useEffect(() => { writeStored('rebus-solved-ids', rebusSolvedIds); }, [rebusSolvedIds]);
@@ -365,6 +455,65 @@ export default function App() {
     setSavedCards((current) => current.some((entry) => String(entry.id) === String(currentStash.id)) ? current : [...current, { id: currentStash.id, savedAt: Date.now() }]);
   };
 
+  const isKnowledgeItemSaved = (itemId) => savedKnowledgeItems.some((entry) => String(entry.id) === String(itemId));
+
+  const saveKnowledgeItem = (item) => {
+    if (!item?.id || !item?.disciplineId) return;
+    setSavedKnowledgeItems((current) => current.some((entry) => String(entry.id) === String(item.id)) ? current : [...current, { ...item, savedAt: Date.now() }]);
+  };
+
+  const saveDiscovery = (item) => {
+    if (!item?.id) return;
+    if (item.originalCardId) {
+      setSavedCards((current) => current.some((entry) => String(entry.id) === String(item.originalCardId)) ? current : [...current, { id: item.originalCardId, savedAt: Date.now() }]);
+      return;
+    }
+    saveKnowledgeItem(item);
+  };
+
+  const surpriseMe = () => {
+    const next = chooseRandomDrop(buildDropPool(sharedItems, generatedItems, stashUnlockedTier), dropItem?.id);
+    if (next) setDropItem(next);
+    setDropIsDaily(false);
+    setDropVisible(true);
+  };
+
+  const dismissDrop = () => {
+    setDropVisible(false);
+    writeStored(`drop-dismissed-${today}`, true);
+  };
+
+  const teachDrop = (item) => {
+    if (item?.originalCardId) navigate(`/stash/${item.originalCardId}`);
+    else if (item?.disciplineId && item?.id) navigate(`/disciplines/${item.disciplineId}/${item.id}`);
+    setDropVisible(false);
+    writeStored(`drop-dismissed-${today}`, true);
+  };
+
+  const generateKnowledgeItem = async (disciplineId) => {
+    if (generationLock.current || generation.loading) return;
+    const routeAtStart = getRoute();
+    generationLock.current = true;
+    setGeneration({ disciplineId, loading: true, error: '' });
+    try {
+      const result = await generateSharedItem(disciplineId);
+      const item = result?.item;
+      if (!item?.id) throw new Error('service_error');
+      if (item.status === 'approved' || item.source === 'shared') {
+        setSharedItems((current) => [item, ...current.filter((entry) => String(entry.id) !== String(item.id))]);
+      } else {
+        setGeneratedItems((current) => [item, ...current.filter((entry) => String(entry.id) !== String(item.id))]);
+      }
+      setGeneration({ disciplineId, loading: false, error: '' });
+      // Finish saving the draft without hijacking navigation if the user moved elsewhere while waiting.
+      if (getRoute() === routeAtStart) navigate(`/disciplines/${disciplineId}/${item.id}`);
+    } catch (error) {
+      setGeneration({ disciplineId, loading: false, error: friendlyLibraryError(error?.message) });
+    } finally {
+      generationLock.current = false;
+    }
+  };
+
   const answerStashQuiz = (optionId) => {
     if (!hasValidStashQuiz || stashSession.locked) return;
     if (settings.soundOn) playFeedback(optionId === currentStashQuiz.correctId);
@@ -524,10 +673,20 @@ export default function App() {
     setCourtIndex((index) => (index + delta + total) % total);
   };
 
-  const savedEntries = useMemo(() => savedCards.map((entry) => {
-    const card = stashDeck.find((item) => String(item.id) === String(entry.id));
-    return card ? { id: card.id, title: card.title, category: card.category, summary: card.summary, savedAt: entry.savedAt } : null;
-  }).filter(Boolean), [savedCards]);
+  const savedEntries = useMemo(() => [
+    ...savedCards.map((entry) => {
+      const card = stashDeck.find((item) => String(item.id) === String(entry.id));
+      return card ? { id: card.id, title: card.title, category: card.category, summary: card.summary, savedAt: entry.savedAt, route: `/stash/${card.id}` } : null;
+    }).filter(Boolean),
+    ...savedKnowledgeItems.map((entry) => ({
+      id: entry.id,
+      title: entry.title,
+      category: entry.category || disciplines.find((discipline) => discipline.id === entry.disciplineId)?.shortTitle || 'Discovery',
+      summary: entry.summary,
+      savedAt: entry.savedAt,
+      route: `/disciplines/${entry.disciplineId}/${entry.id}`,
+    })),
+  ], [savedCards, savedKnowledgeItems]);
   const categories = useMemo(() => [...new Set(savedEntries.map((card) => card.category))], [savedEntries]);
 
   const shareResults = async () => {
@@ -558,6 +717,11 @@ export default function App() {
     setProgress(normalizeProgress(emptyProgress));
     setSettings({ ...defaultSettings });
     setSavedCards([]);
+    setSavedKnowledgeItems([]);
+    setGeneratedItems([]);
+    setDropItem(initialDrop(today, 1));
+    setDropVisible(true);
+    setDropIsDaily(true);
     setActiveCategory(null);
     setDaily({ ...dailyDefaults });
     setStashSessions({});
@@ -580,9 +744,34 @@ export default function App() {
   let onBack = null;
 
   if (route === '/' || route === '') {
-    screen = <HomeScreen progress={progress} daily={{ done: daily.done, onStart: () => navigate('/stash') }} modes={modeCards} onSelectMode={openMode} onOpenCollection={() => navigate('/collection')} />;
+    screen = <HomeScreen progress={progress} daily={{ done: daily.done, onStart: () => navigate('/stash') }} modes={modeCards} onSelectMode={openMode} onOpenCollection={() => navigate('/collection')} onExploreDisciplines={() => navigate('/disciplines')} onSurpriseMe={surpriseMe} />;
   } else if (route === '/play') {
-    screen = <PlayScreen modes={modeCards} onSelectMode={openMode} />;
+    screen = <PlayScreen modes={modeCards} onSelectMode={openMode} onExploreDisciplines={() => navigate('/disciplines')} />;
+  } else if (route === '/disciplines' || route.startsWith('/disciplines/')) {
+    const segments = route.split('/').filter(Boolean);
+    const disciplineId = segments[1] || null;
+    const itemId = segments[2] || null;
+    screen = <DisciplinesScreen
+      disciplines={disciplines}
+      disciplineId={disciplineId}
+      itemId={itemId}
+      remoteItems={sharedItems}
+      personalItems={[...generatedItems, ...savedKnowledgeItems]}
+      isLoadingShared={sharedItemsLoading}
+      libraryConfigured={sharedLibraryConfigured}
+      isGenerating={generation.loading}
+      generationError={generation.disciplineId === disciplineId ? generation.error : ''}
+      isItemSaved={isKnowledgeItemSaved}
+      onOpenDiscipline={(id) => navigate(`/disciplines/${id}`)}
+      onOpenItem={(id, item) => navigate(`/disciplines/${id}/${item}`)}
+      onGenerate={generateKnowledgeItem}
+      onSaveItem={saveKnowledgeItem}
+      onBack={(id) => navigate(id === 'home' ? '/' : id ? `/disciplines/${id}` : '/disciplines')}
+    />;
+    backLabel = 'Back to disciplines'; onBack = () => navigate('/disciplines');
+  } else if (route === '/library-review') {
+    screen = <LibraryReviewScreen disciplines={disciplines} onBack={() => navigate('/')} />;
+    backLabel = 'Back to home'; onBack = () => navigate('/');
   } else if (route === '/maths') {
     const lessonViews = mathLessons.map((lesson) => ({ ...lesson, level: `TIER ${lesson.tier}`, duration: `${lesson.steps.length} STEPS`, summary: lesson.blurb, locked: lesson.tier > progress.mathTier }));
     screen = <MathsLessonsScreen lessons={lessonViews} mathTier={progress.mathTier} onOpenLesson={(id) => { const lesson = mathLessons.find((item) => item.id === id); if (lesson && lesson.tier <= progress.mathTier) { setStepIndex(0); navigate(`/maths/lesson/${id}`); } }} onStartRound={() => startQuiz('maths')} />;
@@ -629,7 +818,7 @@ export default function App() {
     }
     backLabel = 'Back to home'; onBack = () => navigate('/');
   } else if (route === '/collection') {
-    screen = <CollectionScreen cards={savedEntries} categories={categories} activeCategory={activeCategory} onFilter={setActiveCategory} onOpenCard={(id) => navigate(`/stash/${id}`)} onBack={() => navigate('/')} />;
+    screen = <CollectionScreen cards={savedEntries} categories={categories} activeCategory={activeCategory} onFilter={setActiveCategory} onOpenCard={(id, itemRoute) => navigate(itemRoute || `/stash/${id}`)} onBack={() => navigate('/')} />;
     backLabel = 'Back to home'; onBack = () => navigate('/');
   } else if (route === '/result' && lastResult) {
     screen = <ResultScreen {...lastResult} onShare={shareResults} onRetry={() => startQuiz(lastResult.mode === 'fallacies' ? 'fallacies' : lastResult.mode === 'traps' ? 'traps' : 'maths')} onHome={() => navigate('/')} />;
@@ -638,13 +827,18 @@ export default function App() {
     screen = <SettingsScreen settings={settings} onChange={(patch) => setSettings((current) => ({ ...current, ...patch }))} onResetProgress={resetProgress} onBack={() => navigate('/profile')} />;
     backLabel = 'Back to profile'; onBack = () => navigate('/profile');
   } else if (route === '/profile') {
-    screen = <ProfileScreen progress={progress} savedCount={savedCards.length} onSettings={() => navigate('/settings')} onCollection={() => navigate('/collection')} onShare={shareResults} />;
+    screen = <ProfileScreen progress={progress} savedCount={savedCards.length + savedKnowledgeItems.length} onSettings={() => navigate('/settings')} onCollection={() => navigate('/collection')} onShare={shareResults} />;
   } else {
     screen = <div className="not-found"><Icon name="eye" size={27}/><h1>That page is out of the archive.</h1><p>The page may have moved. Your progress is still here.</p><button className="button button-primary" onClick={() => navigate('/')}>Return home <Icon name="arrow" size={16}/></button></div>;
   }
 
+  const dropSaved = dropItem?.originalCardId
+    ? savedCards.some((entry) => String(entry.id) === String(dropItem.originalCardId))
+    : isKnowledgeItemSaved(dropItem?.id);
+
   return <AppShell route={route} progress={progress} onNavigate={navigate} onSettings={() => navigate('/settings')} showNav={showNav} backLabel={backLabel} onBack={onBack}>
     {!isOnline && <div className="offline-ribbon"><span/> OFFLINE MODE · YOUR ARCHIVE IS AVAILABLE</div>}
     {screen}
+    {route === '/' && dropVisible && dropItem && <StashDropModal item={{ ...dropItem, isDaily: dropIsDaily }} saved={dropSaved} onSave={() => saveDiscovery(dropItem)} onTeach={() => teachDrop(dropItem)} onSurprise={surpriseMe} onDismiss={dismissDrop} />}
   </AppShell>;
 }

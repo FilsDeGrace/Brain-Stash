@@ -9,7 +9,7 @@ const navItems = [
 ];
 
 export default function AppShell({ children, route, progress, onNavigate, onSettings, showNav = true, backLabel = null, onBack = null }) {
-  const active = route.startsWith('/play') || route.startsWith('/maths') || route.startsWith('/rebus') || route.startsWith('/traps') || route.startsWith('/fallacies') || route.startsWith('/court') || route.startsWith('/stash') ? '/play' : route.startsWith('/collection') ? '/collection' : route.startsWith('/profile') || route.startsWith('/settings') ? '/profile' : '/';
+  const active = route.startsWith('/play') || route.startsWith('/maths') || route.startsWith('/rebus') || route.startsWith('/traps') || route.startsWith('/fallacies') || route.startsWith('/court') || route.startsWith('/stash') || route.startsWith('/disciplines') || route.startsWith('/library-review') ? '/play' : route.startsWith('/collection') ? '/collection' : route.startsWith('/profile') || route.startsWith('/settings') ? '/profile' : '/';
   return <div className="app-frame">
     <header className="topbar">
       <div className="topbar-brand">

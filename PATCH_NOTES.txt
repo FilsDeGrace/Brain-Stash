@@ -36,3 +36,25 @@ VALIDATION RESULTS
 
 BUILD NOTE
 A Vite production build could not be completed in this environment because the npm registry connection failed with `EAI_AGAIN` while downloading dependencies. The source-level checks and test suite pass, but the next successful install/deployment should still be treated as the final production build verification.
+
+KNOWLEDGE WING — FIRST MILESTONE
+- Added seven disciplines: Psychology & Human Nature; Influence & Manipulation; Scale of Reality; Laws, Principles & Mental Models; Practical Intelligence; Hidden Systems; Money, Economics & Financial Psychology.
+- Added 21 authored starter discoveries, including a four-question spending pause (need, use, full cost, and opportunity cost) and a clear NFA disclaimer for money-related learning.
+- Added Stash Drops: one daily random discovery plus Surprise Me, Stash it, and Teach me actions. The modal supports Escape and keyboard focus handling; locked Deep Stash tiers are not exposed through random drops.
+- Added a persistent shared-library API backed by Supabase REST, plus SQL for the content bank and atomic daily quotas. Approved items are visible to everyone; AI drafts remain pending until reviewed.
+- Added an admin review screen at `/#/library-review` and a daily Vercel cron that creates one review candidate across a rotating discipline.
+- Added duplicate protections against bundled content, previously rejected content, and other users' pending drafts; generation no longer hijacks navigation if the user leaves while it is running.
+- Added online recovery for shared-library loading and disabled generation when the API reports that persistent storage is not configured.
+- Supabase setup steps and environment variables are documented in `docs/shared-library-setup.md`.
+
+SHARED LIBRARY ENVIRONMENT
+- Keep `AI_API_KEY`, `AI_BASE_URL`, and `AI_MODELS` in Vercel; `AI_MODELS` remains comma-separated.
+- Configure `SUPABASE_URL`, `SUPABASE_SECRET_KEY` (recommended `sb_secret_...` key), `CONTENT_ADMIN_TOKEN`, `CRON_SECRET`, and `QUOTA_SALT` in Vercel.
+- The code also accepts the legacy `SUPABASE_SERVICE_ROLE_KEY` while transitioning, but the recommended setup uses a current Supabase Secret key. Never expose it in the browser or commit environment files.
+- Run `db/shared-library.sql` in Supabase SQL Editor before using shared generation. Without database setup, the bundled disciplines and Stash Drops still work, while shared generation stays unavailable.
+
+LATEST VALIDATION
+- `npm test`: passed after shared-library changes; 11 shared-content regression assertions/tests pass in addition to the existing maths, timer, progression, Rebus, teaching and Court checks.
+- `npm run validate`: passed across the existing content banks, all 54 Rebus explanations, all 20 Court cases, and all seven new disciplines (21 starter discoveries).
+- TypeScript parser syntax check: 50 JavaScript/JSX/MJS files, zero syntax errors.
+- Vite production build remains unverified in this environment: the npm install timed out while the registry was unreachable, leaving no usable Vite executable. Run the normal Vercel deployment after applying the Supabase setup and confirm the build logs.

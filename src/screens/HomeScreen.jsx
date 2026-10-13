@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../components/Icons.jsx';
 import ModeCards from '../components/ModeCards.jsx';
 
-export default function HomeScreen({ progress, daily, modes, onSelectMode, onOpenCollection }) {
+export default function HomeScreen({ progress, daily, modes, onSelectMode, onOpenCollection, onExploreDisciplines, onSurpriseMe }) {
   return <div className="home-screen" data-mode="stash">
     <section className="daily-hero">
       <div className="hero-topline"><span className="eyebrow"><i className="eyebrow-mark"/> DAILY CHALLENGE</span><span className={`completion-tag ${daily.done.stash ? 'is-done' : ''}`}>{daily.done.stash ? <><Icon name="check" size={13}/> COMPLETED</> : 'TODAY · 01'}</span></div>
@@ -26,8 +26,12 @@ export default function HomeScreen({ progress, daily, modes, onSelectMode, onOpe
     </section>
 
     <section className="modes-section">
-      <div className="section-heading"><div><span className="eyebrow">CHOOSE YOUR PRACTICE</span><h2>The four disciplines</h2></div><span className="section-index">A — D</span></div>
+      <div className="section-heading"><div><span className="eyebrow">CHOOSE YOUR PRACTICE</span><h2>Core practice modes</h2></div><span className="section-index">01 — 05</span></div>
       <ModeCards modes={modes} onSelectMode={onSelectMode} />
+    </section>
+    <section className="knowledge-wing-teaser">
+      <div className="knowledge-wing-copy"><span className="eyebrow">THE KNOWLEDGE WING · 07 DISCIPLINES</span><h2>Look beneath <em>the obvious.</em></h2><p>Human nature, manipulation, hidden systems, money psychology and more.</p></div>
+      <div className="knowledge-wing-actions"><button className="button button-primary" onClick={onExploreDisciplines}>Explore disciplines <Icon name="arrow" size={16}/></button><button className="button button-quiet bordered-button" onClick={onSurpriseMe}><Icon name="spark" size={16}/> Surprise me</button></div>
     </section>
     <section className="home-footnote"><span className="tiny-seal">✳</span><p>Knowledge kept close. Progress kept private.</p><button onClick={onOpenCollection}>VIEW YOUR ARCHIVE <Icon name="arrow" size={13}/></button></section>
   </div>;
