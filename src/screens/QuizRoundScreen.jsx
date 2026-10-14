@@ -1,7 +1,8 @@
 import React from 'react';
 import Icon from '../components/Icons.jsx';
+import AskAboutThis from '../components/AskAboutThis.jsx';
 
-export default function QuizRoundScreen({ mode, prompt, context, options, status, locked, reveal, explanation, timer, tier, questionNumber, totalQuestions, onSelect, onNext, onQuit }) {
+export default function QuizRoundScreen({ mode, prompt, context, options, status, locked, reveal, explanation, timer, tier, questionNumber, totalQuestions, topicId, onSelect, onNext, onQuit }) {
   const title = mode === 'maths' ? 'Quick Maths' : mode === 'fallacies' ? 'Fallacies' : 'Mind Traps';
   const ratio = timer ? Math.max(0, Math.min(1, timer.timeLeftMs / timer.totalMs)) : 1;
   const secs = timer ? Math.ceil(timer.timeLeftMs / 1000) : null;
@@ -20,6 +21,9 @@ export default function QuizRoundScreen({ mode, prompt, context, options, status
     })}</div>
     {reveal && <div className={`answer-feedback ${reveal.timedOut ? 'feedback-timeout' : ''}`} role="status"><div className="feedback-title"><Icon name={reveal.selectedId === reveal.correctId && !reveal.timedOut ? 'check' : 'eye'} size={16}/><strong>{reveal.timedOut ? 'Time is up' : reveal.selectedId === reveal.correctId ? 'Well reasoned' : 'Not quite'}</strong></div><p>{explanation}</p></div>}
     {status === 'running' && timer && <p className="timer-note"><Icon name="clock" size={13}/> The clock pauses when you leave this tab.</p>}
-    <div className="quiz-footer">{reveal ? <button className="button button-primary button-wide" onClick={onNext}>{questionNumber >= totalQuestions ? 'See your result' : 'Next question'} <Icon name="arrow" size={17}/></button> : <p className="selection-hint">Choose one answer to lock it in.</p>}</div>
+    <div className="quiz-footer">
+      {reveal ? <button className="button button-primary button-wide" onClick={onNext}>{questionNumber >= totalQuestions ? 'See your result' : 'Next question'} <Icon name="arrow" size={17}/></button> : <p className="selection-hint">Choose one answer to lock it in.</p>}
+    </div>
+    {reveal && mode !== 'maths' && <AskAboutThis key={`${mode}:${topicId || questionNumber}`} disciplineId={mode === 'fallacies' ? 'fallacies' : 'traps'} topic={{ id: topicId || `${mode}-${questionNumber}`, title: prompt, category: mode === 'fallacies' ? 'Fallacy' : 'Mind trap', summary: context || prompt, explanation: explanation || '', details: `Question: ${prompt}\nChoices: ${options.map((option) => option.label).join(' | ')}\nCorrect choice: ${options.find((option) => option.id === reveal.correctId)?.label || ''}` }} />}
   </section>;
 }

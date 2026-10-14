@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '../components/Icons.jsx';
+import AskAboutThis from '../components/AskAboutThis.jsx';
 
 function teachMessage(code) {
   if (code === 'offline') return 'You appear to be offline. Reconnect and try again.';
@@ -7,7 +8,7 @@ function teachMessage(code) {
   return 'The walkthrough isn’t available right now. Try again in a moment.';
 }
 
-export default function StashCardScreen({ card, saved, quiz, quizReveal, locked, completed, isDailyCard = false, canTeach = false, lessonState = { status: 'idle' }, diagnosisState = null, onTeach, onDiagnose, onSave, onSelectQuizOption, onDone, onOpenCollection, onOpenArchive }) {
+export default function StashCardScreen({ card, saved, quiz, quizReveal, locked, completed, isDailyCard = false, canTeach = false, lessonState = { status: 'idle' }, diagnosisState = null, onTeach, onDiagnose, onSave, onSelectQuizOption, onDone, onOpenCollection, onOpenArchive, previousCard = null, nextCard = null, cardPosition = 0, cardTotal = 0, onPreviousCard, onNextCard }) {
   const entryLabel = isDailyCard ? (completed ? 'DAILY REVIEW' : 'DAILY ENTRY') : (completed ? 'ARCHIVE REVIEW' : 'ARCHIVE ENTRY');
   return <section className="screen-page stash-screen" data-mode="stash">
     <div className="page-heading stash-heading"><div><span className="eyebrow">THE PRIVATE ARCHIVE · {entryLabel}</span><h1>Deep <em>Stash.</em></h1><p>One principle. A clearer way to see the world.</p></div><div className="stash-heading-seal"><Icon name="lock" size={22}/><span>SEALED<br/>INSIGHT</span></div></div>
@@ -38,5 +39,18 @@ export default function StashCardScreen({ card, saved, quiz, quizReveal, locked,
       {!completed && <button className="button button-primary button-wide" onClick={onDone} disabled={!quizReveal}>{isDailyCard ? 'Complete daily entry' : 'Complete principle'} <Icon name="arrow" size={16}/></button>}
       {completed && <div className="completed-next"><Icon name="check" size={17}/><span>{isDailyCard ? "Today's entry is in the books." : 'This principle is in the books.'}</span><button className="text-link" onClick={isDailyCard ? onOpenCollection : onOpenArchive}>{isDailyCard ? 'Review saved ideas' : 'Continue browsing'} <Icon name="arrow" size={14}/></button></div>}
     </div>}
+    {cardPosition > 0 && cardTotal > 0 && <nav className="topic-navigation stash-topic-navigation" aria-label="Browse archive principles">
+      <button type="button" className="topic-nav-button topic-nav-previous" onClick={onPreviousCard} disabled={!previousCard}>
+        <span className="topic-nav-direction"><Icon name="back" size={15}/> Previous principle</span>
+        <strong>{previousCard?.title || 'First principle'}</strong>
+      </button>
+      <span className="topic-nav-count">{cardPosition} OF {cardTotal}</span>
+      <button type="button" className="topic-nav-button topic-nav-next" onClick={onNextCard} disabled={!nextCard}>
+        <span className="topic-nav-direction">Next principle <Icon name="arrow" size={15}/></span>
+        <strong>{nextCard?.title || 'End of archive'}</strong>
+      </button>
+    </nav>}
+
+    <AskAboutThis key={`principles:${card.id}`} disciplineId="principles" topic={{ id: card.id, title: card.title, category: card.category || 'Principle', summary: card.summary || '', explanation: card.whyItMatters || card.summary || '', example: card.example || '', whyItMatters: card.whyItMatters || '' }} />
   </section>;
 }

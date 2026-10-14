@@ -1,7 +1,8 @@
 import React from 'react';
 import Icon from '../components/Icons.jsx';
+import AskAboutThis from '../components/AskAboutThis.jsx';
 
-export default function RebusScreen({ imageSrc, imageAlt, entryMode, wordLengths, status, locked, attempt, hintsLeft, hintCost, timer, puzzleNumber, totalPuzzles, answerText, explanation, slots = [], pool = [], inputValue = '', hintText = '', canAffordHint = true, onHint, onSkip, onNext, onQuit, onPlaceTile, onClearSlot, onInputChange, onSubmit }) {
+export default function RebusScreen({ puzzleId, imageSrc, imageAlt, entryMode, wordLengths, status, locked, attempt, hintsLeft, hintCost, timer, puzzleNumber, totalPuzzles, answerText, explanation, slots = [], pool = [], inputValue = '', hintText = '', canAffordHint = true, onHint, onSkip, onNext, onQuit, onPlaceTile, onClearSlot, onInputChange, onSubmit }) {
   const complete = status === 'finished';
   return <section className="screen-page rebus-screen" data-mode="rebus">
     <div className="quiz-toolbar"><button className="text-back" onClick={onQuit}><Icon name="back" size={16}/> BACK TO PRACTICE</button><span className="round-count">PUZZLE {String(puzzleNumber).padStart(2,'0')} <i/> {String(totalPuzzles).padStart(2,'0')}</span></div>
@@ -27,6 +28,8 @@ export default function RebusScreen({ imageSrc, imageAlt, entryMode, wordLengths
     </div>
     {complete && <div className="rebus-success" role="status"><span className="success-seal"><Icon name="check" size={23}/></span><div><span className="eyebrow">PUZZLE SOLVED</span><h2>{answerText}</h2><p>Another pattern added to your mental toolkit.</p></div></div>}
     {complete && explanation && <div className="explanation-note"><span className="eyebrow">THE REASONING</span><p>{explanation}</p></div>}
+
     <div className="rebus-controls">{!complete ? <><button className="button button-quiet" onClick={onHint} disabled={hintsLeft <= 0 || locked || !canAffordHint} aria-label={canAffordHint ? `Use a hint for ${hintCost} XP` : `Need ${hintCost} XP to use a hint`}><Icon name="eye" size={16}/> Hint <span className="button-cost">{canAffordHint ? `−${hintCost} XP` : `Need ${hintCost} XP`} · {hintsLeft} left</span></button><button className="button button-quiet" onClick={onSkip} disabled={locked}>Skip <Icon name="arrow" size={15}/></button></> : <button className="button button-primary button-wide" onClick={onNext}>Next puzzle <Icon name="arrow" size={17}/></button>}</div>
+    {complete && <AskAboutThis key={`rebus:${puzzleId || puzzleNumber}`} disciplineId="rebus" topic={{ id: puzzleId || `rebus-${puzzleNumber}`, title: `Rebus: ${answerText || `Puzzle ${puzzleNumber}`}`, category: 'Visual reasoning', summary: explanation || 'A visual word puzzle.', explanation: explanation || '', details: `Solved phrase: ${answerText || ''}` }} />}
   </section>;
 }

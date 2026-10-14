@@ -67,3 +67,21 @@ LIBRARY REVIEW RELIABILITY FIX
 - Updated the Knowledge Wing and review-screen copy to explain the user action and outcome in plain language.
 - Added regression tests for idempotent retries, opposite terminal decisions, missing entries, and database error classification.
 - Validation: `npm test` passed, including 15 shared-library tests; JavaScript and JSX parser checks passed. A Vite production build remains unverified because dependencies cannot be downloaded in this environment.
+
+
+ASK ABOUT THIS + TOPIC NAVIGATION
+- Added a contextual AI Q&A panel across Knowledge Wing articles, Deep Stash, maths techniques, solved Rebus, revealed reasoning questions, and Court cases after verdicts.
+- Included three preset follow-up prompts and a maximum of two successful questions per topic per local day. Server-side quota enforces two uncached generations per IP/topic/day and 40 new answers globally per UTC day.
+- New answers are stored in a shared Q&A cache so identical normalized questions about the same topic reuse the existing answer. The UI explicitly warns readers that questions and answers are shared.
+- Added a Supabase migration for the Q&A cache and quota function; existing installations must run db/ask-cache-migration.sql in the Vercel-connected Supabase project.
+- Added Previous/Next topic navigation for Knowledge Wing articles, unlocked Quick Maths techniques, and unlocked Deep Stash principles. Existing Court navigation remains.
+
+
+ASK ABOUT THIS + TOPIC NAVIGATION — FINAL REVIEW
+- Added discipline-specific suggested follow-ups for Psychology, Influence, Scale of Reality, Principles, Practical Intelligence, Hidden Systems, Money, Quick Maths lessons, Rebus, Mind Traps, Fallacies and Court.
+- Hardened the shared Q&A endpoint: the server resolves built-in topics from trusted content and only accepts dynamic Knowledge Wing topics after they are approved. Browser-supplied topic text cannot poison the shared answer cache.
+- Kept the AI panel out of timed Quick Maths rounds; readers can ask follow-up questions from the authored Quick Maths technique pages without interrupting a timed quiz.
+- Moved topic/progression controls ahead of the potentially long Q&A panel and reset scroll position when navigating to another topic, respecting the reduced-motion setting.
+- Improved Q&A privacy/error copy and increased the readability of small helper text on mobile.
+- Added regression tests for trusted-topic resolution, spoofed topic rejection, discipline-specific suggestions, shared-cache reuse, quota enforcement and safe endpoint errors.
+- Latest validation: `npm test` passed; TypeScript transpile diagnostics passed for 56 JavaScript/JSX/MJS files; 100 relative imports resolve. Vite production build remains unverified because npm dependencies could not be downloaded in this environment.

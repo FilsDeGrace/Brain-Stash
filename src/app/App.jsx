@@ -268,6 +268,12 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    // Topic-to-topic navigation should start at the title on mobile, not retain
+    // the previous topic's scroll position. Respect the user's motion setting.
+    window.scrollTo({ top: 0, behavior: settings.reducedMotion ? 'auto' : 'smooth' });
+  }, [route, settings.reducedMotion]);
+
+  useEffect(() => {
     if (!isOnline) { setSharedItemsLoading(false); return undefined; }
     const controller = new AbortController();
     let active = true;
@@ -782,7 +788,16 @@ export default function App() {
       screen = <div className="screen-page locked-practice" data-mode="maths"><span className="eyebrow">TECHNIQUE SEALED</span><h1>Tier {lesson.tier} <em>required.</em></h1><p>Complete a maths round with at least 80% accuracy to open the next tier. You are currently at Tier {progress.mathTier}.</p><button className="button button-primary" onClick={() => navigate('/maths')}>Back to techniques <Icon name="arrow" size={16}/></button></div>;
     } else {
       const lessonView = { ...lesson, level: `TIER ${lesson.tier}`, duration: `${lesson.steps.length} STEPS`, summary: lesson.blurb };
-      screen = <LessonScreen {...lessonView} stepIndex={Math.min(stepIndex, lesson.steps.length - 1)} onNext={() => setStepIndex((index) => Math.min(index + 1, lesson.steps.length - 1))} onBack={() => setStepIndex((index) => Math.max(0, index - 1))} onGoBack={() => navigate('/maths')} onStartRound={() => startQuiz('maths', lesson.skillId)} />;
+      const unlockedLessons = mathLessons.filter((item) => item.tier <= progress.mathTier);
+      const lessonIndex = unlockedLessons.findIndex((item) => item.id === lesson.id);
+      const previousTechnique = lessonIndex > 0 ? unlockedLessons[lessonIndex - 1] : null;
+      const nextTechnique = lessonIndex >= 0 && lessonIndex < unlockedLessons.length - 1 ? unlockedLessons[lessonIndex + 1] : null;
+      const openTechnique = (nextLesson) => {
+        if (!nextLesson) return;
+        setStepIndex(0);
+        navigate(`/maths/lesson/${nextLesson.id}`);
+      };
+      screen = <LessonScreen {...lessonView} lessonId={lesson.id} stepIndex={Math.min(stepIndex, lesson.steps.length - 1)} previousTechnique={previousTechnique} nextTechnique={nextTechnique} techniquePosition={lessonIndex + 1} techniqueTotal={unlockedLessons.length} onPreviousTechnique={() => openTechnique(previousTechnique)} onNextTechnique={() => openTechnique(nextTechnique)} onNext={() => setStepIndex((index) => Math.min(index + 1, lesson.steps.length - 1))} onBack={() => setStepIndex((index) => Math.max(0, index - 1))} onGoBack={() => navigate('/maths')} onStartRound={() => startQuiz('maths', lesson.skillId)} />;
     }
     backLabel = 'Back to maths'; onBack = () => navigate('/maths');
   } else if (route === '/court') {
@@ -796,12 +811,13 @@ export default function App() {
     if (!activeQuestion) {
       screen = <div className="screen-page" data-mode={quiz.mode === 'maths' ? 'maths' : 'traps'}><p>Opening the next round…</p></div>;
     } else {
-      screen = <QuizRoundScreen mode={quiz.mode} prompt={activeQuestion.prompt} context={activeQuestion.context} options={activeQuestion.options} status={quiz.status} locked={quiz.locked} reveal={quiz.reveal} explanation={activeQuestion.explanation} timer={timer} tier={quiz.tier} questionNumber={quiz.index + 1} totalQuestions={questions.length} onSelect={onSelectQuiz} onNext={onNextQuiz} onQuit={() => navigate(quiz.mode === 'maths' ? '/maths' : '/traps')} />;
+      const questionTopicId = activeQuestion.id || `${quiz.mode}-${hashSeed(`${activeQuestion.prompt || ''}|${activeQuestion.context || ''}|${(activeQuestion.options || []).map((option) => option.label).join('|')}`)}`;
+      screen = <QuizRoundScreen mode={quiz.mode} topicId={questionTopicId} prompt={activeQuestion.prompt} context={activeQuestion.context} options={activeQuestion.options} status={quiz.status} locked={quiz.locked} reveal={quiz.reveal} explanation={activeQuestion.explanation} timer={timer} tier={quiz.tier} questionNumber={quiz.index + 1} totalQuestions={questions.length} onSelect={onSelectQuiz} onNext={onNextQuiz} onQuit={() => navigate(quiz.mode === 'maths' ? '/maths' : '/traps')} />;
     }
     backLabel = 'Leave round'; onBack = () => navigate(quiz.mode === 'maths' ? '/maths' : '/traps');
   } else if (route === '/rebus') {
     const completed = rebusSession.status === 'finished';
-    screen = <RebusScreen imageSrc={currentPuzzle.imageSrc} imageAlt={currentPuzzle.imageAlt} entryMode={currentEntryMode} wordLengths={currentPuzzle.wordLengths} status={rebusSession.status} locked={completed} attempt={rebusSession.attempt} hintsLeft={Math.max(0, currentPuzzle.hintsLeft - rebusSession.hintCount)} hintCost={currentPuzzle.hintCost} timer={null} puzzleNumber={rebusIndex + 1} totalPuzzles={rebusDeck.length} answerText={completed ? currentPuzzle.answer : undefined} explanation={currentPuzzle.explanation} hintText={rebusSession.hintText} canAffordHint={progress.xp >= currentPuzzle.hintCost} slots={slots} pool={tilePool} inputValue={rebusSession.inputValue} onHint={takeRebusHint} onSkip={skipRebus} onNext={nextRebus} onQuit={() => navigate('/')} onPlaceTile={placeRebusTile} onClearSlot={clearRebusSlot} onInputChange={typeRebusAnswer} onSubmit={submitTypedRebus} />;
+    screen = <RebusScreen puzzleId={currentPuzzle.id} imageSrc={currentPuzzle.imageSrc} imageAlt={currentPuzzle.imageAlt} entryMode={currentEntryMode} wordLengths={currentPuzzle.wordLengths} status={rebusSession.status} locked={completed} attempt={rebusSession.attempt} hintsLeft={Math.max(0, currentPuzzle.hintsLeft - rebusSession.hintCount)} hintCost={currentPuzzle.hintCost} timer={null} puzzleNumber={rebusIndex + 1} totalPuzzles={rebusDeck.length} answerText={completed ? currentPuzzle.answer : undefined} explanation={currentPuzzle.explanation} hintText={rebusSession.hintText} canAffordHint={progress.xp >= currentPuzzle.hintCost} slots={slots} pool={tilePool} inputValue={rebusSession.inputValue} onHint={takeRebusHint} onSkip={skipRebus} onNext={nextRebus} onQuit={() => navigate('/')} onPlaceTile={placeRebusTile} onClearSlot={clearRebusSlot} onInputChange={typeRebusAnswer} onSubmit={submitTypedRebus} />;
     backLabel = 'Back to home'; onBack = () => navigate('/');
   } else if (route === '/stash/archive') {
     screen = <StashArchiveScreen cards={stashDeck} unlockedTier={stashUnlockedTier} sessions={stashSessions} savedIds={new Set(savedCards.map((entry) => String(entry.id)))} onOpenCard={(id) => navigate(`/stash/${id}`)} onBack={() => navigate('/stash')} />;
@@ -814,7 +830,10 @@ export default function App() {
     } else {
       const currentQuiz = currentStashQuiz;
       const reveal = stashSession.locked ? { selectedId: stashSession.selectedId, correctId: currentQuiz.correctId, timedOut: false } : null;
-      screen = <StashCardScreen card={currentStash} isDailyCard={String(currentStash.id) === String(dailyStash?.id)} saved={saved} quiz={currentQuiz} quizReveal={reveal} locked={stashSession.locked} completed={stashSession.completed} unlockedTier={stashUnlockedTier} canTeach={isOnline} lessonState={lessonState} diagnosisState={diagnosisState} onTeach={() => teaching.teach(currentStash)} onDiagnose={() => missedOptionId && teaching.diagnose(currentStash, missedOptionId)} onSave={saveStashCard} onSelectQuizOption={answerStashQuiz} onDone={finishStash} onOpenCollection={() => navigate('/collection')} onOpenArchive={() => navigate('/stash/archive')} />;
+      const stashCardIndex = eligibleStashDeck.findIndex((card) => String(card.id) === String(currentStash.id));
+      const previousStashCard = stashCardIndex > 0 ? eligibleStashDeck[stashCardIndex - 1] : null;
+      const nextStashCard = stashCardIndex >= 0 && stashCardIndex < eligibleStashDeck.length - 1 ? eligibleStashDeck[stashCardIndex + 1] : null;
+      screen = <StashCardScreen card={currentStash} isDailyCard={String(currentStash.id) === String(dailyStash?.id)} saved={saved} quiz={currentQuiz} quizReveal={reveal} locked={stashSession.locked} completed={stashSession.completed} unlockedTier={stashUnlockedTier} canTeach={isOnline} lessonState={lessonState} diagnosisState={diagnosisState} previousCard={previousStashCard} nextCard={nextStashCard} cardPosition={stashCardIndex + 1} cardTotal={eligibleStashDeck.length} onPreviousCard={() => previousStashCard && navigate(`/stash/${previousStashCard.id}`)} onNextCard={() => nextStashCard && navigate(`/stash/${nextStashCard.id}`)} onTeach={() => teaching.teach(currentStash)} onDiagnose={() => missedOptionId && teaching.diagnose(currentStash, missedOptionId)} onSave={saveStashCard} onSelectQuizOption={answerStashQuiz} onDone={finishStash} onOpenCollection={() => navigate('/collection')} onOpenArchive={() => navigate('/stash/archive')} />;
     }
     backLabel = 'Back to home'; onBack = () => navigate('/');
   } else if (route === '/collection') {

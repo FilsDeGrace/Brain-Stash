@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "validate": "node scripts/validate-content.mjs && node scripts/validate-rebus.mjs && node scripts/validate-court.mjs && node scripts/validate-disciplines.mjs",
-    "test": "node test/timer-race.test.mjs && node test/mathEngine.test.mjs && node test/stash-progression.test.mjs && node test/rebus-rewards.test.mjs && node test/teach.test.mjs && node scripts/validate-content.mjs && node test/ai-model-fallback.test.mjs && node scripts/validate-rebus.mjs && node scripts/validate-court.mjs && node test/contentLibrary.test.mjs && node scripts/validate-disciplines.mjs"
+    "test": "node test/timer-race.test.mjs && node test/mathEngine.test.mjs && node test/stash-progression.test.mjs && node test/rebus-rewards.test.mjs && node test/teach.test.mjs && node test/ask.test.mjs && node scripts/validate-content.mjs && node test/ai-model-fallback.test.mjs && node scripts/validate-rebus.mjs && node scripts/validate-court.mjs && node test/contentLibrary.test.mjs && node scripts/validate-disciplines.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^6.1.2",

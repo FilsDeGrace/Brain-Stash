@@ -46,3 +46,14 @@ The app still displays the bundled starter content and daily Stash Drops. The Ge
 There are no user accounts in this milestone. The server hashes the request IP with `QUOTA_SALT` for best-effort per-IP daily quotas; users on the same network may share that quota, and IP-based limits are not an identity system. The database-wide quota is the hard backstop for generation spend. Saved items, the daily dismiss flag, and a generated draft preview remain in the user's browser unless the item is approved and published to the shared library.
 
 The daily job produces a **pending draft**, not an automatically published fact. This moderation boundary is deliberate: the model can generate an error or fabricated source, and shared content should be reviewed first.
+
+
+## 6. Ask about any topic (shared answers)
+
+The Ask about this panel is available on Knowledge Wing articles, Deep Stash principles, Quick Maths techniques, solved Rebus puzzles, revealed Mind Trap and Fallacies questions, and Court cases after a verdict. Readers can ask up to two questions about a topic per local day. Suggested prompts count toward the same limit.
+
+Answers are cached in `brain_stash_qa_cache` by discipline, topic and normalized question. If another reader asks the same normalized question about the same topic, Brain Stash reuses the stored answer without another Gemini call. The server also enforces a limit of two uncached answers per IP hash per topic per UTC day and 40 newly generated answers globally per UTC day. Requests that reuse an existing cached answer do not consume the AI generation quota.
+
+**After updating the app:** open the Supabase project connected to Vercel, then SQL Editor, and run `db/ask-cache-migration.sql`. This adds the shared Q&A cache and quota function to an existing installation. Do not run it in a different Supabase project from the one used by Vercel. No extra environment variables are required.
+
+Questions and AI-generated answers are shared. The interface tells readers not to include personal details, and the API rejects obvious email addresses, phone numbers and credential-like strings. The server also builds topic context from bundled or approved content, rather than trusting text submitted by a browser. These are safeguards, not a guarantee that every private detail can be detected.

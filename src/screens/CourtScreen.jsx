@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '../components/Icons.jsx';
+import AskAboutThis from '../components/AskAboutThis.jsx';
 
 const roleLabels = {
   deciding: 'DECIDING FACTOR',
@@ -76,5 +77,6 @@ export default function CourtScreen({ caseItem, caseNumber, totalCases, selected
       <button className="button button-quiet bordered-button" onClick={onPrevious} disabled={caseNumber <= 1}><Icon name="back" size={15}/> Previous case</button>
       <button className="button button-primary" onClick={onNext}>{caseNumber >= totalCases ? 'Return to first case' : revealed ? 'Next case' : 'Pass this case'} <Icon name="arrow" size={16}/></button>
     </div>
+    {revealed && <AskAboutThis key={`court:${caseItem.id}`} disciplineId="court" topic={{ id: caseItem.id, title: caseItem.title, category: caseItem.category || 'Court case', summary: caseItem.context || '', explanation: caseItem.prompt || '', details: (caseItem.counsel || []).map((entry) => `${entry.name || entry.id}: ${entry.argument}`).join('\n') + `\nFactors: ${(caseItem.factors || []).map((factor) => `${factor.role}: ${factor.label}`).join(' | ')}\nRuling: ${caseItem.explanation || caseItem.canonicalRatio || ''}` }} />}
   </section>;
 }
