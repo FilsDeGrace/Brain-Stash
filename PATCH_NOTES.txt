@@ -85,3 +85,17 @@ ASK ABOUT THIS + TOPIC NAVIGATION — FINAL REVIEW
 - Improved Q&A privacy/error copy and increased the readability of small helper text on mobile.
 - Added regression tests for trusted-topic resolution, spoofed topic rejection, discipline-specific suggestions, shared-cache reuse, quota enforcement and safe endpoint errors.
 - Latest validation: `npm test` passed; TypeScript transpile diagnostics passed for 56 JavaScript/JSX/MJS files; 100 relative imports resolve. Vite production build remains unverified because npm dependencies could not be downloaded in this environment.
+
+
+FRESH CONTENT FIRST — CROSS-DISCIPLINE
+- Added persistent local history for seen and answered content. Selecting an item no longer makes an item appear unseen on the next visit.
+- Rebus now selects unseen, unsolved puzzles first; it falls back to previously seen unsolved puzzles, and only reviews solved puzzles when no unsolved puzzles remain. Returning to an unfinished puzzle resumes its session; repeated Next/Skip taps are guarded against double advancement.
+- Mind Traps and Fallacies select unseen questions first and use a shorter round when fewer new questions remain, rather than padding the round with questions the user has already encountered. XP scales with the shorter round length so a one-question round does not earn a full ten-question base reward. Once the bank is exhausted, a review round is available with clear history notes.
+- Quick Maths continues generating fresh variants and tracks exact prompt/answer pairs so genuine repeats are labelled accurately.
+- Court prefers unseen case files, resumes cases left open, remembers answered and passed cases, and presents reviewed cases with a returning-case label.
+- Deep Stash tracks views separately from answered/completed sessions, prioritizes unseen principles for daily selection and Next navigation, resumes in-progress entries, and labels seen entries in the archive. XP/completion records remain separate from view history.
+- Knowledge Wing tracks previously opened discoveries without mislabeling the first visit as a repeat; topic navigation prefers unseen entries.
+- Stash Drops avoid recently seen content until the available pool is exhausted and can then serve a clearly labelled review item.
+- Progress history uses stable content IDs (or normalized prompt/answer for generated maths), is bounded where appropriate, remains local to the browser/device, and clears with Reset Progress.
+- Added regression tests for fresh selection, solved-Rebus fallback, Deep Stash resume/fresh priority, question de-duplication, exhaustion review behavior, and stable history keys.
+- Validation: `npm test` and `npm run validate` pass. Vite production build remains unverified because `npm ci` stalled while fetching packages from the npm registry in this environment.

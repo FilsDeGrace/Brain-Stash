@@ -26,6 +26,7 @@ import { createRng, generateRound, hashSeed, listSkills } from '../engine/mathEn
 import { entryModeFor, isCorrect as isRebusCorrect, normalize as normalizeRebusAnswer } from '../engine/rebusMatch.js';
 import { claimPuzzleReward } from '../engine/rebusRewards.js';
 import { getEligibleStashCards, getUnlockedStashTier, resolveCurrentStash, stashTier } from '../engine/stashProgression.js';
+import { calculateRoundXp, chooseFreshRandom, chooseFreshStashCard, chooseRebusContent, nextFreshIndex, questionHistoryKey, rememberIds, selectFreshFirst } from '../engine/freshContent.js';
 import mathLessons from '../content/mathLessons.json';
 import rebusDeck from '../content/rebus.json';
 import stashDeck from '../content/stash.json';
@@ -83,10 +84,12 @@ function buildDropPool(sharedItems = [], personalItems = [], unlockedTier = 1) {
   });
 }
 
-function chooseRandomDrop(items, excludeId = null) {
-  const pool = items.filter((item) => String(item.id) !== String(excludeId));
-  const available = pool.length ? pool : items;
-  return available.length ? available[Math.floor(Math.random() * available.length)] : null;
+function chooseRandomDrop(items, excludeId = null, seenIds = readStored('drop-seen-ids', [])) {
+  const result = chooseFreshRandom(items, seenIds, {
+    excludeIds: excludeId ? [String(excludeId)] : [],
+    keyFor: (item) => item?.id,
+  });
+  return result.item ? { ...result.item, freshContentStatus: result.status } : null;
 }
 
 function initialDrop(today, unlockedTier = 1) {
@@ -95,8 +98,10 @@ function initialDrop(today, unlockedTier = 1) {
   const storedCardIsAvailable = !storedCard || stashTier(storedCard) <= unlockedTier;
   if (stored?.date === today && stored?.item?.id && storedCardIsAvailable) return stored.item;
   const candidates = readStored('generated-knowledge-items', []);
-  return chooseRandomDrop(buildDropPool([], Array.isArray(candidates) ? candidates : [], unlockedTier));
+  const result = chooseFreshRandom(buildDropPool([], Array.isArray(candidates) ? candidates : [], unlockedTier), readStored('drop-seen-ids', []), { keyFor: (item) => item?.id });
+  return result.item ? { ...result.item, freshContentStatus: result.status } : null;
 }
+
 
 const mathSkillIds = new Set(listSkills().map((skill) => skill.id));
 
@@ -210,9 +215,19 @@ export default function App() {
   const [generatedItems, setGeneratedItems] = useState(() => { const value = readStored('generated-knowledge-items', []); return Array.isArray(value) ? value : []; });
   const [generation, setGeneration] = useState({ disciplineId: null, loading: false, error: '' });
   const [daily, setDaily] = useState(() => ({ ...dailyDefaults, ...readStored(`daily-${today}`, dailyDefaults) }));
-  const [stashSessions, setStashSessions] = useState(() => readStored('stash-sessions', {}));
+  const [stashSessions, setStashSessions] = useState(() => { const value = readStored('stash-sessions', {}); return value && typeof value === 'object' && !Array.isArray(value) ? value : {}; });
+  const [stashSeenIds, setStashSeenIds] = useState(() => { const value = readStored('stash-seen-ids', []); return Array.isArray(value) ? value.map(String) : []; });
+  const [knowledgeSeenIds, setKnowledgeSeenIds] = useState(() => { const value = readStored('knowledge-seen-ids', []); return Array.isArray(value) ? value.map(String) : []; });
+  const [knowledgeCurrentVisit, setKnowledgeCurrentVisit] = useState(null);
+  const [mathsSeenKeys, setMathsSeenKeys] = useState(() => { const value = readStored('maths-seen-question-keys', []); return Array.isArray(value) ? value.map(String) : []; });
+  const [mathsAnsweredKeys, setMathsAnsweredKeys] = useState(() => { const value = readStored('maths-answered-question-keys', []); return Array.isArray(value) ? value.map(String) : []; });
+  const [trapsSeenIds, setTrapsSeenIds] = useState(() => { const value = readStored('traps-seen-ids', []); return Array.isArray(value) ? value.map(String) : []; });
+  const [trapsAnsweredIds, setTrapsAnsweredIds] = useState(() => { const value = readStored('traps-answered-ids', []); return Array.isArray(value) ? value.map(String) : []; });
+  const [fallaciesSeenIds, setFallaciesSeenIds] = useState(() => { const value = readStored('fallacies-seen-ids', []); return Array.isArray(value) ? value.map(String) : []; });
+  const [fallaciesAnsweredIds, setFallaciesAnsweredIds] = useState(() => { const value = readStored('fallacies-answered-ids', []); return Array.isArray(value) ? value.map(String) : []; });
   const initialStashTier = getUnlockedStashTier(stashDeck, stashSessions);
   const [dropItem, setDropItem] = useState(() => initialDrop(today, initialStashTier));
+  const [dropSeenIds, setDropSeenIds] = useState(() => { const value = readStored('drop-seen-ids', []); return Array.isArray(value) ? value.map(String) : []; });
   const [dropVisible, setDropVisible] = useState(() => !readStored(`drop-dismissed-${today}`, false));
   const [dropIsDaily, setDropIsDaily] = useState(() => {
     const stored = readStored('daily-drop-state', null);
@@ -226,15 +241,16 @@ export default function App() {
     const stored = readStored('rebus-solved-ids', []);
     return Array.isArray(stored) ? stored.map(String) : [];
   });
+  const [rebusSeenIds, setRebusSeenIds] = useState(() => { const value = readStored('rebus-seen-ids', []); return Array.isArray(value) ? value.map(String) : []; });
   const rebusSolvedRef = useRef(new Set(rebusSolvedIds));
   const [rebusIndex, setRebusIndex] = useState(() => {
-    const stored = readStored(`rebus-session-${today}`, null);
+    const stored = readStored('rebus-session-current', readStored(`rebus-session-${today}`, readStored(`rebus-session-${dayBefore(today)}`, null)));
     const storedIndex = rebusDeck.findIndex((puzzle) => puzzle.id === stored?.puzzleId);
-    return stored?.dayStamp === today && storedIndex >= 0 ? storedIndex : seededIndex(today, rebusDeck.length);
+    return storedIndex >= 0 ? storedIndex : seededIndex(today, rebusDeck.length);
   });
   const [rebusSession, setRebusSession] = useState(() => {
-    const stored = readStored(`rebus-session-${today}`, null);
-    if (stored?.dayStamp === today && rebusDeck.some((puzzle) => puzzle.id === stored.puzzleId)) {
+    const stored = readStored('rebus-session-current', readStored(`rebus-session-${today}`, readStored(`rebus-session-${dayBefore(today)}`, null)));
+    if (stored?.puzzleId && rebusDeck.some((puzzle) => puzzle.id === stored.puzzleId)) {
       return { puzzleId: null, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false, ...stored };
     }
     return { dayStamp: today, puzzleId: null, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false };
@@ -247,10 +263,23 @@ export default function App() {
     const stored = readStored('court-answers', {});
     return stored && typeof stored === 'object' && !Array.isArray(stored) ? stored : {};
   });
+  const [courtSeenIds, setCourtSeenIds] = useState(() => { const value = readStored('court-seen-ids', []); return Array.isArray(value) ? value.map(String) : []; });
+  const [courtPassedIds, setCourtPassedIds] = useState(() => { const value = readStored('court-passed-ids', []); return Array.isArray(value) ? value.map(String) : []; });
+  const [courtEntryStatus, setCourtEntryStatus] = useState(() => {
+    const caseId = courtDeck[Number(readStored('court-index', seededIndex(today, courtDeck.length)))]?.id;
+    const answers = readStored('court-answers', {});
+    const passed = readStored('court-passed-ids', []);
+    const seen = readStored('court-seen-ids', []);
+    if (caseId && answers?.[caseId]) return 'answered';
+    if (caseId && (Array.isArray(passed) && passed.map(String).includes(String(caseId)) || Array.isArray(seen) && seen.map(String).includes(String(caseId)))) return 'seen';
+    return 'new';
+  });
   const quizAdvanceLock = useRef(null);
   const rebusAwardLock = useRef(false);
+  const rebusAdvanceLock = useRef(false);
   const stashFinishLocks = useRef(new Set());
   const generationLock = useRef(false);
+  const previousRouteRef = useRef(null);
 
   useEffect(() => {
     const update = () => setRoute(getRoute());
@@ -294,14 +323,68 @@ export default function App() {
   useEffect(() => { writeStored('saved-knowledge-items', savedKnowledgeItems); }, [savedKnowledgeItems]);
   useEffect(() => { writeStored('generated-knowledge-items', generatedItems); }, [generatedItems]);
   useEffect(() => { if (dropItem?.id) writeStored('daily-drop-state', { date: today, item: dropItem, isDaily: dropIsDaily }); }, [dropItem, dropIsDaily, today]);
+  useEffect(() => {
+    if (!dropItem?.id) return;
+    setDropSeenIds((current) => {
+      const next = rememberIds(current, [String(dropItem.id)], 1000);
+      if (next.length === current.length && next.every((id, index) => id === current[index])) return current;
+      return next;
+    });
+  }, [dropItem?.id]);
+  useEffect(() => { writeStored('drop-seen-ids', dropSeenIds); }, [dropSeenIds]);
   useEffect(() => { writeStored(`daily-${today}`, daily); }, [daily, today]);
   useEffect(() => { writeStored('stash-sessions', stashSessions); }, [stashSessions]);
+  useEffect(() => { writeStored('stash-seen-ids', stashSeenIds); }, [stashSeenIds]);
   useEffect(() => { writeStored('rebus-solved-ids', rebusSolvedIds); }, [rebusSolvedIds]);
+  useEffect(() => { writeStored('rebus-seen-ids', rebusSeenIds); }, [rebusSeenIds]);
+  useEffect(() => { writeStored('maths-seen-question-keys', mathsSeenKeys); }, [mathsSeenKeys]);
+  useEffect(() => { writeStored('maths-answered-question-keys', mathsAnsweredKeys); }, [mathsAnsweredKeys]);
+  useEffect(() => { writeStored('traps-seen-ids', trapsSeenIds); }, [trapsSeenIds]);
+  useEffect(() => { writeStored('traps-answered-ids', trapsAnsweredIds); }, [trapsAnsweredIds]);
+  useEffect(() => { writeStored('fallacies-seen-ids', fallaciesSeenIds); }, [fallaciesSeenIds]);
+  useEffect(() => { writeStored('fallacies-answered-ids', fallaciesAnsweredIds); }, [fallaciesAnsweredIds]);
+  useEffect(() => { writeStored('knowledge-seen-ids', knowledgeSeenIds); }, [knowledgeSeenIds]);
   useEffect(() => {
-    if (rebusSession?.dayStamp === today && rebusSession.puzzleId) writeStored(`rebus-session-${today}`, rebusSession);
-  }, [rebusSession, today]);
+    if (rebusSession?.puzzleId) writeStored('rebus-session-current', rebusSession);
+  }, [rebusSession]);
   useEffect(() => { writeStored('court-index', courtIndex); }, [courtIndex]);
   useEffect(() => { writeStored('court-answers', courtAnswers); }, [courtAnswers]);
+  useEffect(() => { writeStored('court-seen-ids', courtSeenIds); }, [courtSeenIds]);
+  useEffect(() => { writeStored('court-passed-ids', courtPassedIds); }, [courtPassedIds]);
+
+  useEffect(() => {
+    const segments = route.split('/').filter(Boolean);
+    if (segments[0] !== 'disciplines' || !segments[1] || !segments[2]) {
+      setKnowledgeCurrentVisit(null);
+      return;
+    }
+    const key = `${segments[1]}:${String(segments[2])}`;
+    setKnowledgeCurrentVisit({ key, wasSeen: knowledgeSeenIds.includes(key) });
+  // Capture the item's history once when its route changes. The marking effect below
+  // updates persistent history separately, so a first visit never labels itself as a repeat.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [route]);
+
+  useEffect(() => {
+    const segments = route.split('/').filter(Boolean);
+    if (segments[0] !== 'disciplines' || !segments[1] || !segments[2]) return;
+    const discipline = disciplines.find((entry) => entry.id === segments[1]);
+    if (!discipline) return;
+    const itemId = String(segments[2]);
+    const exists = discipline.items.some((item) => String(item.id) === itemId)
+      || sharedItems.some((item) => String(item.id) === itemId && item.disciplineId === discipline.id && item.status === 'approved')
+      || generatedItems.some((item) => String(item.id) === itemId && item.disciplineId === discipline.id)
+      || savedKnowledgeItems.some((item) => String(item.id) === itemId && item.disciplineId === discipline.id);
+    if (!exists) return;
+    const key = `${discipline.id}:${itemId}`;
+    setKnowledgeSeenIds((current) => current.includes(key) ? current : rememberIds(current, [key], 2000));
+  }, [route, sharedItems, generatedItems, savedKnowledgeItems]);
+
+  useEffect(() => {
+    if (route !== '/court' || !currentCourtCase?.id) return;
+    const id = String(currentCourtCase.id);
+    setCourtSeenIds((current) => current.includes(id) ? current : [...current, id]);
+  }, [route, courtIndex]);
 
   const navigate = (path) => {
     if (getRoute() === path) setRoute(path);
@@ -351,12 +434,46 @@ export default function App() {
         const skill = listSkills().find((entry) => entry.id === skills);
         if (skill) tier = Math.min(skill.maxTier, Math.max(skill.minTier, progress.mathTier));
       }
-      questions = generateRound({ skillId: skills, tier, count: 10, seed: `${today}-${Date.now()}-${Math.random()}`, baseSeconds: getBaseSeconds(settings) });
+      const targetCount = 10;
+      const seen = new Set(mathsSeenKeys);
+      const answered = new Set(mathsAnsweredKeys);
+      const selectedKeys = new Set();
+      const freshQuestions = [];
+      const reviewQuestions = [];
+      let firstRound = [];
+      for (let attempt = 0; attempt < 12 && freshQuestions.length < targetCount; attempt += 1) {
+        const round = generateRound({ skillId: skills, tier, count: targetCount, seed: `${today}-${Date.now()}-${Math.random()}-${attempt}`, baseSeconds: getBaseSeconds(settings) });
+        if (!firstRound.length) firstRound = round;
+        for (const question of round) {
+          const key = questionHistoryKey('maths', question);
+          if (selectedKeys.has(key)) continue;
+          selectedKeys.add(key);
+          if (seen.has(key)) reviewQuestions.push({ ...question, freshContentStatus: answered.has(key) ? 'answered' : 'seen' });
+          else freshQuestions.push({ ...question, freshContentStatus: 'new' });
+          if (freshQuestions.length >= targetCount) break;
+        }
+      }
+      questions = [...freshQuestions, ...reviewQuestions].slice(0, targetCount);
+      if (!questions.length) questions = firstRound.map((question) => { const key = questionHistoryKey('maths', question); return { ...question, freshContentStatus: seen.has(key) ? answered.has(key) ? 'answered' : 'seen' : 'new' }; });
       if (questions.length && questions[0].tier) tier = questions[0].tier;
     } else if (mode === 'traps') {
-      questions = shuffleWithSeed(trapQuestions, `${today}-${Date.now()}-traps`);
+      const seen = new Set(trapsSeenIds);
+      const freshCount = trapQuestions.filter((question) => !seen.has(questionHistoryKey('traps', question))).length;
+      const roundSize = freshCount > 0 ? Math.min(10, freshCount) : 10;
+      questions = selectFreshFirst(shuffleWithSeed(trapQuestions, `${today}-${Date.now()}-${Math.random()}-traps`), roundSize, {
+        seenIds: trapsSeenIds,
+        answeredIds: trapsAnsweredIds,
+        keyFor: (question) => questionHistoryKey('traps', question),
+      });
     } else {
-      questions = shuffleWithSeed(fallacyQuestions, `${today}-${Date.now()}-fallacies`);
+      const seen = new Set(fallaciesSeenIds);
+      const freshCount = fallacyQuestions.filter((question) => !seen.has(questionHistoryKey('fallacies', question))).length;
+      const roundSize = freshCount > 0 ? Math.min(10, freshCount) : 10;
+      questions = selectFreshFirst(shuffleWithSeed(fallacyQuestions, `${today}-${Date.now()}-${Math.random()}-fallacies`), roundSize, {
+        seenIds: fallaciesSeenIds,
+        answeredIds: fallaciesAnsweredIds,
+        keyFor: (question) => questionHistoryKey('fallacies', question),
+      });
     }
     return { ...emptyQuiz(mode), skillId, tier, questions, status: 'running', startedAt: Date.now() };
   };
@@ -400,6 +517,10 @@ export default function App() {
   const onSelectQuiz = (optionId) => {
     if (quiz.locked || quiz.status !== 'running' || !currentQuestion) return;
     const correct = optionId === currentQuestion.correctId;
+    const historyKey = questionHistoryKey(quiz.mode, currentQuestion);
+    if (quiz.mode === 'maths') setMathsAnsweredKeys((current) => rememberIds(current, [historyKey], 2000));
+    else if (quiz.mode === 'traps') setTrapsAnsweredIds((current) => rememberIds(current, [historyKey], 1000));
+    else if (quiz.mode === 'fallacies') setFallaciesAnsweredIds((current) => rememberIds(current, [historyKey], 1000));
     if (settings.soundOn) playFeedback(correct);
     setQuiz((current) => {
       if (current.locked || current.status !== 'running' || current.index !== quiz.index || current.startedAt !== quiz.startedAt) return current;
@@ -411,7 +532,7 @@ export default function App() {
     if (quiz.status !== 'revealed' || quizAdvanceLock.current === questionKey) return;
     quizAdvanceLock.current = questionKey;
     if (quiz.index + 1 >= questions.length) {
-      const earned = 10 + quiz.score * 10;
+      const earned = calculateRoundXp(questions.length, quiz.score);
       const mode = quiz.mode;
       const tierAdvanced = mode === 'maths' && quiz.score / questions.length >= 0.8;
       const nextMathTier = tierAdvanced ? Math.min(5, Math.max(progress.mathTier + 1, quiz.tier + 1)) : progress.mathTier;
@@ -430,9 +551,22 @@ export default function App() {
     }
   };
 
+  useEffect(() => {
+    if (!currentRouteIsQuiz || !currentQuestion) return;
+    const historyKey = questionHistoryKey(quiz.mode, currentQuestion);
+    if (quiz.mode === 'maths') setMathsSeenKeys((current) => rememberIds(current, [historyKey], 500));
+    else if (quiz.mode === 'traps') setTrapsSeenIds((current) => rememberIds(current, [historyKey], 500));
+    else if (quiz.mode === 'fallacies') setFallaciesSeenIds((current) => rememberIds(current, [historyKey], 500));
+  }, [currentRouteIsQuiz, quiz.mode, quiz.startedAt, quiz.index, currentQuestion?.prompt, currentQuestion?.id]);
+
   const stashUnlockedTier = getUnlockedStashTier(stashDeck, stashSessions);
   const eligibleStashDeck = getEligibleStashCards(stashDeck, stashUnlockedTier);
-  const generatedDailyStash = eligibleStashDeck[seededIndex(today, eligibleStashDeck.length)];
+  const stashSeenSet = new Set(stashSeenIds.map(String));
+  const freshStashDeck = eligibleStashDeck.filter((card) => !stashSeenSet.has(String(card.id)) && !stashSessions[card.id]);
+  const inProgressStashDeck = eligibleStashDeck.filter((card) => Boolean(stashSessions[card.id]) && !stashSessions[card.id]?.completed);
+  const seenUnstartedStashDeck = eligibleStashDeck.filter((card) => stashSeenSet.has(String(card.id)) && !stashSessions[card.id]);
+  const fallbackStashDeck = inProgressStashDeck.length ? inProgressStashDeck : freshStashDeck.length ? freshStashDeck : seenUnstartedStashDeck.length ? seenUnstartedStashDeck : eligibleStashDeck;
+  const generatedDailyStash = fallbackStashDeck[seededIndex(today, fallbackStashDeck.length)];
   const storedDailyStash = daily.stashId ? stashDeck.find((card) => String(card.id) === String(daily.stashId) && stashTier(card) <= stashUnlockedTier) : null;
   const dailyStash = storedDailyStash || generatedDailyStash;
   useEffect(() => {
@@ -440,6 +574,34 @@ export default function App() {
       setDaily((current) => ({ ...current, stashId: dailyStash.id }));
     }
   }, [dailyStash?.id, daily.stashId]);
+
+  const openDailyStash = () => {
+    const current = eligibleStashDeck.find((card) => String(card.id) === String(dailyStash?.id));
+    const currentHasUnfinishedAnswer = Boolean(current && stashSessions[current.id] && !stashSessions[current.id]?.completed);
+    const currentWasOnlyViewed = Boolean(current && stashSeenSet.has(String(current.id)) && !stashSessions[current.id]);
+    if (current && (stashSessions[current.id]?.completed || currentWasOnlyViewed) && !currentHasUnfinishedAnswer) {
+      const next = chooseFreshStashCard(eligibleStashDeck, stashSessions, stashSeenIds, current.id).item;
+      if (next) setDaily((value) => ({ ...value, stashId: next.id }));
+    }
+    navigate('/stash');
+  };
+
+  const dailyRouteRef = useRef(null);
+  useEffect(() => {
+    const wasRoute = dailyRouteRef.current;
+    dailyRouteRef.current = route;
+    if (route !== '/stash' || wasRoute === '/stash') return;
+    const current = eligibleStashDeck.find((card) => String(card.id) === String(daily.stashId));
+    if (!current) return;
+    const currentHasUnfinishedAnswer = Boolean(stashSessions[current.id] && !stashSessions[current.id]?.completed);
+    const currentWasOnlyViewed = stashSeenSet.has(String(current.id)) && !stashSessions[current.id];
+    if (!stashSessions[current.id]?.completed && !(currentWasOnlyViewed && !currentHasUnfinishedAnswer)) return;
+    const next = chooseFreshStashCard(eligibleStashDeck, stashSessions, stashSeenIds, current.id).item;
+    if (next && String(next.id) !== String(current.id)) setDaily((value) => ({ ...value, stashId: next.id }));
+  // Choose the next principle only when entering the daily route, not immediately
+  // after completion; the user should still see their completion feedback.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [route]);
   const stashRouteId = route.startsWith('/stash/') ? route.split('/')[2] : null;
   const requestedStash = stashDeck.find((card) => String(card.id) === String(stashRouteId));
   const stashLocked = Boolean(requestedStash && stashTier(requestedStash) > stashUnlockedTier);
@@ -456,6 +618,12 @@ export default function App() {
   const missedOptionId = hasValidStashQuiz && stashSession.locked && stashSession.selectedId && stashSession.selectedId !== currentStashQuiz.correctId ? stashSession.selectedId : null;
   const lessonState = teaching.stateFor(lessonKey(currentStash));
   const diagnosisState = missedOptionId ? teaching.stateFor(diagnoseKey(currentStash, missedOptionId)) : null;
+
+  useEffect(() => {
+    const isStashEntry = route === '/stash' || (route.startsWith('/stash/') && route !== '/stash/archive' && !stashLocked);
+    if (!isStashEntry || !stashDeck.some((card) => String(card.id) === String(currentStash.id))) return;
+    setStashSeenIds((current) => rememberIds(current, [String(currentStash.id)], stashDeck.length * 3));
+  }, [route, currentStash.id, stashLocked]);
 
   const saveStashCard = () => {
     setSavedCards((current) => current.some((entry) => String(entry.id) === String(currentStash.id)) ? current : [...current, { id: currentStash.id, savedAt: Date.now() }]);
@@ -478,7 +646,7 @@ export default function App() {
   };
 
   const surpriseMe = () => {
-    const next = chooseRandomDrop(buildDropPool(sharedItems, generatedItems, stashUnlockedTier), dropItem?.id);
+    const next = chooseRandomDrop(buildDropPool(sharedItems, generatedItems, stashUnlockedTier), dropItem?.id, dropSeenIds);
     if (next) setDropItem(next);
     setDropIsDaily(false);
     setDropVisible(true);
@@ -537,33 +705,56 @@ export default function App() {
     setStashSessions((current) => ({ ...current, [currentStash.id]: { ...stashSession, completed: true } }));
   };
 
+  const openNewRebus = (excludeId = null) => {
+    if (rebusAdvanceLock.current) return;
+    const choice = chooseRebusContent(rebusDeck, rebusSolvedIds, rebusSeenIds, excludeId);
+    const puzzle = choice.item;
+    if (!puzzle) return;
+    rebusAdvanceLock.current = true;
+    const index = rebusDeck.findIndex((item) => String(item.id) === String(puzzle.id));
+    rebusAwardLock.current = false;
+    setRebusIndex(Math.max(0, index));
+    setRebusSeenIds((current) => rememberIds(current, [String(puzzle.id)], rebusDeck.length * 3));
+    setRebusSession({ dayStamp: today, puzzleId: puzzle.id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false, freshContentStatus: choice.status, selectionKey: `${Date.now()}-${Math.random()}` });
+  };
+
+  useEffect(() => {
+    if (rebusSession?.selectionKey && rebusAdvanceLock.current) rebusAdvanceLock.current = false;
+  }, [rebusSession?.selectionKey]);
+
   const startRebus = () => {
     const existingIndex = rebusDeck.findIndex((puzzle) => puzzle.id === rebusSession.puzzleId);
-    // Re-entering from Home resumes today's session (including a solved state).
-    // A new daily session is created only when the date changes or no session exists.
-    if (rebusSession.dayStamp !== today || existingIndex < 0) {
-      const index = seededIndex(today, rebusDeck.length);
-      setRebusIndex(index);
-      setRebusSession({ dayStamp: today, puzzleId: rebusDeck[index].id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
+    if (existingIndex >= 0 && rebusSession.status !== 'finished' && !rebusSolvedIds.includes(String(rebusSession.puzzleId))) {
+      setRebusIndex(existingIndex);
+      setRebusSeenIds((current) => rememberIds(current, [String(rebusSession.puzzleId)], rebusDeck.length * 3));
+      if (!rebusSession.freshContentStatus) {
+        setRebusSession((current) => ({ ...current, freshContentStatus: rebusSolvedIds.includes(String(current.puzzleId)) ? 'solved' : rebusSeenIds.includes(String(current.puzzleId)) ? 'seen' : 'new' }));
+      }
       rebusAwardLock.current = false;
     } else {
-      setRebusIndex(existingIndex);
-      rebusAwardLock.current = rebusSession.status === 'finished';
+      openNewRebus(rebusSession.puzzleId);
     }
     navigate('/rebus');
   };
 
   useEffect(() => {
-    if (route === '/rebus' && (rebusSession.dayStamp !== today || !rebusSession.puzzleId || !rebusDeck.some((puzzle) => puzzle.id === rebusSession.puzzleId))) {
-      const index = seededIndex(today, rebusDeck.length);
-      const puzzle = rebusDeck[index];
-      if (puzzle) {
-        setRebusIndex(index);
-        setRebusSession({ dayStamp: today, puzzleId: puzzle.id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
-        rebusAwardLock.current = false;
-      }
+    if (route !== '/rebus') {
+      previousRouteRef.current = route;
+      return;
     }
-  }, [route, today, rebusIndex, rebusSession.dayStamp, rebusSession.puzzleId]);
+    const enteringRebus = previousRouteRef.current !== '/rebus';
+    previousRouteRef.current = route;
+    const storedIndex = rebusDeck.findIndex((puzzle) => String(puzzle.id) === String(rebusSession.puzzleId));
+    if (storedIndex < 0 || (enteringRebus && (rebusSession.status === 'finished' || rebusSolvedIds.includes(String(rebusSession.puzzleId))))) {
+      openNewRebus(rebusSession.puzzleId || null);
+      return;
+    }
+    setRebusIndex(storedIndex);
+    setRebusSeenIds((current) => rememberIds(current, [String(rebusSession.puzzleId)], rebusDeck.length * 3));
+  // Route-entry handling is deliberate: puzzle completion must not immediately
+  // replace the success screen; only entering the discipline selects another.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [route]);
 
   const currentPuzzle = rebusDeck.find((puzzle) => puzzle.id === rebusSession.puzzleId) || rebusDeck[rebusIndex] || rebusDeck[0];
   const currentEntryMode = entryModeFor(currentPuzzle);
@@ -650,20 +841,12 @@ export default function App() {
   };
 
   const nextRebus = () => {
-    rebusAwardLock.current = false;
-    const currentDeckIndex = Math.max(0, rebusDeck.findIndex((puzzle) => puzzle.id === currentPuzzle.id));
-    const nextIndex = (currentDeckIndex + 1) % rebusDeck.length;
-    setRebusIndex(nextIndex);
-    setRebusSession({ dayStamp: today, puzzleId: rebusDeck[nextIndex].id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
+    openNewRebus(currentPuzzle.id);
   };
 
   // Skip advances without passing through the completed/reveal state or awarding XP.
   const skipRebus = () => {
-    const currentDeckIndex = Math.max(0, rebusDeck.findIndex((puzzle) => puzzle.id === currentPuzzle.id));
-    const nextIndex = (currentDeckIndex + 1) % rebusDeck.length;
-    rebusAwardLock.current = false;
-    setRebusIndex(nextIndex);
-    setRebusSession({ dayStamp: today, puzzleId: rebusDeck[nextIndex].id, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
+    openNewRebus(currentPuzzle.id);
   };
 
   const currentCourtCase = courtDeck[courtIndex] || courtDeck[0] || null;
@@ -674,10 +857,66 @@ export default function App() {
     setCourtAnswers((current) => ({ ...current, [currentCourtCase.id]: optionId }));
   };
   const moveCourt = (delta) => {
-    const total = courtDeck.length;
-    if (!total) return;
-    setCourtIndex((index) => (index + delta + total) % total);
+    if (!courtDeck.length) return;
+    if (delta < 0) {
+      const index = Math.max(0, courtIndex - 1);
+      const target = courtDeck[index];
+      setCourtIndex(index);
+      setCourtEntryStatus(target && courtAnswers[target.id] ? 'answered' : target && (courtPassedIds.includes(String(target.id)) || courtSeenIds.includes(String(target.id))) ? 'seen' : 'new');
+      return;
+    }
+    if (currentCourtCase && !selectedCourtVerdict) {
+      setCourtPassedIds((current) => rememberIds(current, [String(currentCourtCase.id)], courtDeck.length * 3));
+    }
+    const seenAfterLeaving = rememberIds(courtSeenIds, currentCourtCase ? [String(currentCourtCase.id)] : [], courtDeck.length * 3);
+    const nextIndex = nextFreshIndex(courtDeck, courtIndex, seenAfterLeaving, { keyFor: (item) => String(item.id) });
+    const target = courtDeck[nextIndex];
+    setCourtIndex(nextIndex);
+    setCourtEntryStatus(target && courtAnswers[target.id] ? 'answered' : target && (courtPassedIds.includes(String(target.id)) || courtSeenIds.includes(String(target.id))) ? 'seen' : 'new');
   };
+
+  const openCourt = () => {
+    const current = courtDeck[courtIndex];
+    if (current && courtSeenIds.includes(String(current.id)) && !courtAnswers[current.id] && !courtPassedIds.includes(String(current.id))) {
+      setCourtEntryStatus('seen');
+      navigate('/court');
+      return;
+    }
+    const fresh = courtDeck.filter((item) => !courtSeenIds.includes(String(item.id)) && !courtPassedIds.includes(String(item.id)) && !courtAnswers[item.id]);
+    const pool = fresh.length ? fresh : courtDeck;
+    if (pool.length) {
+      const selected = pool[Math.floor(Math.random() * pool.length)];
+      const index = courtDeck.findIndex((item) => String(item.id) === String(selected.id));
+      if (index >= 0) {
+        setCourtIndex(index);
+        setCourtEntryStatus(courtAnswers[selected.id] ? 'answered' : (courtPassedIds.includes(String(selected.id)) || courtSeenIds.includes(String(selected.id))) ? 'seen' : 'new');
+      }
+    }
+    navigate('/court');
+  };
+
+  const courtRouteRef = useRef(null);
+  useEffect(() => {
+    const previousRoute = courtRouteRef.current;
+    courtRouteRef.current = route;
+    if (route !== '/court' || previousRoute === '/court') return;
+    const current = courtDeck[courtIndex];
+    if (!current) return;
+    if (!courtAnswers[current.id] && !courtPassedIds.includes(String(current.id))) {
+      setCourtEntryStatus(courtSeenIds.includes(String(current.id)) ? 'seen' : 'new');
+      return;
+    }
+    const fresh = courtDeck.filter((item) => !courtSeenIds.includes(String(item.id)) && !courtPassedIds.includes(String(item.id)) && !courtAnswers[item.id]);
+    if (!fresh.length) return;
+    const selected = fresh[Math.floor(Math.random() * fresh.length)];
+    const index = courtDeck.findIndex((item) => String(item.id) === String(selected.id));
+    if (index >= 0) {
+      setCourtIndex(index);
+      setCourtEntryStatus(courtAnswers[selected.id] ? 'answered' : (courtPassedIds.includes(String(selected.id)) || courtSeenIds.includes(String(selected.id))) ? 'seen' : 'new');
+    }
+  // Direct links and refreshes should not reopen a finished case when fresh cases remain.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [route]);
 
   const savedEntries = useMemo(() => [
     ...savedCards.map((entry) => {
@@ -713,8 +952,8 @@ export default function App() {
   const openMode = (mode) => {
     if (mode === 'maths') navigate('/maths');
     else if (mode === 'rebus') startRebus();
-    else if (mode === 'stash') navigate('/stash');
-    else if (mode === 'court') navigate('/court');
+    else if (mode === 'stash') openDailyStash();
+    else if (mode === 'court') openCourt();
     else navigate('/traps');
   };
 
@@ -725,21 +964,35 @@ export default function App() {
     setSavedCards([]);
     setSavedKnowledgeItems([]);
     setGeneratedItems([]);
+    setDropSeenIds([]);
+    setKnowledgeSeenIds([]);
+    setKnowledgeCurrentVisit(null);
+    setMathsSeenKeys([]);
+    setMathsAnsweredKeys([]);
+    setTrapsSeenIds([]);
+    setTrapsAnsweredIds([]);
+    setFallaciesSeenIds([]);
+    setFallaciesAnsweredIds([]);
     setDropItem(initialDrop(today, 1));
     setDropVisible(true);
     setDropIsDaily(true);
     setActiveCategory(null);
     setDaily({ ...dailyDefaults });
     setStashSessions({});
+    setStashSeenIds([]);
     stashFinishLocks.current.clear();
     quizAdvanceLock.current = null;
     setLastResult(null);
     setQuiz(emptyQuiz());
     setRebusSolvedIds([]);
+    setRebusSeenIds([]);
     rebusSolvedRef.current.clear();
     setRebusIndex(seededIndex(today, rebusDeck.length));
     setRebusSession({ dayStamp: today, puzzleId: null, selectedTileIds: [], inputValue: '', attempt: 'none', status: 'running', hintCount: 0, hintText: '', awarded: false });
     setCourtAnswers({});
+    setCourtSeenIds([]);
+    setCourtPassedIds([]);
+    setCourtEntryStatus('new');
     setCourtIndex(seededIndex(today, courtDeck.length));
     navigate('/');
   };
@@ -750,7 +1003,7 @@ export default function App() {
   let onBack = null;
 
   if (route === '/' || route === '') {
-    screen = <HomeScreen progress={progress} daily={{ done: daily.done, onStart: () => navigate('/stash') }} modes={modeCards} onSelectMode={openMode} onOpenCollection={() => navigate('/collection')} onExploreDisciplines={() => navigate('/disciplines')} onSurpriseMe={surpriseMe} />;
+    screen = <HomeScreen progress={progress} daily={{ done: daily.done, onStart: openDailyStash }} modes={modeCards} onSelectMode={openMode} onOpenCollection={() => navigate('/collection')} onExploreDisciplines={() => navigate('/disciplines')} onSurpriseMe={surpriseMe} />;
   } else if (route === '/play') {
     screen = <PlayScreen modes={modeCards} onSelectMode={openMode} onExploreDisciplines={() => navigate('/disciplines')} />;
   } else if (route === '/disciplines' || route.startsWith('/disciplines/')) {
@@ -763,6 +1016,8 @@ export default function App() {
       itemId={itemId}
       remoteItems={sharedItems}
       personalItems={[...generatedItems, ...savedKnowledgeItems]}
+      seenItemIds={knowledgeSeenIds}
+      currentVisit={knowledgeCurrentVisit}
       isLoadingShared={sharedItemsLoading}
       libraryConfigured={sharedLibraryConfigured}
       isGenerating={generation.loading}
@@ -801,7 +1056,7 @@ export default function App() {
     }
     backLabel = 'Back to maths'; onBack = () => navigate('/maths');
   } else if (route === '/court') {
-    screen = <CourtScreen caseItem={currentCourtCase} caseNumber={courtIndex + 1} totalCases={courtDeck.length} selectedId={selectedCourtVerdict} onSelectVerdict={selectCourtVerdict} onNext={() => moveCourt(1)} onPrevious={() => moveCourt(-1)} />;
+    screen = <CourtScreen caseItem={currentCourtCase} caseNumber={courtIndex + 1} totalCases={courtDeck.length} selectedId={selectedCourtVerdict} reviewStatus={courtEntryStatus} onSelectVerdict={selectCourtVerdict} onNext={() => moveCourt(1)} onPrevious={() => moveCourt(-1)} />;
     backLabel = 'Back to practice'; onBack = () => navigate('/play');
   } else if (route === '/traps') {
     screen = <ReasoningHubScreen onStartMindTraps={() => startQuiz('traps')} onStartFallacies={() => startQuiz('fallacies')} />;
@@ -812,15 +1067,15 @@ export default function App() {
       screen = <div className="screen-page" data-mode={quiz.mode === 'maths' ? 'maths' : 'traps'}><p>Opening the next round…</p></div>;
     } else {
       const questionTopicId = activeQuestion.id || `${quiz.mode}-${hashSeed(`${activeQuestion.prompt || ''}|${activeQuestion.context || ''}|${(activeQuestion.options || []).map((option) => option.label).join('|')}`)}`;
-      screen = <QuizRoundScreen mode={quiz.mode} topicId={questionTopicId} prompt={activeQuestion.prompt} context={activeQuestion.context} options={activeQuestion.options} status={quiz.status} locked={quiz.locked} reveal={quiz.reveal} explanation={activeQuestion.explanation} timer={timer} tier={quiz.tier} questionNumber={quiz.index + 1} totalQuestions={questions.length} onSelect={onSelectQuiz} onNext={onNextQuiz} onQuit={() => navigate(quiz.mode === 'maths' ? '/maths' : '/traps')} />;
+      screen = <QuizRoundScreen mode={quiz.mode} topicId={questionTopicId} prompt={activeQuestion.prompt} context={activeQuestion.context} options={activeQuestion.options} status={quiz.status} locked={quiz.locked} reveal={quiz.reveal} explanation={activeQuestion.explanation} timer={timer} tier={quiz.tier} historyStatus={activeQuestion.freshContentStatus || 'new'} questionNumber={quiz.index + 1} totalQuestions={questions.length} onSelect={onSelectQuiz} onNext={onNextQuiz} onQuit={() => navigate(quiz.mode === 'maths' ? '/maths' : '/traps')} />;
     }
     backLabel = 'Leave round'; onBack = () => navigate(quiz.mode === 'maths' ? '/maths' : '/traps');
   } else if (route === '/rebus') {
     const completed = rebusSession.status === 'finished';
-    screen = <RebusScreen puzzleId={currentPuzzle.id} imageSrc={currentPuzzle.imageSrc} imageAlt={currentPuzzle.imageAlt} entryMode={currentEntryMode} wordLengths={currentPuzzle.wordLengths} status={rebusSession.status} locked={completed} attempt={rebusSession.attempt} hintsLeft={Math.max(0, currentPuzzle.hintsLeft - rebusSession.hintCount)} hintCost={currentPuzzle.hintCost} timer={null} puzzleNumber={rebusIndex + 1} totalPuzzles={rebusDeck.length} answerText={completed ? currentPuzzle.answer : undefined} explanation={currentPuzzle.explanation} hintText={rebusSession.hintText} canAffordHint={progress.xp >= currentPuzzle.hintCost} slots={slots} pool={tilePool} inputValue={rebusSession.inputValue} onHint={takeRebusHint} onSkip={skipRebus} onNext={nextRebus} onQuit={() => navigate('/')} onPlaceTile={placeRebusTile} onClearSlot={clearRebusSlot} onInputChange={typeRebusAnswer} onSubmit={submitTypedRebus} />;
+    screen = <RebusScreen puzzleId={currentPuzzle.id} imageSrc={currentPuzzle.imageSrc} imageAlt={currentPuzzle.imageAlt} entryMode={currentEntryMode} wordLengths={currentPuzzle.wordLengths} status={rebusSession.status} locked={completed} attempt={rebusSession.attempt} hintsLeft={Math.max(0, currentPuzzle.hintsLeft - rebusSession.hintCount)} hintCost={currentPuzzle.hintCost} timer={null} puzzleNumber={rebusIndex + 1} totalPuzzles={rebusDeck.length} answerText={completed ? currentPuzzle.answer : undefined} explanation={currentPuzzle.explanation} hintText={rebusSession.hintText} canAffordHint={progress.xp >= currentPuzzle.hintCost} reviewStatus={rebusSession.freshContentStatus || (rebusSolvedIds.includes(String(currentPuzzle.id)) ? 'solved' : rebusSeenIds.includes(String(currentPuzzle.id)) ? 'seen' : 'new')} slots={slots} pool={tilePool} inputValue={rebusSession.inputValue} onHint={takeRebusHint} onSkip={skipRebus} onNext={nextRebus} onQuit={() => navigate('/')} onPlaceTile={placeRebusTile} onClearSlot={clearRebusSlot} onInputChange={typeRebusAnswer} onSubmit={submitTypedRebus} />;
     backLabel = 'Back to home'; onBack = () => navigate('/');
   } else if (route === '/stash/archive') {
-    screen = <StashArchiveScreen cards={stashDeck} unlockedTier={stashUnlockedTier} sessions={stashSessions} savedIds={new Set(savedCards.map((entry) => String(entry.id)))} onOpenCard={(id) => navigate(`/stash/${id}`)} onBack={() => navigate('/stash')} />;
+    screen = <StashArchiveScreen cards={stashDeck} unlockedTier={stashUnlockedTier} sessions={stashSessions} seenIds={new Set(stashSeenIds.map(String))} savedIds={new Set(savedCards.map((entry) => String(entry.id)))} onOpenCard={(id) => navigate(`/stash/${id}`)} onBack={() => navigate('/stash')} />;
     backLabel = 'Back to today’s entry'; onBack = () => navigate('/stash');
   } else if (route === '/stash' || route.startsWith('/stash/')) {
     if (stashLocked) {
@@ -832,7 +1087,14 @@ export default function App() {
       const reveal = stashSession.locked ? { selectedId: stashSession.selectedId, correctId: currentQuiz.correctId, timedOut: false } : null;
       const stashCardIndex = eligibleStashDeck.findIndex((card) => String(card.id) === String(currentStash.id));
       const previousStashCard = stashCardIndex > 0 ? eligibleStashDeck[stashCardIndex - 1] : null;
-      const nextStashCard = stashCardIndex >= 0 && stashCardIndex < eligibleStashDeck.length - 1 ? eligibleStashDeck[stashCardIndex + 1] : null;
+      const stashAfterCurrent = stashCardIndex >= 0
+        ? [...eligibleStashDeck.slice(stashCardIndex + 1), ...eligibleStashDeck.slice(0, stashCardIndex)]
+        : eligibleStashDeck;
+      const nextStashCard = stashAfterCurrent.find((card) => !stashSeenSet.has(String(card.id)) && !stashSessions[card.id])
+        || stashAfterCurrent.find((card) => stashSessions[card.id] && !stashSessions[card.id]?.completed)
+        || stashAfterCurrent.find((card) => stashSeenSet.has(String(card.id)) && !stashSessions[card.id])
+        || stashAfterCurrent[0]
+        || null;
       screen = <StashCardScreen card={currentStash} isDailyCard={String(currentStash.id) === String(dailyStash?.id)} saved={saved} quiz={currentQuiz} quizReveal={reveal} locked={stashSession.locked} completed={stashSession.completed} unlockedTier={stashUnlockedTier} canTeach={isOnline} lessonState={lessonState} diagnosisState={diagnosisState} previousCard={previousStashCard} nextCard={nextStashCard} cardPosition={stashCardIndex + 1} cardTotal={eligibleStashDeck.length} onPreviousCard={() => previousStashCard && navigate(`/stash/${previousStashCard.id}`)} onNextCard={() => nextStashCard && navigate(`/stash/${nextStashCard.id}`)} onTeach={() => teaching.teach(currentStash)} onDiagnose={() => missedOptionId && teaching.diagnose(currentStash, missedOptionId)} onSave={saveStashCard} onSelectQuizOption={answerStashQuiz} onDone={finishStash} onOpenCollection={() => navigate('/collection')} onOpenArchive={() => navigate('/stash/archive')} />;
     }
     backLabel = 'Back to home'; onBack = () => navigate('/');

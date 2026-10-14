@@ -11,7 +11,7 @@ export default function HomeScreen({ progress, daily, modes, onSelectMode, onOpe
         <p>One useful idea. One question. A little more clarity than yesterday.</p>
       </div>
       <div className="hero-footer">
-        <button className="button button-primary" onClick={daily.onStart}>{daily.done.stash ? 'Review today’s idea' : 'Enter today’s challenge'} <Icon name="arrow" size={17}/></button>
+        <button className="button button-primary" onClick={daily.onStart}>{daily.done.stash ? 'Explore another idea' : 'Enter today’s challenge'} <Icon name="arrow" size={17}/></button>
         <div className="hero-seal" aria-hidden="true"><span className="seal-orbit"/><span className="seal-cross">✳</span><small>NO. 001</small></div>
       </div>
       <span className="hero-corner corner-tl"/><span className="hero-corner corner-br"/>

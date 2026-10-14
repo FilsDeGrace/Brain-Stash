@@ -32,6 +32,8 @@ export default function DisciplinesScreen({
   itemId = null,
   remoteItems = [],
   personalItems = [],
+  seenItemIds = [],
+  currentVisit = null,
   isLoadingShared = false,
   libraryConfigured = null,
   isGenerating = false,
@@ -65,14 +67,23 @@ export default function DisciplinesScreen({
   const items = mergeItems(discipline, remoteItems, personalItems);
   const selectedIndex = itemId ? items.findIndex((entry) => String(entry.id) === String(itemId)) : -1;
   const selectedItem = selectedIndex >= 0 ? items[selectedIndex] : null;
+  const seenKeys = new Set(Array.isArray(seenItemIds) ? seenItemIds.map(String) : []);
+  const isSeen = (item) => {
+    const key = `${discipline.id}:${item?.id}`;
+    if (itemId && String(item?.id) === String(itemId) && currentVisit?.key === key) return Boolean(currentVisit.wasSeen);
+    return seenKeys.has(key);
+  };
   const previousItem = selectedIndex > 0 ? items[selectedIndex - 1] : null;
-  const nextItem = selectedIndex >= 0 && selectedIndex < items.length - 1 ? items[selectedIndex + 1] : null;
+  const freshNextItem = selectedIndex >= 0 && items.length > 1
+    ? Array.from({ length: items.length - 1 }, (_, offset) => items[(selectedIndex + offset + 1) % items.length]).find((item) => !isSeen(item)) || null
+    : null;
+  const nextItem = freshNextItem || (selectedIndex >= 0 && selectedIndex < items.length - 1 ? items[selectedIndex + 1] : null);
 
   if (itemId && selectedItem) {
     const pending = selectedItem.status === 'pending';
     return <section className="screen-page knowledge-detail-screen" data-mode="stash">
       <button className="text-back" onClick={() => onBack(discipline.id)}><Icon name="back" size={15}/> BACK TO {discipline.shortTitle.toUpperCase()}</button>
-      <div className="knowledge-detail-top"><span className="eyebrow">{discipline.title.toUpperCase()}</span><KindBadge item={selectedItem}/></div>
+      <div className="knowledge-detail-top"><span className="eyebrow">{discipline.title.toUpperCase()}</span><div className="knowledge-detail-badges"><KindBadge item={selectedItem}/>{isSeen(selectedItem) && <span className="content-history-badge">SEEN BEFORE</span>}</div></div>
       <h1>{selectedItem.title}</h1>
       <p className="knowledge-deck">{selectedItem.summary}</p>
       {pending && <div className="draft-notice"><Icon name="clock" size={18}/><p><strong>Draft awaiting review.</strong> You can read and save this discovery now. It will become part of the shared library only after it is approved.</p></div>}
@@ -119,9 +130,9 @@ export default function DisciplinesScreen({
     {generationError && <p className="inline-error" role="status">{generationError}</p>}
     <div className="section-heading discipline-list-heading"><div><span className="eyebrow">THE FILES</span><h2>Discoveries</h2></div><span className="count-label">{items.length} ENTRIES</span></div>
     <div className="knowledge-list">
-      {items.map((item, index) => <button className="knowledge-row" key={item.id} onClick={() => onOpenItem(discipline.id, item.id)}>
+      {items.map((item, index) => <button className={`knowledge-row ${isSeen(item) ? 'knowledge-row-seen' : ''}`} key={item.id} onClick={() => onOpenItem(discipline.id, item.id)}>
         <span className="knowledge-number">{String(index + 1).padStart(2, '0')}</span>
-        <span className="knowledge-row-copy"><small>{String(item.category || discipline.shortTitle).toUpperCase()} · {item.status === 'pending' ? 'DRAFT' : itemKindLabel(item)}</small><strong>{item.title}</strong><span>{item.summary}</span></span>
+        <span className="knowledge-row-copy"><small>{String(item.category || discipline.shortTitle).toUpperCase()} · {item.status === 'pending' ? 'DRAFT' : itemKindLabel(item)}{isSeen(item) ? ' · SEEN BEFORE' : ''}</small><strong>{item.title}</strong><span>{item.summary}</span></span>
         <Icon name="arrow" size={16}/>
       </button>)}
     </div>

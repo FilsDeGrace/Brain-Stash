@@ -39,6 +39,7 @@ export default function StashDropModal({ item, saved, onSave, onTeach, onSurpris
       <span className="eyebrow drop-category">{String(item.category || label).toUpperCase()}</span>
       <h2 id="stash-drop-title">{item.title}</h2>
       <p className="drop-summary">{item.summary}</p>
+      {item.freshContentStatus === 'seen' && <p className="content-history-note drop-history-note"><Icon name="history" size={15}/><span>You've seen this discovery before. Revisit it or explore another topic.</span></p>}
       {item.disclaimer && <p className="drop-nfa-note">{item.disclaimer}</p>}
       <div className="drop-rule"><span/><b>✳</b><span/></div>
       <div className="drop-actions">

@@ -2,12 +2,13 @@ import React from 'react';
 import Icon from '../components/Icons.jsx';
 import AskAboutThis from '../components/AskAboutThis.jsx';
 
-export default function RebusScreen({ puzzleId, imageSrc, imageAlt, entryMode, wordLengths, status, locked, attempt, hintsLeft, hintCost, timer, puzzleNumber, totalPuzzles, answerText, explanation, slots = [], pool = [], inputValue = '', hintText = '', canAffordHint = true, onHint, onSkip, onNext, onQuit, onPlaceTile, onClearSlot, onInputChange, onSubmit }) {
+export default function RebusScreen({ puzzleId, imageSrc, imageAlt, entryMode, wordLengths, status, locked, attempt, hintsLeft, hintCost, timer, puzzleNumber, totalPuzzles, answerText, explanation, slots = [], pool = [], inputValue = '', hintText = '', canAffordHint = true, reviewStatus = 'new', onHint, onSkip, onNext, onQuit, onPlaceTile, onClearSlot, onInputChange, onSubmit }) {
   const complete = status === 'finished';
   return <section className="screen-page rebus-screen" data-mode="rebus">
     <div className="quiz-toolbar"><button className="text-back" onClick={onQuit}><Icon name="back" size={16}/> BACK TO PRACTICE</button><span className="round-count">PUZZLE {String(puzzleNumber).padStart(2,'0')} <i/> {String(totalPuzzles).padStart(2,'0')}</span></div>
     <div className="round-progress"><span style={{width: `${((puzzleNumber - 1) / totalPuzzles) * 100}%`}}/></div>
     <div className="page-heading rebus-heading"><div><span className="eyebrow">DISCIPLINE 02 · REBUS</span><h1>Look closer.</h1><p>Sometimes the position says more than the words.</p></div><span className="heading-glyph"><Icon name="eye" size={27}/></span></div>
+    {reviewStatus !== 'new' && <div className="content-history-note" role="note"><Icon name="history" size={15}/><span>{reviewStatus === 'solved' ? 'Previously solved. This is a review puzzle, and its XP reward has already been claimed.' : 'You have seen this puzzle before. Give the pattern another try.'}</span></div>}
     <div className="puzzle-art"><img src={imageSrc} alt={imageAlt}/><span className="art-caption">FIG. {String(puzzleNumber).padStart(2,'0')} <i/> READ THE CLUE</span></div>
     <div className="answer-entry">
       <div className="entry-label"><span>YOUR ANSWER</span><span className="word-pattern">({wordLengths.join(', ')})</span></div>

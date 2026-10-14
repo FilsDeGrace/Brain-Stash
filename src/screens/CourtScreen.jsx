@@ -10,7 +10,7 @@ const roleLabels = {
 };
 
 /** A case-based reasoning exercise. Verdict feedback is based only on the authored case file. */
-export default function CourtScreen({ caseItem, caseNumber, totalCases, selectedId = null, onSelectVerdict, onNext, onPrevious }) {
+export default function CourtScreen({ caseItem, caseNumber, totalCases, selectedId = null, reviewStatus = 'new', onSelectVerdict, onNext, onPrevious }) {
   if (!caseItem) {
     return <section className="screen-page court-screen" data-mode="court"><h1>The Court</h1><p>No case files are available.</p></section>;
   }
@@ -22,9 +22,10 @@ export default function CourtScreen({ caseItem, caseNumber, totalCases, selected
 
   return <section className="screen-page court-screen" data-mode="court">
     <div className="quiz-toolbar">
-      <span className="eyebrow">THE COURT · CASE FILE</span>
+      <span className="eyebrow">THE COURT · {reviewStatus === 'answered' ? 'PREVIOUSLY DECIDED' : reviewStatus === 'seen' ? 'RETURNING CASE' : 'CASE FILE'}</span>
       <span className="round-count">CASE {String(caseNumber).padStart(2, '0')} <i/> {String(totalCases).padStart(2, '0')}</span>
     </div>
+    {reviewStatus !== 'new' && <div className="content-history-note" role="note"><Icon name="history" size={15}/><span>{reviewStatus === 'answered' ? 'You decided this case before. Revisit the arguments and test your reasoning again.' : 'You opened this case before but did not decide it. Continue when you are ready.'}</span></div>}
     <div className="round-progress"><span style={{ width: `${(caseNumber / Math.max(1, totalCases)) * 100}%` }} /></div>
     <div className="page-heading court-heading">
       <div><span className="eyebrow">TIER {caseItem.difficulty} · {caseItem.category}</span><h1>Enter <em>your verdict.</em></h1><p>Separate the decisive facts from the arguments that only feel persuasive.</p></div>
@@ -75,7 +76,7 @@ export default function CourtScreen({ caseItem, caseNumber, totalCases, selected
 
     <div className="court-navigation">
       <button className="button button-quiet bordered-button" onClick={onPrevious} disabled={caseNumber <= 1}><Icon name="back" size={15}/> Previous case</button>
-      <button className="button button-primary" onClick={onNext}>{caseNumber >= totalCases ? 'Return to first case' : revealed ? 'Next case' : 'Pass this case'} <Icon name="arrow" size={16}/></button>
+      <button className="button button-primary" onClick={onNext}>{revealed ? 'Next case' : 'Pass this case'} <Icon name="arrow" size={16}/></button>
     </div>
     {revealed && <AskAboutThis key={`court:${caseItem.id}`} disciplineId="court" topic={{ id: caseItem.id, title: caseItem.title, category: caseItem.category || 'Court case', summary: caseItem.context || '', explanation: caseItem.prompt || '', details: (caseItem.counsel || []).map((entry) => `${entry.name || entry.id}: ${entry.argument}`).join('\n') + `\nFactors: ${(caseItem.factors || []).map((factor) => `${factor.role}: ${factor.label}`).join(' | ')}\nRuling: ${caseItem.explanation || caseItem.canonicalRatio || ''}` }} />}
   </section>;
